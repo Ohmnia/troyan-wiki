@@ -123,92 +123,108 @@ html.dark #docs-section.section-expanded #docs-toggle {
 /* ===== Light mode table borders ===== */
 #main-content table {
   border: 1px solid #4b5563;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 /* ===== Light mode code blocks ===== */
 #main-content pre {
   background: #e5e7eb;
-  color: #1e293b;
   border: 1px solid #4b5563;
+  color: #1e293b;
 }
-#main-content pre.text-green-400,
-#main-content pre .text-green-400,
-#main-content code.text-green-400,
-#main-content code .text-green-400 {
-  color: #7b1fa2;
-}
-#main-content pre.text-red-400,
-#main-content pre .text-red-400 {
-  color: #b91c1c;
+#main-content pre code {
+  background: transparent;
+  color: inherit;
 }
 
-/* ===== Dark mode heading colors ===== */
-html.dark #main-content h1,
-html.dark #main-content h2,
-html.dark #main-content h3,
-html.dark #main-content h4,
-html.dark #main-content h5,
-html.dark #main-content h6 {
-  color: #ffffff;
-}
+/* ===== Light mode syntax highlighting ===== */
+#main-content .hljs-keyword { color: #6d28d9; }
+#main-content .hljs-built_in { color: #0e7490; }
+#main-content .hljs-type { color: #a21caf; }
+#main-content .hljs-literal { color: #7e22ce; }
+#main-content .hljs-number { color: #b45309; }
+#main-content .hljs-regexp { color: #c2410c; }
+#main-content .hljs-string { color: #15803d; }
+#main-content .hljs-subst { color: #0f766e; }
+#main-content .hljs-symbol { color: #be185d; }
+#main-content .hljs-title.class_ { color: #4338ca; }
+#main-content .hljs-title.function_ { color: #0369a1; }
+#main-content .hljs-params { color: #c2410c; }
+#main-content .hljs-comment { color: #059669; font-style: italic; }
+#main-content .hljs-doctag { color: #1d4ed8; }
+#main-content .hljs-meta { color: #be185d; }
+#main-content .hljs-meta .hljs-keyword { color: #be185d; }
+#main-content .hljs-meta .hljs-string { color: #15803d; }
+#main-content .hljs-section { color: #6d28d9; }
+#main-content .hljs-tag { color: #0369a1; }
+#main-content .hljs-name { color: #0f766e; }
+#main-content .hljs-attr { color: #0f766e; }
+#main-content .hljs-attribute { color: #047857; }
+#main-content .hljs-selector-tag { color: #15803d; }
+#main-content .hljs-selector-id { color: #b45309; }
+#main-content .hljs-selector-class { color: #15803d; }
+#main-content .hljs-selector-attr { color: #0e7490; }
+#main-content .hljs-selector-pseudo { color: #1d4ed8; }
+#main-content .hljs-template-tag { color: #c2410c; }
+#main-content .hljs-template-variable { color: #be185d; }
+#main-content .hljs-addition { color: #15803d; }
+#main-content .hljs-deletion { color: #b91c1c; }
+#main-content .hljs-emphasis { font-style: italic; }
+#main-content .hljs-strong { font-weight: bold; }
+#main-content .hljs-link { color: #1d4ed8; text-decoration: underline; }
+#main-content .hljs-bullet { color: #0f766e; }
+#main-content .hljs-code { color: inherit; }
+#main-content .hljs-formula { color: #b45309; }
+#main-content .hljs-quote { color: #059669; font-style: italic; }
+#main-content .hljs-variable { color: inherit; }
+#main-content .hljs-punctuation { color: inherit; }
+#main-content .hljs-title { color: inherit; }
+#main-content .hljs-title.class_.inherited__ { color: #4338ca; }
 
-/* ===== Dark mode fainter body text ===== */
-html.dark #main-content p,
-html.dark #main-content li,
-html.dark #main-content blockquote,
-html.dark #main-content .text-gray-700 {
-  color: #94a3b8;
-}
-
-html.dark #main-content .font-medium,
-html.dark #main-content strong {
-  color: #cbd5e1;
-}
-
-/* ===== Dark mode tables ===== */
-html.dark #main-content table {
-  background: #020617;
-  border: 1px solid #9ca3af;
-}
-html.dark #main-content th {
-  color: #f1f5f9;
-  background: #0f172a;
-}
-html.dark #main-content tr {
-  border-color: #1e293b;
-}
-html.dark #main-content td {
-  color: #94a3b8;
-  border-color: #1e293b;
-}
-html.dark #main-content th {
-  background: #334155;
-  color: #f1f5f9;
-}
-html.dark #main-content td {
-  color: #94a3b8;
-  border-color: #334155;
-}
-html.dark #main-content td .text-indigo-600,
-html.dark #main-content td.text-indigo-600 {
-  color: #a5b4fc;
-}
-
-/* ===== Dark mode code blocks ===== */
-html.dark #main-content pre {
-  background: #020617;
-  border: 1px solid #9ca3af;
-}
-html.dark #main-content pre.text-green-400,
-html.dark #main-content pre .text-green-400,
-html.dark #main-content code.text-green-400,
-html.dark #main-content code .text-green-400 {
-  color: #a855f7;
-}
-html.dark #main-content pre.text-red-400,
-html.dark #main-content pre .text-red-400 {
-  color: #f87171;
-}
+/* ===== Dark mode syntax highlighting ===== */
+html.dark #main-content .hljs-keyword { color: #c4b5fd; }
+html.dark #main-content .hljs-built_in { color: #67e8f9; }
+html.dark #main-content .hljs-type { color: #f0abfc; }
+html.dark #main-content .hljs-literal { color: #d8b4fe; }
+html.dark #main-content .hljs-number { color: #fcd34d; }
+html.dark #main-content .hljs-regexp { color: #fdba74; }
+html.dark #main-content .hljs-string { color: #86efac; }
+html.dark #main-content .hljs-subst { color: #5eead4; }
+html.dark #main-content .hljs-symbol { color: #f9a8d4; }
+html.dark #main-content .hljs-title.class_ { color: #a5b4fc; }
+html.dark #main-content .hljs-title.function_ { color: #7dd3fc; }
+html.dark #main-content .hljs-params { color: #fdba74; }
+html.dark #main-content .hljs-comment { color: #34d399; font-style: italic; }
+html.dark #main-content .hljs-doctag { color: #93c5fd; }
+html.dark #main-content .hljs-meta { color: #f9a8d4; }
+html.dark #main-content .hljs-meta .hljs-keyword { color: #f9a8d4; }
+html.dark #main-content .hljs-meta .hljs-string { color: #86efac; }
+html.dark #main-content .hljs-section { color: #c4b5fd; }
+html.dark #main-content .hljs-tag { color: #7dd3fc; }
+html.dark #main-content .hljs-name { color: #5eead4; }
+html.dark #main-content .hljs-attr { color: #5eead4; }
+html.dark #main-content .hljs-attribute { color: #6ee7b7; }
+html.dark #main-content .hljs-selector-tag { color: #86efac; }
+html.dark #main-content .hljs-selector-id { color: #fcd34d; }
+html.dark #main-content .hljs-selector-class { color: #86efac; }
+html.dark #main-content .hljs-selector-attr { color: #67e8f9; }
+html.dark #main-content .hljs-selector-pseudo { color: #93c5fd; }
+html.dark #main-content .hljs-template-tag { color: #fdba74; }
+html.dark #main-content .hljs-template-variable { color: #f9a8d4; }
+html.dark #main-content .hljs-addition { color: #86efac; }
+html.dark #main-content .hljs-deletion { color: #f87171; }
+html.dark #main-content .hljs-emphasis { font-style: italic; }
+html.dark #main-content .hljs-strong { font-weight: bold; }
+html.dark #main-content .hljs-link { color: #93c5fd; text-decoration: underline; }
+html.dark #main-content .hljs-bullet { color: #5eead4; }
+html.dark #main-content .hljs-code { color: inherit; }
+html.dark #main-content .hljs-formula { color: #fcd34d; }
+html.dark #main-content .hljs-quote { color: #34d399; font-style: italic; }
+html.dark #main-content .hljs-variable { color: inherit; }
+html.dark #main-content .hljs-punctuation { color: inherit; }
+html.dark #main-content .hljs-title { color: inherit; }
+html.dark #main-content .hljs-title.class_.inherited__ { color: #a5b4fc; }
 
 /* ===== Dark mode links ===== */
 html.dark #main-content a {

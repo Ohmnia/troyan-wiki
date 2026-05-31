@@ -3,7 +3,7 @@
 
   <!-- 1 -->
   <section>
-    <a name="core-rts-architecture-philosophy"></a>
+    <a name="entity-architecture-guide-core-rts-architecture-philosophy"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">1. Core RTS Architecture Philosophy</h2>
     <p class="text-gray-700 leading-relaxed mb-3">RTS games are fundamentally:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Data simulation engines</pre>
@@ -12,10 +12,10 @@
     <p class="text-gray-700 leading-relaxed mb-3">The renderer is only a VISUALIZATION of game state.</p>
     <p class="text-gray-700 leading-relaxed mb-3">This distinction is critical.</p>
 
-    <a name="golden-rule"></a>
+    <a name="entity-architecture-guide-golden-rule"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Golden Rule</h3>
 
-    <a name="never-store-gameplay-state-inside-threejs-objects"></a>
+    <a name="entity-architecture-guide-never-store-gameplay-state-inside-threejs-objects"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">NEVER store gameplay state inside Three.js objects.</h4>
 
     <p class="text-gray-700 leading-relaxed mb-3 font-medium">BAD:</p>
@@ -32,18 +32,18 @@ AbilityComponent</pre>
 
   <!-- 2 -->
   <section>
-    <a name="the-biggest-rts-mistakes"></a>
+    <a name="entity-architecture-guide-the-biggest-rts-mistakes"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">2. The Biggest RTS Mistakes</h2>
 
-    <a name="common-beginner-errors"></a>
+    <a name="entity-architecture-guide-common-beginner-errors"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Common Beginner Errors</h3>
 
-    <a name="1-gameplay-inside-render-objects"></a>
+    <a name="entity-architecture-guide-1-gameplay-inside-render-objects"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">1. Gameplay inside render objects</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Mesh contains game logic</pre>
     <p class="text-gray-700 leading-relaxed mb-3">This destroys scalability.</p>
 
-    <a name="2-massive-inheritance-trees"></a>
+    <a name="entity-architecture-guide-2-massive-inheritance-trees"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">2. Massive inheritance trees</h4>
     <p class="text-gray-700 leading-relaxed mb-3 font-medium">BAD:</p>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Unit
@@ -52,13 +52,13 @@ AbilityComponent</pre>
       &rarr; EliteSniper</pre>
     <p class="text-gray-700 leading-relaxed mb-3">This becomes impossible to maintain.</p>
 
-    <a name="3-per-unit-update-loops"></a>
+    <a name="entity-architecture-guide-3-per-unit-update-loops"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">3. Per-unit update loops</h4>
     <p class="text-gray-700 leading-relaxed mb-3 font-medium">BAD:</p>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">units.forEach(unit =&gt; unit.update());</pre>
     <p class="text-gray-700 leading-relaxed mb-3">This scales poorly.</p>
 
-    <a name="4-large-object-allocations"></a>
+    <a name="entity-architecture-guide-4-large-object-allocations"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">4. Large object allocations</h4>
     <p class="text-gray-700 leading-relaxed mb-3">RTS games generate enormous amounts of state changes.</p>
     <p class="text-gray-700 leading-relaxed mb-3">Garbage collection spikes will kill performance.</p>
@@ -68,10 +68,10 @@ AbilityComponent</pre>
 
   <!-- 3 -->
   <section>
-    <a name="recommended-architecture"></a>
+    <a name="entity-architecture-guide-recommended-architecture"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">3. Recommended Architecture</h2>
 
-    <a name="best-modern-approach"></a>
+    <a name="entity-architecture-guide-best-modern-approach"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">BEST MODERN APPROACH</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">ECS (Entity Component System)
 +
@@ -81,7 +81,7 @@ Server authoritative simulation
 +
 Renderer separation</pre>
 
-    <a name="recommended-stack"></a>
+    <a name="entity-architecture-guide-recommended-stack"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Stack</h3>
     <div class="overflow-x-auto">
       <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
@@ -108,24 +108,24 @@ Renderer separation</pre>
 
   <!-- 4 -->
   <section>
-    <a name="why-ecs-is-the-best-choice"></a>
+    <a name="entity-architecture-guide-why-ecs-is-the-best-choice"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">4. Why ECS Is The Best Choice</h2>
 
-    <a name="traditional-oop-fails-at-rts-scale"></a>
+    <a name="entity-architecture-guide-traditional-oop-fails-at-rts-scale"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Traditional OOP Fails at RTS Scale</h3>
     <p class="text-gray-700 leading-relaxed mb-3">RTS games may contain:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">10,000+ entities</pre>
     <p class="text-gray-700 leading-relaxed mb-3">OOP becomes cache inefficient.</p>
 
-    <a name="ecs-advantages"></a>
+    <a name="entity-architecture-guide-ecs-advantages"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">ECS Advantages</h3>
 
-    <a name="ecs-stores"></a>
+    <a name="entity-architecture-guide-ecs-stores"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">ECS stores:</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Behavior separately from data</pre>
     <p class="text-gray-700 leading-relaxed mb-3">This is ideal for RTS workloads.</p>
 
-    <a name="ecs-structure"></a>
+    <a name="entity-architecture-guide-ecs-structure"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">ECS Structure</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Entity
   = ID only
@@ -136,7 +136,7 @@ Components
 Systems
   = logic processors</pre>
 
-    <a name="example"></a>
+    <a name="entity-architecture-guide-example"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Example</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Entity #1052
 
@@ -154,16 +154,16 @@ Components:
 
   <!-- 5 -->
   <section>
-    <a name="entity-design"></a>
+    <a name="entity-architecture-guide-entity-design"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">5. Entity Design</h2>
 
-    <a name="best-practice"></a>
+    <a name="entity-architecture-guide-best-practice"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Practice</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Entities should ONLY contain:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">type Entity = number;</pre>
     <p class="text-gray-700 leading-relaxed mb-3">That is all.</p>
 
-    <a name="never-store"></a>
+    <a name="entity-architecture-guide-never-store"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">NEVER Store</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">methods
 logic
@@ -175,10 +175,10 @@ render state</pre>
 
   <!-- 6 -->
   <section>
-    <a name="component-design"></a>
+    <a name="entity-architecture-guide-component-design"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">6. Component Design</h2>
 
-    <a name="components-should-be-pure-data"></a>
+    <a name="entity-architecture-guide-components-should-be-pure-data"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Components Should Be PURE DATA</h3>
     <p class="text-gray-700 leading-relaxed mb-3 font-medium">GOOD:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">interface HealthComponent {
@@ -192,10 +192,10 @@ render state</pre>
 }</pre>
     <p class="text-gray-700 leading-relaxed mb-3">Logic belongs in systems.</p>
 
-    <a name="recommended-components"></a>
+    <a name="entity-architecture-guide-recommended-components"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Components</h3>
 
-    <a name="core-components"></a>
+    <a name="entity-architecture-guide-core-components"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Core Components</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Position
 Rotation
@@ -209,7 +209,7 @@ Movement
 Selectable
 Vision</pre>
 
-    <a name="combat-components"></a>
+    <a name="entity-architecture-guide-combat-components"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Combat Components</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">AttackCooldown
 ProjectileWeapon
@@ -217,7 +217,7 @@ MeleeWeapon
 Aggro
 StatusEffects</pre>
 
-    <a name="rts-specific-components"></a>
+    <a name="entity-architecture-guide-rts-specific-components"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">RTS-Specific Components</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">TechTreeNode
 ProductionQueue
@@ -226,7 +226,7 @@ Builder
 Harvester
 PopulationCost</pre>
 
-    <a name="ability-components"></a>
+    <a name="entity-architecture-guide-ability-components"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Ability Components</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">AbilitySlots
 Cooldowns
@@ -238,16 +238,16 @@ Energy</pre>
 
   <!-- 7 -->
   <section>
-    <a name="health-systems"></a>
+    <a name="entity-architecture-guide-health-systems"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">7. Health Systems</h2>
 
-    <a name="best-practice"></a>
+    <a name="entity-architecture-guide-best-practice-1"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">BEST PRACTICE</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Health should be:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">integer-based</pre>
     <p class="text-gray-700 leading-relaxed mb-3">NOT floating point.</p>
 
-    <a name="why"></a>
+    <a name="entity-architecture-guide-why"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Why?</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Integers:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">deterministic
@@ -255,14 +255,14 @@ faster
 network efficient
 easier syncing</pre>
 
-    <a name="recommended-format"></a>
+    <a name="entity-architecture-guide-recommended-format"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Format</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">interface HealthComponent {
   current: number;
   max: number;
 }</pre>
 
-    <a name="avoid-percentages-internally"></a>
+    <a name="entity-architecture-guide-avoid-percentages-internally"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Avoid Percentages Internally</h3>
     <p class="text-gray-700 leading-relaxed mb-3 font-medium">BAD:</p>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">health = 0.62;</pre>
@@ -270,7 +270,7 @@ easier syncing</pre>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">health = 620;
 max = 1000;</pre>
 
-    <a name="damage-processing-pipeline"></a>
+    <a name="entity-architecture-guide-damage-processing-pipeline"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Damage Processing Pipeline</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Incoming damage
 &rarr; armor reduction
@@ -284,16 +284,16 @@ max = 1000;</pre>
 
   <!-- 8 -->
   <section>
-    <a name="damage-systems"></a>
+    <a name="entity-architecture-guide-damage-systems"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">8. Damage Systems</h2>
 
-    <a name="best-practice"></a>
+    <a name="entity-architecture-guide-best-practice-2"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Practice</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Use:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Queued combat events</pre>
     <p class="text-gray-700 leading-relaxed mb-3">NOT direct mutation everywhere.</p>
 
-    <a name="recommended-damage-event"></a>
+    <a name="entity-architecture-guide-recommended-damage-event"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Damage Event</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">interface DamageEvent {
   source: Entity;
@@ -302,7 +302,7 @@ max = 1000;</pre>
   type: DamageType;
 }</pre>
 
-    <a name="why-event-queues-matter"></a>
+    <a name="entity-architecture-guide-why-event-queues-matter"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Why Event Queues Matter</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Benefits:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">deterministic
@@ -311,7 +311,7 @@ easy replay systems
 rollback friendly
 debuggable</pre>
 
-    <a name="damage-types"></a>
+    <a name="entity-architecture-guide-damage-types"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Damage Types</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Recommended:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">physical
@@ -322,7 +322,7 @@ ice
 poison
 siege</pre>
 
-    <a name="armor-tables"></a>
+    <a name="entity-architecture-guide-armor-tables"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Armor Tables</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Use lookup tables:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">damageMultiplier[DamageType][ArmorType]</pre>
@@ -333,16 +333,16 @@ siege</pre>
 
   <!-- 9 -->
   <section>
-    <a name="ability-systems"></a>
+    <a name="entity-architecture-guide-ability-systems"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">9. Ability Systems</h2>
 
-    <a name="best-rts-ability-design"></a>
+    <a name="entity-architecture-guide-best-rts-ability-design"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best RTS Ability Design</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Abilities should be:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">data-driven</pre>
     <p class="text-gray-700 leading-relaxed mb-3">NOT hardcoded.</p>
 
-    <a name="example-ability-definition"></a>
+    <a name="entity-architecture-guide-example-ability-definition"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Example Ability Definition</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">interface AbilityDefinition {
   id: string;
@@ -352,19 +352,19 @@ siege</pre>
   effects: EffectDefinition[];
 }</pre>
 
-    <a name="runtime-ability-state"></a>
+    <a name="entity-architecture-guide-runtime-ability-state"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Runtime Ability State</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">interface AbilityState {
   cooldownRemaining: number;
   charges: number;
 }</pre>
 
-    <a name="never-put-logic-inside-ability-definitions"></a>
+    <a name="entity-architecture-guide-never-put-logic-inside-ability-definitions"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">NEVER Put Logic Inside Ability Definitions</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Definitions are static.</p>
     <p class="text-gray-700 leading-relaxed mb-3">State is dynamic.</p>
 
-    <a name="recommended-ability-architecture"></a>
+    <a name="entity-architecture-guide-recommended-ability-architecture"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Ability Architecture</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Ability Definition
 +
@@ -377,29 +377,29 @@ Ability System</pre>
 
   <!-- 10 -->
   <section>
-    <a name="tech-tree-architecture"></a>
+    <a name="entity-architecture-guide-tech-tree-architecture"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">10. Tech Tree Architecture</h2>
 
-    <a name="never-hardcode-tech-trees"></a>
+    <a name="entity-architecture-guide-never-hardcode-tech-trees"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">NEVER Hardcode Tech Trees</h3>
     <p class="text-gray-700 leading-relaxed mb-3 font-medium">BAD:</p>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">if (player.hasBarracks)</pre>
     <p class="text-gray-700 leading-relaxed mb-3 font-medium">GOOD:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">graph-based unlock system</pre>
 
-    <a name="best-tech-tree-structure"></a>
+    <a name="entity-architecture-guide-best-tech-tree-structure"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Best Tech Tree Structure</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Use:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Directed Acyclic Graph (DAG)</pre>
 
-    <a name="example"></a>
+    <a name="entity-architecture-guide-example-1"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Example</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">TownHall
   &rarr; Barracks
       &rarr; Infantry
       &rarr; Elite Infantry</pre>
 
-    <a name="recommended-data-structure"></a>
+    <a name="entity-architecture-guide-recommended-data-structure"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Data Structure</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">interface TechNode {
   id: string;
@@ -407,7 +407,7 @@ Ability System</pre>
   unlocks: string[];
 }</pre>
 
-    <a name="why-dag-works-best"></a>
+    <a name="entity-architecture-guide-why-dag-works-best"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Why DAG Works Best</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Benefits:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">easy balancing
@@ -420,20 +420,20 @@ easy UI generation</pre>
 
   <!-- 11 -->
   <section>
-    <a name="upgrade-systems"></a>
+    <a name="entity-architecture-guide-upgrade-systems"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">11. Upgrade Systems</h2>
 
-    <a name="best-upgrade-strategy"></a>
+    <a name="entity-architecture-guide-best-upgrade-strategy"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Upgrade Strategy</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Use:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">modifier pipelines</pre>
     <p class="text-gray-700 leading-relaxed mb-3">NOT permanent stat mutation.</p>
 
-    <a name="bad"></a>
+    <a name="entity-architecture-guide-bad"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">BAD</h3>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">unit.damage += 5;</pre>
 
-    <a name="good"></a>
+    <a name="entity-architecture-guide-good"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">GOOD</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">base stats
 +
@@ -441,7 +441,7 @@ modifier layers
 +
 upgrade multipliers</pre>
 
-    <a name="recommended-formula"></a>
+    <a name="entity-architecture-guide-recommended-formula"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Formula</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">finalStat =
   base
@@ -454,15 +454,15 @@ upgrade multipliers</pre>
 
   <!-- 12 -->
   <section>
-    <a name="buffs-and-debuffs"></a>
+    <a name="entity-architecture-guide-buffs-and-debuffs"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">12. Buffs &amp; Debuffs</h2>
 
-    <a name="best-practice"></a>
+    <a name="entity-architecture-guide-best-practice-3"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Practice</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Buffs should be:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">time-based modifiers</pre>
 
-    <a name="recommended-buff-structure"></a>
+    <a name="entity-architecture-guide-recommended-buff-structure"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Buff Structure</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">interface Buff {
   type: BuffType;
@@ -470,7 +470,7 @@ upgrade multipliers</pre>
   magnitude: number;
 }</pre>
 
-    <a name="avoid-permanent-mutation"></a>
+    <a name="entity-architecture-guide-avoid-permanent-mutation"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Avoid Permanent Mutation</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Always calculate final values dynamically.</p>
   </section>
@@ -479,10 +479,10 @@ upgrade multipliers</pre>
 
   <!-- 13 -->
   <section>
-    <a name="state-machines"></a>
+    <a name="entity-architecture-guide-state-machines"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">13. State Machines</h2>
 
-    <a name="units-need-state-machines"></a>
+    <a name="entity-architecture-guide-units-need-state-machines"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Units NEED State Machines</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Typical states:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Idle
@@ -494,13 +494,13 @@ Fleeing
 Casting
 Dead</pre>
 
-    <a name="recommended-approach"></a>
+    <a name="entity-architecture-guide-recommended-approach"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Approach</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Use:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">finite state machines</pre>
     <p class="text-gray-700 leading-relaxed mb-3">NOT giant condition chains.</p>
 
-    <a name="example"></a>
+    <a name="entity-architecture-guide-example-2"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Example</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">switch(state) {
   case UnitState.Attacking:
@@ -511,17 +511,17 @@ Dead</pre>
 
   <!-- 14 -->
   <section>
-    <a name="networking-architecture"></a>
+    <a name="entity-architecture-guide-networking-architecture"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">14. Networking Architecture</h2>
 
-    <a name="most-important-rule"></a>
+    <a name="entity-architecture-guide-most-important-rule"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">MOST IMPORTANT RULE</h3>
 
-    <a name="server-authoritative"></a>
+    <a name="entity-architecture-guide-server-authoritative"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">SERVER AUTHORITATIVE.</h4>
     <p class="text-gray-700 leading-relaxed mb-3">Always.</p>
 
-    <a name="why"></a>
+    <a name="entity-architecture-guide-why-1"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Why?</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Prevents:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">cheating
@@ -529,7 +529,7 @@ desyncs
 speed hacks
 modified clients</pre>
 
-    <a name="client-responsibilities"></a>
+    <a name="entity-architecture-guide-client-responsibilities"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Client Responsibilities</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Clients should ONLY:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">predict
@@ -537,7 +537,7 @@ interpolate
 render
 send commands</pre>
 
-    <a name="server-responsibilities"></a>
+    <a name="entity-architecture-guide-server-responsibilities"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Server Responsibilities</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Server owns:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">truth
@@ -552,26 +552,26 @@ simulation</pre>
 
   <!-- 15 -->
   <section>
-    <a name="deterministic-simulation"></a>
+    <a name="entity-architecture-guide-deterministic-simulation"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">15. Deterministic Simulation</h2>
 
-    <a name="critical-for-rts"></a>
+    <a name="entity-architecture-guide-critical-for-rts"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Critical for RTS</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Use:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">fixed tick simulation</pre>
 
-    <a name="recommended-tick-rate"></a>
+    <a name="entity-architecture-guide-recommended-tick-rate"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Tick Rate</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">10&ndash;30 simulation ticks/sec</pre>
     <p class="text-gray-700 leading-relaxed mb-3">NOT:</p>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">60+</pre>
     <p class="text-gray-700 leading-relaxed mb-3">RTS does not require shooter-level responsiveness.</p>
 
-    <a name="fixed-tick-example"></a>
+    <a name="entity-architecture-guide-fixed-tick-example"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Fixed Tick Example</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">const FIXED_TICK = 100;</pre>
 
-    <a name="why-fixed-ticks-matter"></a>
+    <a name="entity-architecture-guide-why-fixed-ticks-matter"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Why Fixed Ticks Matter</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Benefits:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">sync stability
@@ -585,10 +585,10 @@ lower CPU cost</pre>
 
   <!-- 16 -->
   <section>
-    <a name="performance-scaling"></a>
+    <a name="entity-architecture-guide-performance-scaling"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">16. Performance Scaling</h2>
 
-    <a name="biggest-rts-cpu-costs"></a>
+    <a name="entity-architecture-guide-biggest-rts-cpu-costs"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Biggest RTS CPU Costs</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Usually:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">pathfinding
@@ -597,14 +597,14 @@ visibility
 combat checks</pre>
     <p class="text-gray-700 leading-relaxed mb-3">NOT rendering.</p>
 
-    <a name="optimization-priority"></a>
+    <a name="entity-architecture-guide-optimization-priority"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Optimization Priority</h3>
     <p class="text-gray-700 leading-relaxed mb-3 font-semibold">Optimize SIMULATION first.</p>
 
-    <a name="best-performance-practices"></a>
+    <a name="entity-architecture-guide-best-performance-practices"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Best Performance Practices</h3>
 
-    <a name="use"></a>
+    <a name="entity-architecture-guide-use"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Use:</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">typed arrays
 struct-of-arrays
@@ -612,7 +612,7 @@ pooled objects
 batch processing
 spatial partitioning</pre>
 
-    <a name="avoid"></a>
+    <a name="entity-architecture-guide-avoid"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Avoid</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">deep object graphs
 closures in hot loops
@@ -623,21 +623,21 @@ frequent allocations</pre>
 
   <!-- 17 -->
   <section>
-    <a name="memory-optimization"></a>
+    <a name="entity-architecture-guide-memory-optimization"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">17. Memory Optimization</h2>
 
-    <a name="rts-games-are-memory-intensive"></a>
+    <a name="entity-architecture-guide-rts-games-are-memory-intensive"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">RTS Games Are Memory Intensive</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Avoid:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">new DamageEvent()</pre>
     <p class="text-gray-700 leading-relaxed mb-3">every frame.</p>
 
-    <a name="use-object-pools"></a>
+    <a name="entity-architecture-guide-use-object-pools"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Use Object Pools</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">preallocated buffers
 reused event objects</pre>
 
-    <a name="example"></a>
+    <a name="entity-architecture-guide-example-3"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Example</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">damageEventPool.acquire();</pre>
   </section>
@@ -646,23 +646,23 @@ reused event objects</pre>
 
   <!-- 18 -->
   <section>
-    <a name="serialization"></a>
+    <a name="entity-architecture-guide-serialization"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">18. Serialization</h2>
 
-    <a name="best-network-strategy"></a>
+    <a name="entity-architecture-guide-best-network-strategy"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Network Strategy</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Use:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">binary serialization</pre>
     <p class="text-gray-700 leading-relaxed mb-3">NOT JSON.</p>
 
-    <a name="why"></a>
+    <a name="entity-architecture-guide-why-2"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Why?</h3>
     <p class="text-gray-700 leading-relaxed mb-3">JSON is:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">large
 slow
 allocation heavy</pre>
 
-    <a name="recommended-formats"></a>
+    <a name="entity-architecture-guide-recommended-formats"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Formats</h3>
     <div class="overflow-x-auto">
       <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
@@ -685,23 +685,23 @@ allocation heavy</pre>
 
   <!-- 19 -->
   <section>
-    <a name="rendering-separation"></a>
+    <a name="entity-architecture-guide-rendering-separation"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">19. Rendering Separation</h2>
 
-    <a name="critical-rule"></a>
+    <a name="entity-architecture-guide-critical-rule"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">CRITICAL RULE</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Renderer should ONLY:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">read ECS state</pre>
     <p class="text-gray-700 leading-relaxed mb-3">Never own gameplay.</p>
 
-    <a name="rendering-flow"></a>
+    <a name="entity-architecture-guide-rendering-flow"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Rendering Flow</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Simulation
 &rarr; ECS state update
 &rarr; renderer reads state
 &rarr; mesh transforms update</pre>
 
-    <a name="example"></a>
+    <a name="entity-architecture-guide-example-4"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Example</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">mesh.position.set(
   Position.x[id],
@@ -714,10 +714,10 @@ allocation heavy</pre>
 
   <!-- 20 -->
   <section>
-    <a name="example-ecs-layout"></a>
+    <a name="entity-architecture-guide-example-ecs-layout"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">20. Example ECS Layout</h2>
 
-    <a name="best-modern-layout"></a>
+    <a name="entity-architecture-guide-best-modern-layout"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Modern Layout</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">ECS
   &boxvh; Components
@@ -726,7 +726,7 @@ allocation heavy</pre>
   &boxvh; Event Queues
   &boxv; Simulation Tick</pre>
 
-    <a name="recommended-system-order"></a>
+    <a name="entity-architecture-guide-recommended-system-order"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended System Order</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Input
 &rarr; AI
@@ -743,7 +743,7 @@ allocation heavy</pre>
 
   <!-- 21 -->
   <section>
-    <a name="recommended-project-structure"></a>
+    <a name="entity-architecture-guide-recommended-project-structure"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">21. Recommended Project Structure</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">src/
   ecs/
@@ -771,17 +771,17 @@ allocation heavy</pre>
 
   <!-- 22 -->
   <section>
-    <a name="example-typescript-code"></a>
+    <a name="entity-architecture-guide-example-typescript-code"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">22. Example TypeScript Code</h2>
 
-    <a name="health-component"></a>
+    <a name="entity-architecture-guide-health-component"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Health Component</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">export const Health = {
   current: new Uint16Array(MAX_ENTITIES),
   max: new Uint16Array(MAX_ENTITIES),
 };</pre>
 
-    <a name="damage-queue"></a>
+    <a name="entity-architecture-guide-damage-queue"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Damage Queue</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">interface DamageEvent {
   source: number;
@@ -789,7 +789,7 @@ allocation heavy</pre>
   amount: number;
 }</pre>
 
-    <a name="damage-system"></a>
+    <a name="entity-architecture-guide-damage-system"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Damage System</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">for (const evt of damageQueue) {
   Health.current[evt.target] -= evt.amount;
@@ -799,13 +799,13 @@ allocation heavy</pre>
   }
 }</pre>
 
-    <a name="ability-cooldowns"></a>
+    <a name="entity-architecture-guide-ability-cooldowns"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Ability Cooldowns</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">export const AbilityCooldown = {
   remaining: new Float32Array(MAX_ENTITIES),
 };</pre>
 
-    <a name="tech-tree-node"></a>
+    <a name="entity-architecture-guide-tech-tree-node"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Tech Tree Node</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">interface TechNode {
   id: string;
@@ -817,13 +817,13 @@ allocation heavy</pre>
 
   <!-- 23 -->
   <section>
-    <a name="best-practices"></a>
+    <a name="entity-architecture-guide-best-practices"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">23. Best Practices</h2>
 
-    <a name="do"></a>
+    <a name="entity-architecture-guide-do"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">DO</h3>
 
-    <a name="use"></a>
+    <a name="entity-architecture-guide-use-1"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Use:</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">ECS
 fixed ticks
@@ -833,10 +833,10 @@ typed arrays
 binary networking
 server authority</pre>
 
-    <a name="do-not"></a>
+    <a name="entity-architecture-guide-do-not"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">DO NOT</h3>
 
-    <a name="avoid"></a>
+    <a name="entity-architecture-guide-avoid-1"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Avoid:</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">logic in meshes
 deep inheritance
@@ -850,10 +850,10 @@ massive monolithic classes</pre>
 
   <!-- 24 -->
   <section>
-    <a name="scaling-strategy"></a>
+    <a name="entity-architecture-guide-scaling-strategy"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">24. Scaling Strategy</h2>
 
-    <a name="if-you-want-massive-rts-battles"></a>
+    <a name="entity-architecture-guide-if-you-want-massive-rts-battles"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">If You Want Massive RTS Battles</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Prioritize:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">cache efficiency
@@ -867,13 +867,13 @@ deterministic simulation</pre>
 
   <!-- 25 -->
   <section>
-    <a name="final-recommendations"></a>
+    <a name="entity-architecture-guide-final-recommendations"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">25. Final Recommendations</h2>
 
-    <a name="best-overall-rts-architecture"></a>
+    <a name="entity-architecture-guide-best-overall-rts-architecture"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Overall RTS Architecture</h3>
 
-    <a name="ideal-modern-stack"></a>
+    <a name="entity-architecture-guide-ideal-modern-stack"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Ideal Modern Stack</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">TypeScript
 Three.js
@@ -884,14 +884,14 @@ Binary snapshots
 Instanced rendering
 GPU-driven visuals</pre>
 
-    <a name="golden-rts-rule"></a>
+    <a name="entity-architecture-guide-golden-rts-rule"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Golden RTS Rule</h3>
 
-    <a name="treat-the-renderer-as-a-viewer"></a>
+    <a name="entity-architecture-guide-treat-the-renderer-as-a-viewer"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Treat the renderer as a VIEWER.</h4>
     <p class="text-gray-700 leading-relaxed mb-3">NOT the game itself.</p>
 
-    <a name="best-overall-design-philosophy"></a>
+    <a name="entity-architecture-guide-best-overall-design-philosophy"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Best Overall Design Philosophy</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Data-oriented simulation
 +

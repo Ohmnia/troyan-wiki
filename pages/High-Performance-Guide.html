@@ -3,7 +3,7 @@
 
   <!-- 1 -->
   <section>
-    <a name="overview"></a>
+    <a name="high-performance-guide-overview"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Overview</h2>
     <p class="text-gray-700 leading-relaxed mb-4">This guide focuses on professional-grade usage of <code class="text-indigo-600 font-mono">.glb</code> assets in THREE.js for large-scale RTS games where hundreds or thousands of units may be visible simultaneously.</p>
   </section>
@@ -12,11 +12,11 @@
 
   <!-- 2 -->
   <section>
-    <a name="why-glb-is-the-preferred-format"></a>
+    <a name="high-performance-guide-why-glb-is-the-preferred-format"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Why GLB Is the Preferred Format</h2>
     <p class="text-gray-700 leading-relaxed mb-4">Use <code class="text-indigo-600 font-mono">.glb</code> instead of <code class="text-indigo-600 font-mono">.gltf</code> whenever possible.</p>
 
-    <a name="advantages"></a>
+    <a name="high-performance-guide-advantages"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Advantages</h4>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>Single binary file</li>
@@ -37,7 +37,7 @@
     </ul>
     <p class="text-gray-700 leading-relaxed mb-4">For RTS games, asset loading speed directly impacts player experience.</p>
 
-    <a name="recommended-glb-files"></a>
+    <a name="high-performance-guide-recommended-glb-files"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Recommended</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Tank.glb
 Soldier.glb
@@ -45,7 +45,7 @@ Building.glb
 Tree.glb
 Explosion.glb</pre>
 
-    <a name="avoid-glb-formats"></a>
+    <a name="high-performance-guide-avoid-glb-formats"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Avoid</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Tank.gltf
 Tank.bin
@@ -58,7 +58,7 @@ Tank_metallic.png</pre>
 
   <!-- 3 -->
   <section>
-    <a name="asset-pipeline"></a>
+    <a name="high-performance-guide-asset-pipeline"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Asset Pipeline</h2>
     <p class="text-gray-700 leading-relaxed mb-4">The biggest performance gains happen <strong>before assets reach THREE.js</strong>.</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Blender
@@ -84,10 +84,10 @@ THREE.js</pre>
 
   <!-- 4 -->
   <section>
-    <a name="blender-export-settings"></a>
+    <a name="high-performance-guide-blender-export-settings"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Blender Export Settings</h2>
 
-    <a name="apply-transforms"></a>
+    <a name="high-performance-guide-apply-transforms"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Apply Transforms</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Before exporting:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Ctrl + A
@@ -98,10 +98,10 @@ Apply:
 - Location</pre>
     <p class="text-gray-700 leading-relaxed mt-3">Never export unapplied transforms.</p>
 
-    <a name="remove-hidden-geometry"></a>
+    <a name="high-performance-guide-remove-hidden-geometry"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Remove Hidden Geometry</h3>
 
-    <a name="bad-hidden-geometry"></a>
+    <a name="high-performance-guide-bad-hidden-geometry"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Bad</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Tank
  ├ Turret Interior
@@ -109,7 +109,7 @@ Apply:
  ├ Hidden Bolts
  └ Hidden Pipes</pre>
 
-    <a name="good-hidden-geometry"></a>
+    <a name="high-performance-guide-good-hidden-geometry"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Good</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Tank
  ├ Hull
@@ -117,18 +117,18 @@ Apply:
  └ Cannon</pre>
     <p class="text-gray-700 leading-relaxed mt-3">RTS cameras never see hidden details.</p>
 
-    <a name="reduce-material-count"></a>
+    <a name="high-performance-guide-reduce-material-count"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Reduce Material Count</h3>
 
-    <a name="worst-material-count"></a>
+    <a name="high-performance-guide-worst-material-count"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Worst</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">20 materials</pre>
 
-    <a name="better-material-count"></a>
+    <a name="high-performance-guide-better-material-count"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Better</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">1 material</pre>
 
-    <a name="best-material-count"></a>
+    <a name="high-performance-guide-best-material-count"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Best</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">1 texture atlas
 1 material</pre>
@@ -139,7 +139,7 @@ Apply:
 
   <!-- 5 -->
   <section>
-    <a name="compression"></a>
+    <a name="high-performance-guide-compression"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Compression</h2>
     <p class="text-gray-700 leading-relaxed mb-4">Always use:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1">
@@ -148,14 +148,14 @@ Apply:
     </ul>
     <p class="text-gray-700 leading-relaxed mt-3">Together.</p>
 
-    <a name="draco-setup"></a>
+    <a name="high-performance-guide-draco-setup"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Draco Setup</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('/draco/');</pre>
 
-    <a name="draco-benefits"></a>
+    <a name="high-performance-guide-draco-benefits"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Benefits</h4>
     <ul class="list-disc list-inside text-gray-700 space-y-1">
       <li>Smaller downloads</li>
@@ -163,13 +163,13 @@ dracoLoader.setDecoderPath('/draco/');</pre>
       <li>Reduced bandwidth usage</li>
     </ul>
 
-    <a name="meshopt-setup"></a>
+    <a name="high-performance-guide-meshopt-setup"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Meshopt Setup</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 
 loader.setMeshoptDecoder(MeshoptDecoder);</pre>
 
-    <a name="meshopt-benefits"></a>
+    <a name="high-performance-guide-meshopt-benefits"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Benefits</h4>
     <ul class="list-disc list-inside text-gray-700 space-y-1">
       <li>Faster loading</li>
@@ -182,7 +182,7 @@ loader.setMeshoptDecoder(MeshoptDecoder);</pre>
 
   <!-- 6 -->
   <section>
-    <a name="gold-standard-loader-setup"></a>
+    <a name="high-performance-guide-gold-standard-loader-setup"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Gold Standard Loader Setup</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
@@ -201,17 +201,17 @@ loader.setMeshoptDecoder(MeshoptDecoder);</pre>
 
   <!-- 7 -->
   <section>
-    <a name="asset-cache-system"></a>
+    <a name="high-performance-guide-asset-cache-system"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Asset Cache System</h2>
     <p class="text-gray-700 leading-relaxed mb-4">Never load the same GLB twice.</p>
 
-    <a name="bad-cache"></a>
+    <a name="high-performance-guide-bad-cache"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Bad</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">loader.load('/tank.glb');
 loader.load('/tank.glb');
 loader.load('/tank.glb');</pre>
 
-    <a name="good-cache"></a>
+    <a name="high-performance-guide-good-cache"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Good</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">const assetCache = new Map();
 
@@ -232,17 +232,17 @@ async function loadGLB(url) {
 
   <!-- 8 -->
   <section>
-    <a name="clone-correctly"></a>
+    <a name="high-performance-guide-clone-correctly"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Clone Correctly</h2>
     <p class="text-gray-700 leading-relaxed mb-4">Never duplicate loaded assets directly.</p>
 
-    <a name="bad-clone"></a>
+    <a name="high-performance-guide-bad-clone"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Bad</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">scene.add(gltf.scene);
 scene.add(gltf.scene);</pre>
     <p class="text-gray-700 leading-relaxed mt-3">Only one object exists.</p>
 
-    <a name="correct-clone"></a>
+    <a name="high-performance-guide-correct-clone"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Correct Approach</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">import { SkeletonUtils } from 'three/examples/jsm/utils/SkeletonUtils.js';
 
@@ -253,11 +253,11 @@ const unit = SkeletonUtils.clone(gltf.scene);</pre>
 
   <!-- 9 -->
   <section>
-    <a name="instancedmesh-the-rts-superpower"></a>
+    <a name="high-performance-guide-instancedmesh-the-rts-superpower"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">InstancedMesh: The RTS Superpower</h2>
     <p class="text-gray-700 leading-relaxed mb-4">Most RTS games fail because they create thousands of mesh objects.</p>
 
-    <a name="bad-instancedmesh"></a>
+    <a name="high-performance-guide-bad-instancedmesh"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Bad</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">for (let i = 0; i &lt; 1000; i++) {
     scene.add(
@@ -270,7 +270,7 @@ const unit = SkeletonUtils.clone(gltf.scene);</pre>
     <p class="text-gray-700 leading-relaxed mt-3 font-medium">Result:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">1000 draw calls</pre>
 
-    <a name="good-instancedmesh"></a>
+    <a name="high-performance-guide-good-instancedmesh"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Good</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">const mesh = new THREE.InstancedMesh(
     geometry,
@@ -282,7 +282,7 @@ scene.add(mesh);</pre>
     <p class="text-gray-700 leading-relaxed mt-3 font-medium">Result:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">1 draw call</pre>
 
-    <a name="updating-instance-transforms"></a>
+    <a name="high-performance-guide-updating-instance-transforms"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Updating Instance Transforms</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">const matrix = new THREE.Matrix4();
 
@@ -304,22 +304,22 @@ mesh.instanceMatrix.needsUpdate = true;</pre>
 
   <!-- 10 -->
   <section>
-    <a name="gpu-friendly-rts-unit-design"></a>
+    <a name="high-performance-guide-gpu-friendly-rts-unit-design"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GPU-Friendly RTS Unit Design</h2>
 
-    <a name="ideal-triangles"></a>
+    <a name="high-performance-guide-ideal-triangles"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Ideal</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">300–1000 triangles</pre>
 
-    <a name="maximum-triangles"></a>
+    <a name="high-performance-guide-maximum-triangles"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Maximum</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">2000 triangles</pre>
 
-    <a name="avoid-high-triangles"></a>
+    <a name="high-performance-guide-avoid-high-triangles"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Avoid</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">15000+ triangles</pre>
 
-    <a name="example-triangles"></a>
+    <a name="high-performance-guide-example-triangles"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Example</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">500 units
 ×
@@ -334,18 +334,18 @@ mesh.instanceMatrix.needsUpdate = true;</pre>
 
   <!-- 11 -->
   <section>
-    <a name="level-of-detail-lod"></a>
+    <a name="high-performance-guide-level-of-detail-lod"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Level of Detail (LOD)</h2>
     <p class="text-gray-700 leading-relaxed mb-4">Always use LOD.</p>
 
-    <a name="lod-example"></a>
+    <a name="high-performance-guide-lod-example"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Example</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">LOD0 = 1000 tris
 LOD1 = 500 tris
 LOD2 = 150 tris
 LOD3 = billboard</pre>
 
-    <a name="threejs-lod-implementation"></a>
+    <a name="high-performance-guide-threejs-lod-implementation"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">THREE.js Implementation</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">const lod = new THREE.LOD();
 
@@ -360,15 +360,15 @@ lod.addLevel(sprite, 250);</pre>
 
   <!-- 12 -->
   <section>
-    <a name="frustum-culling"></a>
+    <a name="high-performance-guide-frustum-culling"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Frustum Culling</h2>
     <p class="text-gray-700 leading-relaxed mb-4">THREE.js supports automatic frustum culling.</p>
 
-    <a name="frustum-culling-recommended"></a>
+    <a name="high-performance-guide-frustum-culling-recommended"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Recommended</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">mesh.frustumCulled = true;</pre>
 
-    <a name="frustum-culling-avoid"></a>
+    <a name="high-performance-guide-frustum-culling-avoid"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Avoid</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">mesh.frustumCulled = false;</pre>
     <p class="text-gray-700 leading-relaxed mt-3">Unless absolutely necessary.</p>
@@ -378,11 +378,11 @@ lod.addLevel(sprite, 250);</pre>
 
   <!-- 13 -->
   <section>
-    <a name="texture-best-practices"></a>
+    <a name="high-performance-guide-texture-best-practices"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Texture Best Practices</h2>
     <p class="text-gray-700 leading-relaxed mb-4">Use KTX2 instead of PNG/JPG.</p>
 
-    <a name="ktx2-benefits"></a>
+    <a name="high-performance-guide-ktx2-benefits"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Benefits</h4>
     <ul class="list-disc list-inside text-gray-700 space-y-1">
       <li>GPU compressed</li>
@@ -391,7 +391,7 @@ lod.addLevel(sprite, 250);</pre>
       <li>Smaller downloads</li>
     </ul>
 
-    <a name="ktx2-setup"></a>
+    <a name="high-performance-guide-ktx2-setup"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Setup</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader.js';
 
@@ -407,7 +407,7 @@ loader.setKTX2Loader(ktx2Loader);</pre>
 
   <!-- 14 -->
   <section>
-    <a name="recommended-texture-sizes"></a>
+    <a name="high-performance-guide-recommended-texture-sizes"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Recommended Texture Sizes</h2>
     <div class="overflow-x-auto">
       <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
@@ -433,20 +433,20 @@ loader.setKTX2Loader(ktx2Loader);</pre>
 
   <!-- 15 -->
   <section>
-    <a name="animation-optimization"></a>
+    <a name="high-performance-guide-animation-optimization"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Animation Optimization</h2>
 
-    <a name="bad-animation"></a>
+    <a name="high-performance-guide-bad-animation"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Bad</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">1000 animation mixers</pre>
 
-    <a name="better-animation"></a>
+    <a name="high-performance-guide-better-animation"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Better</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">if (unit.visible) {
     mixer.update(delta);
 }</pre>
 
-    <a name="even-better-animation"></a>
+    <a name="high-performance-guide-even-better-animation"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Even Better</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">if (distance &lt; 50) {
     mixer.update(delta);
@@ -458,22 +458,22 @@ loader.setKTX2Loader(ktx2Loader);</pre>
 
   <!-- 16 -->
   <section>
-    <a name="shadow-optimization"></a>
+    <a name="high-performance-guide-shadow-optimization"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Shadow Optimization</h2>
     <p class="text-gray-700 leading-relaxed mb-4">One of the biggest FPS killers in RTS games.</p>
 
-    <a name="avoid-shadows"></a>
+    <a name="high-performance-guide-avoid-shadows"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Avoid</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">All units cast shadows</pre>
 
-    <a name="better-shadows"></a>
+    <a name="high-performance-guide-better-shadows"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Better</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Heroes cast shadows
 Buildings cast shadows
 Regular units do not</pre>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed mt-3">unit.castShadow = false;</pre>
 
-    <a name="recommended-shadow-setup"></a>
+    <a name="high-performance-guide-recommended-shadow-setup"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Shadow Setup</h3>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">renderer.shadowMap.type =
     THREE.PCFSoftShadowMap;</pre>
@@ -483,17 +483,17 @@ Regular units do not</pre>
 
   <!-- 17 -->
   <section>
-    <a name="object-pooling"></a>
+    <a name="high-performance-guide-object-pooling"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Object Pooling</h2>
     <p class="text-gray-700 leading-relaxed mb-4">Never create units during gameplay.</p>
 
-    <a name="bad-pooling"></a>
+    <a name="high-performance-guide-bad-pooling"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Bad</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">new Tank();
 new Tank();
 new Tank();</pre>
 
-    <a name="good-pooling"></a>
+    <a name="high-performance-guide-good-pooling"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Good</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">const tankPool = [];
 
@@ -508,7 +508,7 @@ for (let i = 0; i &lt; 500; i++) {
 
   <!-- 18 -->
   <section>
-    <a name="worker-based-pathfinding"></a>
+    <a name="high-performance-guide-worker-based-pathfinding"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Worker-Based Pathfinding</h2>
     <p class="text-gray-700 leading-relaxed mb-4">Never pathfind on the main thread.</p>
     <p class="text-gray-700 leading-relaxed mb-3 font-medium">Use:</p>
@@ -521,7 +521,7 @@ for (let i = 0; i &lt; 500; i++) {
       <li>Influence Maps</li>
     </ul>
 
-    <a name="pathfinding-example"></a>
+    <a name="high-performance-guide-pathfinding-example"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Example</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">const worker =
     new Worker('pathfinding.js');</pre>
@@ -532,10 +532,10 @@ for (let i = 0; i &lt; 500; i++) {
 
   <!-- 19 -->
   <section>
-    <a name="massive-army-architecture"></a>
+    <a name="high-performance-guide-massive-army-architecture"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Massive Army Architecture</h2>
 
-    <a name="professional-rts-architecture"></a>
+    <a name="high-performance-guide-professional-rts-architecture"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Professional RTS Architecture</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Entity System
  ↓
@@ -545,14 +545,14 @@ GPU Instancing
  ↓
 Single Draw Call</pre>
 
-    <a name="avoid-oop"></a>
+    <a name="high-performance-guide-avoid-oop"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Avoid</h4>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Tank Object
 Tank Object
 Tank Object
 Tank Object</pre>
 
-    <a name="data-oriented-design"></a>
+    <a name="high-performance-guide-data-oriented-design"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Use Data-Oriented Design</h4>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">const positions = new Float32Array(...);
 const health = new Uint16Array(...);
@@ -570,7 +570,7 @@ const team = new Uint8Array(...);</pre>
 
   <!-- 20 -->
   <section>
-    <a name="asset-streaming"></a>
+    <a name="high-performance-guide-asset-streaming"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Asset Streaming</h2>
     <p class="text-gray-700 leading-relaxed mb-4">For huge maps:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Chunk_0_0.glb
@@ -587,7 +587,7 @@ Chunk_0_2.glb</pre>
 
   <!-- 21 -->
   <section>
-    <a name="production-grade-renderer-settings"></a>
+    <a name="high-performance-guide-production-grade-renderer-settings"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Production-Grade Renderer Settings</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">const renderer = new THREE.WebGLRenderer({
     antialias: false,
@@ -608,7 +608,7 @@ renderer.shadowMap.enabled = true;</pre>
 
   <!-- 22 -->
   <section>
-    <a name="ultra-fast-asset-manager"></a>
+    <a name="high-performance-guide-ultra-fast-asset-manager"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Ultra-Fast Asset Manager</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">class AssetManager {
     constructor() {
@@ -640,7 +640,7 @@ renderer.shadowMap.enabled = true;</pre>
 
   <!-- 23 -->
   <section>
-    <a name="performance-targets"></a>
+    <a name="high-performance-guide-performance-targets"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Performance Targets</h2>
     <div class="overflow-x-auto">
       <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
@@ -670,7 +670,7 @@ renderer.shadowMap.enabled = true;</pre>
 
   <!-- 24 -->
   <section>
-    <a name="elite-rts-checklist"></a>
+    <a name="high-performance-guide-elite-rts-checklist"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Elite RTS Checklist</h2>
     <p class="text-gray-700 leading-relaxed mb-4">Before shipping:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1">
@@ -694,7 +694,7 @@ renderer.shadowMap.enabled = true;</pre>
 
   <!-- 25 -->
   <section>
-    <a name="architecture-used-by-the-fastest-browser-rts-games"></a>
+    <a name="high-performance-guide-architecture-used-by-the-fastest-browser-rts-games"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Architecture Used by the Fastest Browser RTS Games</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Blender
  ↓
@@ -725,7 +725,7 @@ Data-Oriented ECS
 
   <!-- 26 -->
   <section>
-    <a name="the-single-most-important-rule"></a>
+    <a name="high-performance-guide-the-single-most-important-rule"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">The Single Most Important Rule</h2>
     <blockquote class="border-l-4 border-indigo-400 bg-indigo-50 px-4 py-3 italic text-gray-700 my-4 rounded-r-lg">
       <p>Do not think of a GLB as a game object.</p>

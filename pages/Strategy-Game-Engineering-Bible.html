@@ -3,7 +3,7 @@
 
   <!-- 1 -->
   <section>
-    <a name="purpose-of-this-document"></a>
+    <a name="strategy-game-engineering-bible-purpose-of-this-document"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">PURPOSE OF THIS DOCUMENT</h2>
     <p class="text-gray-700 leading-relaxed mb-3">This document exists to teach:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -33,7 +33,7 @@
 
   <!-- 2 -->
   <section>
-    <a name="the-first-law-of-game-development"></a>
+    <a name="strategy-game-engineering-bible-the-first-law-of-game-development"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">THE FIRST LAW OF GAME DEVELOPMENT</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">THE PLAYER DOES NOT CARE</p>
     <p class="text-gray-700 leading-relaxed mb-3">ABOUT YOUR CODEBASE.</p>
@@ -59,7 +59,7 @@
 
   <!-- 3 -->
   <section>
-    <a name="the-second-law-of-rts-development"></a>
+    <a name="strategy-game-engineering-bible-the-second-law-of-rts-development"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">THE SECOND LAW OF RTS DEVELOPMENT</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">READABILITY IS EVERYTHING</p>
     <p class="text-gray-700 leading-relaxed mb-3">If the player cannot instantly understand:</p>
@@ -84,7 +84,7 @@
 
   <!-- 4 -->
   <section>
-    <a name="the-third-law-of-solo-development"></a>
+    <a name="strategy-game-engineering-bible-the-third-law-of-solo-development"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">THE THIRD LAW OF SOLO DEVELOPMENT</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">FINISHABLE SYSTEMS</p>
     <p class="text-gray-700 leading-relaxed mb-3">BEAT AMBITIOUS SYSTEMS.</p>
@@ -108,7 +108,7 @@
 
   <!-- 5 -->
   <section>
-    <a name="core-engineering-philosophy"></a>
+    <a name="strategy-game-engineering-bible-core-engineering-philosophy"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">CORE ENGINEERING PHILOSOPHY</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Professional RTS engines prioritize:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">1. Determinism
@@ -130,7 +130,7 @@
 
   <!-- 6 -->
   <section>
-    <a name="delta-time"></a>
+    <a name="strategy-game-engineering-bible-delta-time"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">DELTA TIME</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">WHAT IS DELTA TIME?</p>
     <p class="text-gray-700 leading-relaxed mb-3">Delta time is:</p>
@@ -152,7 +152,7 @@ Frame 3 = 15ms</pre>
 
   <!-- 7 -->
   <section>
-    <a name="correct-movement"></a>
+    <a name="strategy-game-engineering-bible-correct-movement"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">CORRECT MOVEMENT</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">position += velocity * deltaTime</pre>
   </section>
@@ -161,7 +161,7 @@ Frame 3 = 15ms</pre>
 
   <!-- 8 -->
   <section>
-    <a name="wrong-movement"></a>
+    <a name="strategy-game-engineering-bible-wrong-movement"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">WRONG MOVEMENT</h2>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">position += velocity</pre>
     <p class="text-gray-700 leading-relaxed mb-3">This causes:</p>
@@ -175,13 +175,13 @@ Frame 3 = 15ms</pre>
 
   <!-- 9 -->
   <section>
-    <a name="fixed-timestep"></a>
+    <a name="strategy-game-engineering-bible-fixed-timestep"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">FIXED TIMESTEP</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Professional RTS games usually separate:</p>
-    <a name="rendering"></a>
+    <a name="strategy-game-engineering-bible-rendering"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Rendering</h3>
     <p class="text-gray-700 leading-relaxed mb-3">from</p>
-    <a name="simulation"></a>
+    <a name="strategy-game-engineering-bible-simulation"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Simulation</h3>
   </section>
 
@@ -189,7 +189,7 @@ Frame 3 = 15ms</pre>
 
   <!-- 10 -->
   <section>
-    <a name="why"></a>
+    <a name="strategy-game-engineering-bible-why"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">WHY?</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Rendering FPS changes constantly.</p>
     <p class="text-gray-700 leading-relaxed mb-3">Simulation must remain stable.</p>
@@ -199,7 +199,7 @@ Frame 3 = 15ms</pre>
 
   <!-- 11 -->
   <section>
-    <a name="common-structure"></a>
+    <a name="strategy-game-engineering-bible-common-structure"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">COMMON STRUCTURE</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Rendering = variable FPS
 
@@ -215,7 +215,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 12 -->
   <section>
-    <a name="why-fixed-timestep-matters"></a>
+    <a name="strategy-game-engineering-bible-why-fixed-timestep-matters"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">WHY FIXED TIMESTEP MATTERS</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Without fixed simulation:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -230,7 +230,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 13 -->
   <section>
-    <a name="professional-rts-rule"></a>
+    <a name="strategy-game-engineering-bible-professional-rts-rule"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">PROFESSIONAL RTS RULE</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">GAMEPLAY SHOULD NOT DEPEND</p>
     <p class="text-gray-700 leading-relaxed mb-3">ON FRAME RATE.</p>
@@ -240,7 +240,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 14 -->
   <section>
-    <a name="collision-detection"></a>
+    <a name="strategy-game-engineering-bible-collision-detection"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">COLLISION DETECTION</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">MOST BEGINNERS OVERCOMPLICATE COLLISION</p>
     <p class="text-gray-700 leading-relaxed mb-3">RTS games rarely use:</p>
@@ -259,7 +259,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 15 -->
   <section>
-    <a name="common-collision-types"></a>
+    <a name="strategy-game-engineering-bible-common-collision-types"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">COMMON COLLISION TYPES</h2>
     <div class="overflow-x-auto">
       <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
@@ -299,7 +299,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 16 -->
   <section>
-    <a name="rts-collision-philosophy"></a>
+    <a name="strategy-game-engineering-bible-rts-collision-philosophy"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">RTS COLLISION PHILOSOPHY</h2>
     <p class="text-gray-700 leading-relaxed mb-3">RTS collision is mostly:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -317,7 +317,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 17 -->
   <section>
-    <a name="professional-rts-secret"></a>
+    <a name="strategy-game-engineering-bible-professional-rts-secret"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">PROFESSIONAL RTS SECRET</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Many RTS games fake:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -336,7 +336,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 18 -->
   <section>
-    <a name="pathfinding"></a>
+    <a name="strategy-game-engineering-bible-pathfinding"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">PATHFINDING</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">PATHFINDING IS ONE OF THE HARDEST RTS PROBLEMS</p>
     <p class="text-gray-700 leading-relaxed mb-3"><strong>Concept / Definitions Claried:</strong></p>
@@ -346,7 +346,7 @@ Simulation = fixed tick rate</pre>
     <p class="text-gray-700 leading-relaxed mb-3">[ Hierarchical Grid ] ---> 1. Breaks large map into macro-nodes</p>
     <p class="text-gray-700 leading-relaxed mb-3">| v [ A* Search ] ---> 2. Finds high-level path through macro-nodes</p>
     <p class="text-gray-700 leading-relaxed mb-3">| v [ Flow Fields ] ---> 3. Generates local steering vectors for crowd movement</p>
-    <a name="1-hierarchical-grids--the-map-structure"></a>
+    <a name="strategy-game-engineering-bible-1-hierarchical-grids--the-map-structure"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">1. Hierarchical Grids (The Map Structure)</h4>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li><strong>Concept</strong>: Divide a massive game map into a two-tier grid.</li>
@@ -354,25 +354,25 @@ Simulation = fixed tick rate</pre>
       <li><strong>High-Level</strong>: Macro-zones (e.g., 10x10 tiles) tracking connectivity between larger rooms or regions.</li>
       <li><strong>Benefit</strong>: Reduces the search space by ignoring local clutter during long-distance planning.</li>
     </ul>
-    <a name="2-hierarchical-a---the-macro-planner"></a>
+    <a name="strategy-game-engineering-bible-2-hierarchical-a---the-macro-planner"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">2. Hierarchical A* (The Macro Planner)</h4>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li><strong>Concept</strong>: A* runs strictly on the high-level macro-nodes instead of individual tiles.</li>
       <li><strong>Process</strong>: It finds which sequence of macro-zones an agent must cross to reach the target destination.</li>
       <li><strong>Benefit</strong>: Drastically cuts down CPU cycles, preventing game stutter when calculating long-range paths.</li>
     </ul>
-    <a name="3-flow-fields--the-micro-navigator"></a>
+    <a name="strategy-game-engineering-bible-3-flow-fields--the-micro-navigator"></a>
     <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">3. Flow Fields (The Micro Navigator)</h4>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li><strong>Concept</strong>: Once A* identifies the macro-path, a flow field is generated inside the active macro-zones.</li>
       <li><strong>Process</strong>: Dijkstra's algorithm calculates a "cost field" from the destination backward, creating a grid of arrows (vectors).</li>
       <li><strong>Benefit</strong>: Moving units do not need individual paths; they simply read the vector arrow of the tile they stand on.</li>
     </ul>
-    <a name="real-world-use-case--rts-games"></a>
+    <a name="strategy-game-engineering-bible-real-world-use-case--rts-games"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Real-World Use Case: RTS Games</h3>
     <p class="text-gray-700 leading-relaxed mb-3">In Real-Time Strategy (RTS) games like *StarCraft* or *Supreme Commander*, a player might order 500 soldiers to march across a giant continent.</p>
     <p class="text-gray-700 leading-relaxed mb-3">1.  <strong>Hierarchical Grid</strong> checks the world map and isolates the 5 large regions the army must traverse. 2.  <strong>A</strong>* plots the line through those 5 regions instantly. 3.  <strong>Flow Fields</strong> activate inside those regions, guiding all 500 units simultaneously around rocks, corners, and each other without computing 500 separate paths.</p>
-    <a name="tailoring-to-your-architecture"></a>
+    <a name="strategy-game-engineering-bible-tailoring-to-your-architecture"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Tailoring to Your Architecture</h3>
     <p class="text-gray-700 leading-relaxed mb-3">To get specific code examples or implementation advice, let me know:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -396,7 +396,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 19 -->
   <section>
-    <a name="common-beginner-mistake"></a>
+    <a name="strategy-game-engineering-bible-common-beginner-mistake"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">COMMON BEGINNER MISTAKE</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Trying:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -417,7 +417,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 20 -->
   <section>
-    <a name="rts-pathfinding-priorities"></a>
+    <a name="strategy-game-engineering-bible-rts-pathfinding-priorities"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">RTS PATHFINDING PRIORITIES</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">1. Stability
 2. Scalability
@@ -434,7 +434,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 21 -->
   <section>
-    <a name="flow-field-pathfinding"></a>
+    <a name="strategy-game-engineering-bible-flow-field-pathfinding"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">FLOW FIELD PATHFINDING</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Large RTS games often use:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -451,7 +451,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 22 -->
   <section>
-    <a name="ai-engineering"></a>
+    <a name="strategy-game-engineering-bible-ai-engineering"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">AI ENGINEERING</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">GAME AI IS MOSTLY ILLUSION</p>
     <p class="text-gray-700 leading-relaxed mb-3">Good AI does NOT mean:</p>
@@ -470,7 +470,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 23 -->
   <section>
-    <a name="bad-ai"></a>
+    <a name="strategy-game-engineering-bible-bad-ai"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">BAD AI</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Feels:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -484,7 +484,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 24 -->
   <section>
-    <a name="good-ai"></a>
+    <a name="strategy-game-engineering-bible-good-ai"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GOOD AI</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Feels:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -499,7 +499,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 25 -->
   <section>
-    <a name="rts-ai-priorities"></a>
+    <a name="strategy-game-engineering-bible-rts-ai-priorities"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">RTS AI PRIORITIES</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">1. Readability
 2. Predictability
@@ -511,7 +511,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 26 -->
   <section>
-    <a name="performance-engineering"></a>
+    <a name="strategy-game-engineering-bible-performance-engineering"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">PERFORMANCE ENGINEERING</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">PERFORMANCE IS A DESIGN PROBLEM</p>
     <p class="text-gray-700 leading-relaxed mb-3">NOT:</p>
@@ -524,7 +524,7 @@ Simulation = fixed tick rate</pre>
 
   <!-- 27 -->
   <section>
-    <a name="bad-pipeline"></a>
+    <a name="strategy-game-engineering-bible-bad-pipeline"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">BAD PIPELINE</h2>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Build everything first
 Optimize later</pre>
@@ -535,7 +535,7 @@ Optimize later</pre>
 
   <!-- 28 -->
   <section>
-    <a name="good-pipeline"></a>
+    <a name="strategy-game-engineering-bible-good-pipeline"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GOOD PIPELINE</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Build
 Measure
@@ -547,7 +547,7 @@ Repeat</pre>
 
   <!-- 29 -->
   <section>
-    <a name="cpu-vs-gpu"></a>
+    <a name="strategy-game-engineering-bible-cpu-vs-gpu"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">CPU VS GPU</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">RTS GAMES ARE USUALLY CPU LIMITED</p>
     <p class="text-gray-700 leading-relaxed mb-3">Because of:</p>
@@ -565,7 +565,7 @@ Repeat</pre>
 
   <!-- 30 -->
   <section>
-    <a name="gpu-costs"></a>
+    <a name="strategy-game-engineering-bible-gpu-costs"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GPU COSTS</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Mostly:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -581,7 +581,7 @@ Repeat</pre>
 
   <!-- 31 -->
   <section>
-    <a name="cpu-costs"></a>
+    <a name="strategy-game-engineering-bible-cpu-costs"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">CPU COSTS</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Mostly:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -597,7 +597,7 @@ Repeat</pre>
 
   <!-- 32 -->
   <section>
-    <a name="golden-performance-rule"></a>
+    <a name="strategy-game-engineering-bible-golden-performance-rule"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GOLDEN PERFORMANCE RULE</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">NEVER UPDATE</p>
     <p class="text-gray-700 leading-relaxed mb-3">EVERYTHING EVERY FRAME.</p>
@@ -607,7 +607,7 @@ Repeat</pre>
 
   <!-- 33 -->
   <section>
-    <a name="professional-techniques"></a>
+    <a name="strategy-game-engineering-bible-professional-techniques"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">PROFESSIONAL TECHNIQUES</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Use:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -623,7 +623,7 @@ Repeat</pre>
 
   <!-- 34 -->
   <section>
-    <a name="object-pooling"></a>
+    <a name="strategy-game-engineering-bible-object-pooling"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">OBJECT POOLING</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">NEVER CONSTANTLY CREATE/DESTROY OBJECTS</p>
     <p class="text-gray-700 leading-relaxed mb-3">Bad:</p>
@@ -640,7 +640,7 @@ delete Bullet()</pre>
 
   <!-- 35 -->
   <section>
-    <a name="good"></a>
+    <a name="strategy-game-engineering-bible-good"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GOOD</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Reuse objects.</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">bullet pool
@@ -652,7 +652,7 @@ effect pool</pre>
 
   <!-- 36 -->
   <section>
-    <a name="memory-management"></a>
+    <a name="strategy-game-engineering-bible-memory-management"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">MEMORY MANAGEMENT</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">STABLE MEMORY = STABLE FRAME RATE</p>
     <p class="text-gray-700 leading-relaxed mb-3">Most stutter comes from:</p>
@@ -667,7 +667,7 @@ effect pool</pre>
 
   <!-- 37 -->
   <section>
-    <a name="professional-rule"></a>
+    <a name="strategy-game-engineering-bible-professional-rule"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">PROFESSIONAL RULE</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Avoid:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -679,7 +679,7 @@ effect pool</pre>
 
   <!-- 38 -->
   <section>
-    <a name="good"></a>
+    <a name="strategy-game-engineering-bible-good-1"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GOOD</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">reuse vectors
 reuse arrays
@@ -690,7 +690,7 @@ reuse objects</pre>
 
   <!-- 39 -->
   <section>
-    <a name="bad"></a>
+    <a name="strategy-game-engineering-bible-bad"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">BAD</h2>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">new Vector3()
 inside update()</pre>
@@ -700,7 +700,7 @@ inside update()</pre>
 
   <!-- 40 -->
   <section>
-    <a name="entity-component-systems-ecs"></a>
+    <a name="strategy-game-engineering-bible-entity-component-systems-ecs"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">ENTITY COMPONENT SYSTEMS (ECS)</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">ECS IS NOT MAGIC</p>
     <p class="text-gray-700 leading-relaxed mb-3">Many beginners think:</p>
@@ -718,7 +718,7 @@ inside update()</pre>
 
   <!-- 41 -->
   <section>
-    <a name="good-ecs"></a>
+    <a name="strategy-game-engineering-bible-good-ecs"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GOOD ECS</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Should:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -732,7 +732,7 @@ inside update()</pre>
 
   <!-- 42 -->
   <section>
-    <a name="bad-ecs"></a>
+    <a name="strategy-game-engineering-bible-bad-ecs"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">BAD ECS</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Creates:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -746,7 +746,7 @@ inside update()</pre>
 
   <!-- 43 -->
   <section>
-    <a name="solo-dev-recommendation"></a>
+    <a name="strategy-game-engineering-bible-solo-dev-recommendation"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">SOLO DEV RECOMMENDATION</h2>
     <p class="text-gray-700 leading-relaxed mb-3">DO NOT build:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -762,7 +762,7 @@ inside update()</pre>
 
   <!-- 44 -->
   <section>
-    <a name="rendering-philosophy"></a>
+    <a name="strategy-game-engineering-bible-rendering-philosophy"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">RENDERING PHILOSOPHY</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">GAMEPLAY FIRST</p>
     <p class="text-gray-700 leading-relaxed mb-3">GRAPHICS SECOND.</p>
@@ -772,7 +772,7 @@ inside update()</pre>
 
   <!-- 45 -->
   <section>
-    <a name="why-many-indie-rts-games-fail-visually"></a>
+    <a name="strategy-game-engineering-bible-why-many-indie-rts-games-fail-visually"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">WHY MANY INDIE RTS GAMES FAIL VISUALLY</h2>
     <p class="text-gray-700 leading-relaxed mb-3">They prioritize:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -788,7 +788,7 @@ inside update()</pre>
 
   <!-- 46 -->
   <section>
-    <a name="rts-visual-priority"></a>
+    <a name="strategy-game-engineering-bible-rts-visual-priority"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">RTS VISUAL PRIORITY</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">1. Units
 2. Combat
@@ -804,7 +804,7 @@ inside update()</pre>
 
   <!-- 47 -->
   <section>
-    <a name="shadows"></a>
+    <a name="strategy-game-engineering-bible-shadows"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">SHADOWS</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">REALTIME SHADOWS ARE EXPENSIVE</p>
     <p class="text-gray-700 leading-relaxed mb-3">RTS games often fake shadows using:</p>
@@ -823,7 +823,7 @@ inside update()</pre>
 
   <!-- 48 -->
   <section>
-    <a name="particle-systems"></a>
+    <a name="strategy-game-engineering-bible-particle-systems"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">PARTICLE SYSTEMS</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">PARTICLES ARE CHEAP</p>
     <p class="text-gray-700 leading-relaxed mb-3">UNTIL THEY AREN'T.</p>
@@ -837,7 +837,7 @@ inside update()</pre>
 
   <!-- 49 -->
   <section>
-    <a name="bad-particle-usage"></a>
+    <a name="strategy-game-engineering-bible-bad-particle-usage"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">BAD PARTICLE USAGE</h2>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>full-screen smoke</li>
@@ -850,7 +850,7 @@ inside update()</pre>
 
   <!-- 50 -->
   <section>
-    <a name="good-particle-usage"></a>
+    <a name="strategy-game-engineering-bible-good-particle-usage"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GOOD PARTICLE USAGE</h2>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>sparse</li>
@@ -863,7 +863,7 @@ inside update()</pre>
 
   <!-- 51 -->
   <section>
-    <a name="networking"></a>
+    <a name="strategy-game-engineering-bible-networking"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">NETWORKING</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">RTS MULTIPLAYER IS EXTREMELY HARD</p>
     <p class="text-gray-700 leading-relaxed mb-3">Because:</p>
@@ -878,7 +878,7 @@ inside update()</pre>
 
   <!-- 52 -->
   <section>
-    <a name="solo-dev-advice"></a>
+    <a name="strategy-game-engineering-bible-solo-dev-advice"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">SOLO DEV ADVICE</h2>
     <p class="text-gray-700 leading-relaxed mb-3">DO NOT START WITH MULTIPLAYER.</p>
     <p class="text-gray-700 leading-relaxed mb-3">Build:</p>
@@ -891,7 +891,7 @@ inside update()</pre>
 
   <!-- 53 -->
   <section>
-    <a name="game-feel"></a>
+    <a name="strategy-game-engineering-bible-game-feel"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GAME FEEL</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">GAME FEEL IS EVERYTHING</p>
     <p class="text-gray-700 leading-relaxed mb-3">Players forgive:</p>
@@ -911,7 +911,7 @@ inside update()</pre>
 
   <!-- 54 -->
   <section>
-    <a name="game-feel-components"></a>
+    <a name="strategy-game-engineering-bible-game-feel-components"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GAME FEEL COMPONENTS</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">input responsiveness
 animation timing
@@ -926,7 +926,7 @@ selection clarity</pre>
 
   <!-- 55 -->
   <section>
-    <a name="strategy-game-ux"></a>
+    <a name="strategy-game-engineering-bible-strategy-game-ux"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">STRATEGY GAME UX</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">UX IS STRATEGY DESIGN</p>
     <p class="text-gray-700 leading-relaxed mb-3">Poor UI destroys:</p>
@@ -941,7 +941,7 @@ selection clarity</pre>
 
   <!-- 56 -->
   <section>
-    <a name="good-rts-ui"></a>
+    <a name="strategy-game-engineering-bible-good-rts-ui"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GOOD RTS UI</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Should:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -955,7 +955,7 @@ selection clarity</pre>
 
   <!-- 57 -->
   <section>
-    <a name="rts-camera-rules"></a>
+    <a name="strategy-game-engineering-bible-rts-camera-rules"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">RTS CAMERA RULES</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">CAMERA STABILITY IS SACRED</p>
     <p class="text-gray-700 leading-relaxed mb-3">Bad:</p>
@@ -976,7 +976,7 @@ selection clarity</pre>
 
   <!-- 58 -->
   <section>
-    <a name="content-pipelines"></a>
+    <a name="strategy-game-engineering-bible-content-pipelines"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">CONTENT PIPELINES</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">PROFESSIONAL GAMES ARE TOOL PIPELINES</p>
     <p class="text-gray-700 leading-relaxed mb-3">NOT:</p>
@@ -989,7 +989,7 @@ selection clarity</pre>
 
   <!-- 59 -->
   <section>
-    <a name="good-pipeline"></a>
+    <a name="strategy-game-engineering-bible-good-pipeline-1"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">GOOD PIPELINE</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">modular assets
 shared materials
@@ -1002,7 +1002,7 @@ procedural assistance</pre>
 
   <!-- 60 -->
   <section>
-    <a name="bad-pipeline"></a>
+    <a name="strategy-game-engineering-bible-bad-pipeline-1"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">BAD PIPELINE</h2>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">unique everything
 manual everything
@@ -1014,7 +1014,7 @@ handcrafted every asset</pre>
 
   <!-- 61 -->
   <section>
-    <a name="modularity"></a>
+    <a name="strategy-game-engineering-bible-modularity"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">MODULARITY</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">MODULARITY IS SURVIVAL</p>
     <p class="text-gray-700 leading-relaxed mb-3">Buildings should use:</p>
@@ -1029,7 +1029,7 @@ handcrafted every asset</pre>
 
   <!-- 62 -->
   <section>
-    <a name="art-direction"></a>
+    <a name="strategy-game-engineering-bible-art-direction"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">ART DIRECTION</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">STRONG ART DIRECTION</p>
     <p class="text-gray-700 leading-relaxed mb-3">BEATS HIGH DETAIL.</p>
@@ -1049,7 +1049,7 @@ handcrafted every asset</pre>
 
   <!-- 63 -->
   <section>
-    <a name="why-starcraft-worked"></a>
+    <a name="strategy-game-engineering-bible-why-starcraft-worked"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">WHY STARCRAFT WORKED</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Not because:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -1068,7 +1068,7 @@ handcrafted every asset</pre>
 
   <!-- 64 -->
   <section>
-    <a name="why-supreme-commander-worked"></a>
+    <a name="strategy-game-engineering-bible-why-supreme-commander-worked"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">WHY SUPREME COMMANDER WORKED</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Not because:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -1086,7 +1086,7 @@ handcrafted every asset</pre>
 
   <!-- 65 -->
   <section>
-    <a name="why-factorio-worked"></a>
+    <a name="strategy-game-engineering-bible-why-factorio-worked"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">WHY FACTORIO WORKED</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Because:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -1104,7 +1104,7 @@ handcrafted every asset</pre>
 
   <!-- 66 -->
   <section>
-    <a name="the-biggest-rts-development-trap"></a>
+    <a name="strategy-game-engineering-bible-the-biggest-rts-development-trap"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">THE BIGGEST RTS DEVELOPMENT TRAP</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">BUILDING SYSTEMS</p>
     <p class="text-gray-700 leading-relaxed mb-3">WITHOUT A CORE LOOP.</p>
@@ -1127,7 +1127,7 @@ handcrafted every asset</pre>
 
   <!-- 67 -->
   <section>
-    <a name="professional-prototyping-rule"></a>
+    <a name="strategy-game-engineering-bible-professional-prototyping-rule"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">PROFESSIONAL PROTOTYPING RULE</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">PROVE FUN FIRST.</p>
     <p class="text-gray-700 leading-relaxed mb-3">Everything else is secondary.</p>
@@ -1137,7 +1137,7 @@ handcrafted every asset</pre>
 
   <!-- 68 -->
   <section>
-    <a name="rts-development-order"></a>
+    <a name="strategy-game-engineering-bible-rts-development-order"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">RTS DEVELOPMENT ORDER</h2>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">1. Camera
 2. Movement
@@ -1158,9 +1158,9 @@ handcrafted every asset</pre>
 
   <!-- 69 -->
   <section>
-    <a name="solo-developer-survival-rules"></a>
+    <a name="strategy-game-engineering-bible-solo-developer-survival-rules"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">SOLO DEVELOPER SURVIVAL RULES</h2>
-    <a name="never"></a>
+    <a name="strategy-game-engineering-bible-never"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">NEVER:</h3>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>chase perfection</li>
@@ -1174,7 +1174,7 @@ handcrafted every asset</pre>
 
   <!-- 70 -->
   <section>
-    <a name="always"></a>
+    <a name="strategy-game-engineering-bible-always"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">ALWAYS:</h2>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>iterate</li>
@@ -1188,7 +1188,7 @@ handcrafted every asset</pre>
 
   <!-- 71 -->
   <section>
-    <a name="the-most-important-rule"></a>
+    <a name="strategy-game-engineering-bible-the-most-important-rule"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">THE MOST IMPORTANT RULE</h2>
     <p class="text-gray-700 leading-relaxed font-bold mb-3">FINISHED</p>
     <p class="text-gray-700 leading-relaxed mb-3">BEATS PERFECT.</p>
@@ -1206,7 +1206,7 @@ handcrafted every asset</pre>
 
   <!-- 72 -->
   <section>
-    <a name="final-engineering-doctrine"></a>
+    <a name="strategy-game-engineering-bible-final-engineering-doctrine"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">FINAL ENGINEERING DOCTRINE</h2>
     <p class="text-gray-700 leading-relaxed mb-3">The best strategy games are built from:</p>
     <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">clarity
@@ -1229,7 +1229,7 @@ controlled scope</pre>
 
   <!-- 73 -->
   <section>
-    <a name="final-thought"></a>
+    <a name="strategy-game-engineering-bible-final-thought"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">FINAL THOUGHT</h2>
     <p class="text-gray-700 leading-relaxed mb-3">The greatest RTS games are not simulations of reality.</p>
     <p class="text-gray-700 leading-relaxed mb-3">They are:</p>

@@ -41,12 +41,13 @@
     </div>
   </div>
 
-  <div class="mt-6 space-y-1">
-    <div class="flex items-center px-2 py-2 rounded-md hover:bg-blue-800 transition-colors cursor-default">
-      <span class="material-icons md-20 text-cyan-300">folder</span>
+  <!-- Assets Section -->
+  <div class="mt-6 space-y-1" id="assets-section">
+    <div class="flex items-center px-2 py-2 rounded-md cursor-pointer hover:bg-blue-700 transition-colors" id="assets-toggle">
+      <span class="material-icons md-20 text-cyan-300" id="assets-icon">arrow_right</span>
       <span class="ml-3 text-cyan-100 font-medium">Assets</span>
     </div>
-    <div class="ml-4 space-y-1">
+    <div class="ml-4 space-y-1 hidden" id="assets-children">
       <a href="#characters" class="flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer" data-page="characters">
         <span class="material-icons md-18 text-white">person</span>
         <span class="ml-2 text-white">Characters</span>
@@ -54,6 +55,10 @@
       <a href="#locations" class="flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer" data-page="locations">
         <span class="material-icons md-18 text-white">place</span>
         <span class="ml-2 text-white">Locations</span>
+      </a>
+      <a href="#resources" class="flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer" data-page="resources">
+        <span class="material-icons md-18 text-white">inventory_2</span>
+        <span class="ml-2 text-white">Resources</span>
       </a>
     </div>
   </div>

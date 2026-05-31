@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
-
+  const hljsModule = await import('highlight.js');
+  const hljs = hljsModule.default;
 
   const sidebar = document.getElementById('sidebar');
   const content = document.getElementById('content');
   let scrollSpyHandler = null;
+  let advanceHandler = null;
+  let currentGuideIndex = -1;
+  let advanceTriggered = false;
+  let pageLoading = false;
   const sidebarMinWidth = 200;
   const phi = (1 + Math.sqrt(5)) / 2;
 
@@ -209,6 +214,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
+  const guideOrder = Object.keys(guides);
+
   const navResp = await fetch('/pages/links.html');
   const navHtml = await navResp.text();
 
@@ -276,6 +283,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     docsSection.classList.toggle('section-expanded', docsOpen);
   });
 
+  const assetsToggle = document.getElementById('assets-toggle');
+  const assetsChildren = document.getElementById('assets-children');
+  const assetsIcon = document.getElementById('assets-icon');
+  const assetsSection = document.getElementById('assets-section');
+  let assetsOpen = false;
+
+  assetsToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    assetsOpen = !assetsOpen;
+    assetsChildren.classList.toggle('hidden', !assetsOpen);
+    assetsIcon.textContent = assetsOpen ? 'arrow_drop_down' : 'arrow_right';
+    assetsSection.classList.toggle('section-expanded', assetsOpen);
+  });
+
   function slugify(text) {
     return text.toLowerCase()
       .replace(/&/g, 'and')
@@ -284,20 +305,50 @@ document.addEventListener('DOMContentLoaded', async () => {
       .replace(/(^-|-$)/g, '');
   }
 
-  async function loadGuidePage(pageKey) {
+  function highlightCode() {
+    const pres = content.querySelectorAll('pre');
+    pres.forEach(pre => {
+      if (pre.querySelector('.hljs')) return;
+      const text = pre.textContent.trim();
+      if (!text) return;
+      const code = document.createElement('code');
+      code.textContent = pre.textContent;
+      pre.innerHTML = '';
+      pre.appendChild(code);
+      try {
+        const result = hljs.highlightAuto(text, ['typescript', 'javascript', 'glsl', 'bash', 'css', 'json']);
+        if (result.language && result.relevance >= 3) {
+          code.innerHTML = result.value;
+        } else {
+          const fallback = hljs.highlight(text, { language: 'typescript', ignoreIllegals: true });
+          code.innerHTML = fallback.value;
+        }
+      } catch {
+        try {
+          const fallback = hljs.highlight(text, { language: 'typescript', ignoreIllegals: true });
+          code.innerHTML = fallback.value;
+        } catch {}
+      }
+    });
+  }
+
+  async function loadGuidePage(pageKey, scrollToFirst) {
+    pageLoading = true;
     const guide = guides[pageKey];
     const resp = await fetch(`/pages/${guide.file}.html`);
     if (!resp.ok) throw new Error(`Failed to load ${pageKey}.html`);
     const html = await resp.text();
     content.innerHTML = html;
+    highlightCode();
 
     const tocEl = document.getElementById(`toc-${pageKey}`);
     if (tocEl) {
+      document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active-toc-link'));
       const guide = guides[pageKey];
       if (guide) {
         tocEl.innerHTML = '';
         guide.toc.forEach(heading => {
-          const anchor = slugify(heading);
+          const anchor = pageKey + '-' + slugify(heading);
           const link = document.createElement('span');
           link.className = 'flex items-center px-2 py-1 rounded-md text-xs hover:bg-cyan-700 transition-colors cursor-pointer toc-link';
           link.dataset.target = anchor;
@@ -318,6 +369,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     setupScrollSpy(pageKey);
+    setupAutoAdvance(pageKey);
+
+    pageLoading = false;
+
+    if (scrollToFirst) {
+      const firstAnchor = content.querySelector('section a[name]');
+      if (firstAnchor) {
+        requestAnimationFrame(() => {
+          firstAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+    }
   }
 
   function setupScrollSpy(pageKey) {
@@ -338,7 +401,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (a.el.getBoundingClientRect().top <= threshold) current = a;
       }
       tocLinks.forEach(l => l.classList.remove('active-toc-link'));
-      if (current) current.link.classList.add('active-toc-link');
+      if (current) {
+        current.link.classList.add('active-toc-link');
+        current.link.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
     }
 
     if (scrollSpyHandler) {
@@ -349,8 +415,43 @@ document.addEventListener('DOMContentLoaded', async () => {
     update();
   }
 
+  function setupAutoAdvance(pageKey) {
+    if (advanceHandler) {
+      content.removeEventListener('scroll', advanceHandler);
+    }
+
+    currentGuideIndex = guideOrder.indexOf(pageKey);
+    advanceTriggered = false;
+
+    advanceHandler = () => {
+      if (advanceTriggered || pageLoading) return;
+
+      const atBottom = content.scrollTop + content.clientHeight >= content.scrollHeight - 120;
+      if (!atBottom) return;
+
+      const nextIdx = currentGuideIndex + 1;
+      if (nextIdx >= guideOrder.length) return;
+
+      advanceTriggered = true;
+      const nextKey = guideOrder[nextIdx];
+
+      loadGuidePage(nextKey, true).catch(() => {
+        advanceTriggered = false;
+      });
+    };
+
+    content.addEventListener('scroll', advanceHandler, { passive: true });
+  }
+
   async function loadPage(page) {
+    pageLoading = true;
+    if (advanceHandler) {
+      content.removeEventListener('scroll', advanceHandler);
+      advanceHandler = null;
+    }
+
     if (page === 'home') {
+      pageLoading = false;
       content.innerHTML = `
         <div class="prose prose-cyan max-w-none">
           <h1 class="text-gray-500">Welcome</h1>
@@ -371,7 +472,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!resp.ok) throw new Error(`Failed to load ${page}`);
       const html = await resp.text();
       content.innerHTML = html;
+      highlightCode();
+      pageLoading = false;
     } catch (error) {
+      pageLoading = false;
       console.error('Error loading page:', error);
       content.innerHTML = `
         <div class="max-w-2xl mx-auto mt-16 text-center">

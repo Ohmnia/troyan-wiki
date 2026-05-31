@@ -45,3 +45,13 @@
 - Fixed ECS anchor in Strategy Bible (double-hyphen to single)
 - Build verified, 5 guides now listed in sidebar navigation
 - Commit: (see git log)
+
+## 2026-05-31 Session
+
+### 21:45 - Feature: Add visual styling for expanded sections
+- Added id="docs-section" to Documentation parent div in pages/links.html
+- Updated src/main.js to toggle section-expanded class on Guides and Documentation section wrappers when expanded
+- Added CSS in src/theme.css for .section-expanded — dark blue background on the section wrapper and persistent blue-700 background on the toggle button when expanded, matching the hover style
+- This creates a visual grouping where expanded sections show a darker blue container background with the toggle header maintaining its hover background color
+- Commit: 9f5f510 (feat: add visual styling for expanded sections)
+- Tag: v0.1.0
