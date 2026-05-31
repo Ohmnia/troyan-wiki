@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const guides = {
     'environment-development-guide': {
       title: 'Environment Development',
+      file: 'Environment-Development-Guide',
       toc: [
         'Philosophy of Browser RTS Rendering',
         'Recommended Stack',
@@ -104,7 +105,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   async function loadGuidePage(pageKey) {
     document.querySelectorAll('.toc-links').forEach(el => el.classList.add('hidden'));
 
-    const resp = await fetch(`/pages/${pageKey}.html`);
+    const guide = guides[pageKey];
+    const resp = await fetch(`/pages/${guide.file}.html`);
     if (!resp.ok) throw new Error(`Failed to load ${pageKey}.html`);
     const html = await resp.text();
     content.innerHTML = html;
@@ -116,10 +118,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         tocEl.innerHTML = '';
         guide.toc.forEach(heading => {
           const anchor = slugify(heading);
-          const link = document.createElement('a');
-          link.href = `#${anchor}`;
+          const link = document.createElement('span');
           link.className = 'flex items-center px-2 py-1 rounded-md text-xs hover:bg-cyan-700 transition-colors cursor-pointer toc-link';
           link.dataset.target = anchor;
+          link.tabIndex = 0;
+          link.role = 'link';
           link.innerHTML = `<span class="material-icons md-14 text-cyan-300" style="font-size:14px">chevron_right</span><span class="ml-1 text-gray-300">${heading}</span>`;
           link.addEventListener('click', (e) => {
             e.preventDefault();
