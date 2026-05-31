@@ -1,8 +1,53 @@
 document.addEventListener('DOMContentLoaded', async () => {
+
+
+
   const sidebar = document.getElementById('sidebar');
   const content = document.getElementById('content');
   const sidebarMinWidth = 200;
   const phi = (1 + Math.sqrt(5)) / 2;
+
+  // THEME TOGGLE BUTTON
+  const themeBtn = document.createElement('button');
+  themeBtn.className = 'theme-toggle-btn';
+  themeBtn.title = 'Toggle light/dark mode';
+  themeBtn.innerHTML = `
+    <span class="material-icons" id="theme-icon">dark_mode</span>
+  `;
+  document.body.appendChild(themeBtn);
+
+  // THEME LOGIC
+  function setTheme(mode) {
+    if (mode === 'dark') {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      document.getElementById('theme-icon').textContent = 'light_mode';
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      document.getElementById('theme-icon').textContent = 'dark_mode';
+    }
+  }
+
+  // Detect system preference
+  function getSystemTheme() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  // Initial theme
+  const savedTheme = localStorage.getItem('theme');
+  setTheme(savedTheme || getSystemTheme());
+
+  // Toggle theme on click
+  themeBtn.addEventListener('click', () => {
+    const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+  });
 
   function updateSidebarWidth() {
     const totalWidth = window.innerWidth;
@@ -41,16 +86,48 @@ document.addEventListener('DOMContentLoaded', async () => {
         'Example Code',
         'Final Recommendations'
       ]
+    },
+    'entity-architecture-guide': {
+      title: 'Entity Architecture',
+      file: 'Entity-Architecture-Guide',
+      toc: [
+        'Core RTS Architecture Philosophy',
+        'The Biggest RTS Mistakes',
+        'Recommended Architecture',
+        'Why ECS Is The Best Choice',
+        'Entity Design',
+        'Component Design',
+        'Health Systems',
+        'Damage Systems',
+        'Ability Systems',
+        'Tech Tree Architecture',
+        'Upgrade Systems',
+        'Buffs & Debuffs',
+        'State Machines',
+        'Networking Architecture',
+        'Deterministic Simulation',
+        'Performance Scaling',
+        'Memory Optimization',
+        'Serialization',
+        'Rendering Separation',
+        'Example ECS Layout',
+        'Recommended Project Structure',
+        'Example TypeScript Code',
+        'Best Practices',
+        'Scaling Strategy',
+        'Final Recommendations'
+      ]
     }
   };
 
   const navResp = await fetch('/pages/links.html');
   const navHtml = await navResp.text();
+
   sidebar.innerHTML = navHtml;
 
   const guidesChildren = document.getElementById('guides-children');
   const guidesToggle = document.getElementById('guides-toggle');
-  const guidesIcon = document.getElementById('guides-icon');
+  const guidesIcon = document.getElementById('guides-icon1');
   let guidesOpen = false;
 
   const guideKeys = Object.keys(guides);
@@ -72,26 +149,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     tocContainer.id = `toc-${key}`;
     wrapper.appendChild(tocContainer);
     guidesChildren.appendChild(wrapper);
+
+    pageLink.addEventListener('click', () => {
+      const toc = document.getElementById(`toc-${key}`);
+      if (toc) toc.classList.toggle('hidden');
+    });
   });
 
   guidesToggle.addEventListener('click', (e) => {
     e.stopPropagation();
     guidesOpen = !guidesOpen;
     guidesChildren.classList.toggle('hidden', !guidesOpen);
-    guidesIcon.textContent = guidesOpen ? 'expand_circle_down' : 'expand_circle_right';
-  });
-
-  function collapseGuides() {
-    guidesOpen = false;
-    guidesChildren.classList.add('hidden');
-    guidesIcon.textContent = 'expand_circle_right';
-    document.querySelectorAll('.toc-links').forEach(el => el.classList.add('hidden'));
-  }
-
-  document.addEventListener('click', (e) => {
-    if (guidesOpen && !e.target.closest('#guides-section')) {
-      collapseGuides();
-    }
+    guidesIcon.textContent = guidesOpen ? 'arrow_drop_up' : 'arrow_right';
   });
 
   function slugify(text) {
@@ -103,8 +172,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function loadGuidePage(pageKey) {
-    document.querySelectorAll('.toc-links').forEach(el => el.classList.add('hidden'));
-
     const guide = guides[pageKey];
     const resp = await fetch(`/pages/${guide.file}.html`);
     if (!resp.ok) throw new Error(`Failed to load ${pageKey}.html`);
@@ -134,14 +201,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           });
           tocEl.appendChild(link);
         });
-        tocEl.classList.remove('hidden');
       }
-    }
-
-    if (!guidesOpen) {
-      guidesOpen = true;
-      guidesChildren.classList.remove('hidden');
-      guidesIcon.textContent = 'expand_circle_down';
     }
   }
 
@@ -187,10 +247,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     e.preventDefault();
 
     const page = link.dataset.page;
-
-    if (!link.dataset.guide) {
-      collapseGuides();
-    }
 
     loadPage(page);
   });
