@@ -1,0 +1,1098 @@
+<div class="space-y-8">
+  <h1 class="text-3xl font-bold text-indigo-800 border-b border-indigo-200 pb-4">Expert Guide: RTS Character Animation in Three.js + TypeScript</h1>
+
+  <!-- 1 -->
+  <section>
+    <a name="rts-animation-philosophy"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">1. RTS Animation Philosophy</h2>
+
+    <a name="important"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">IMPORTANT</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">RTS animation is NOT character-action animation.</p>
+    <p class="text-gray-700 leading-relaxed mb-3">The player usually sees units from:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">high camera angle
+medium/far distance
+many units simultaneously</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">This changes EVERYTHING.</p>
+
+    <a name="rts-animation-priorities"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">RTS Animation Priorities</h3>
+
+    <a name="most-important"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Most Important</h4>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">clarity
+readability
+silhouette
+timing
+responsiveness</pre>
+
+    <a name="least-important"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Least Important</h4>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">facial animation
+finger animation
+micro realism</pre>
+
+    <a name="golden-rule"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Golden Rule</h3>
+
+    <a name="rts-animation-is-about-motion-impression"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">RTS animation is about MOTION IMPRESSION.</h4>
+    <p class="text-gray-700 leading-relaxed mb-3">NOT cinematic realism.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 2 -->
+  <section>
+    <a name="biggest-animation-mistakes"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">2. Biggest Animation Mistakes</h2>
+
+    <a name="common-rts-animation-failures"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Common RTS Animation Failures</h3>
+
+    <a name="1-using-aaa-fps-animation-pipelines"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">1. Using AAA FPS animation pipelines</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Huge waste.</p>
+
+    <a name="2-overly-detailed-rigs"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">2. Overly detailed rigs</h3>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium text-red-700">BAD:</p>
+    <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">120-bone skeletons</pre>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium text-green-700">GOOD:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">15-40 bones</pre>
+
+    <a name="3-unique-animations-per-unit"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">3. Unique animations per unit</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Destroys memory usage.</p>
+
+    <a name="4-high-framerate-baked-animation-everywhere"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">4. High-framerate baked animation everywhere</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Expensive.</p>
+
+    <a name="5-root-motion-in-rts"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">5. Root motion in RTS</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Usually wrong.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 3 -->
+  <section>
+    <a name="best-rts-animation-strategy"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">3. Best RTS Animation Strategy</h2>
+
+    <a name="best-overall-approach"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Overall Approach</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Shared skeletons
++
+Animation reuse
++
+GPU instancing
++
+Animation LOD
++
+Procedural enhancement</pre>
+
+    <a name="best-quality-to-performance-formula"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Quality-to-Performance Formula</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Simple animations
++
+Excellent timing
++
+Procedural secondary motion
++
+Strong silhouettes</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">This looks FAR better than:</p>
+    <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">complex expensive animation</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 4 -->
+  <section>
+    <a name="skeletal-animation-vs-vertex-animation"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">4. Skeletal Animation vs Vertex Animation</h2>
+
+    <a name="skeletal-animation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Skeletal Animation</h3>
+
+    <a name="best-overall-rts-solution"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Best overall RTS solution.</h4>
+    <p class="text-gray-700 leading-relaxed mb-3">Advantages:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">small file size
+animation reuse
+blend support
+easy retargeting
+good memory usage</pre>
+
+    <a name="vertex-animation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Vertex Animation</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Good for:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">crowds
+grass
+monsters
+very large armies</pre>
+
+    <a name="recommendation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recommendation</h3>
+
+    <a name="use-skeletal-animation-for"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Use Skeletal Animation for:</h4>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>hero units</li>
+      <li>infantry</li>
+      <li>vehicles</li>
+      <li>important units</li>
+    </ul>
+
+    <a name="use-vertex-animation-for"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Use Vertex Animation for:</h4>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>distant crowds</li>
+      <li>ambient units</li>
+      <li>background life</li>
+      <li>swarm effects</li>
+    </ul>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 5 -->
+  <section>
+    <a name="why-rts-animation-is-different"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">5. Why RTS Animation Is Different</h2>
+
+    <a name="players-read-units-by"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Players Read Units by:</h3>
+
+    <a name="1-motion-silhouette"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">1. Motion silhouette</h3>
+
+    <a name="2-speed"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">2. Speed</h3>
+
+    <a name="3-rhythm"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">3. Rhythm</h3>
+
+    <a name="4-direction"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">4. Direction</h3>
+
+    <a name="5-attack-timing"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">5. Attack timing</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">NOT tiny details.</p>
+
+    <a name="example"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Example</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">StarCraft units remain readable because:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">animation timing is excellent</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">NOT because rigs are advanced.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 6 -->
+  <section>
+    <a name="the-illusion-of-motion"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">6. The Illusion of Motion</h2>
+
+    <a name="most-important-concept"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">MOST IMPORTANT CONCEPT</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">You do NOT need realistic animation.</p>
+    <p class="text-gray-700 leading-relaxed mb-3">You need:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">convincing motion illusion</pre>
+
+    <a name="motion-illusion-techniques"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Motion Illusion Techniques</h3>
+
+    <a name="1-exaggerated-anticipation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">1. Exaggerated anticipation</h3>
+
+    <a name="2-clear-attack-silhouettes"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">2. Clear attack silhouettes</h3>
+
+    <a name="3-strong-timing"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">3. Strong timing</h3>
+
+    <a name="4-good-acceleration"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">4. Good acceleration</h3>
+
+    <a name="5-proper-turn-arcs"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">5. Proper turn arcs</h3>
+
+    <a name="6-secondary-motion"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">6. Secondary motion</h3>
+
+    <a name="7-animation-sync-variation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">7. Animation sync variation</h3>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 7 -->
+  <section>
+    <a name="best-unit-animation-architecture"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">7. Best Unit Animation Architecture</h2>
+
+    <a name="best-practice"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">BEST PRACTICE</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Separate:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Simulation
+Animation state
+Rendering</pre>
+
+    <a name="recommended-structure"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recommended Structure</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Entity
+  -> movement state
+  -> combat state
+  -> animation state</pre>
+
+    <a name="example-animation-states"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Example Animation States</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Idle
+Walk
+Run
+Attack
+Cast
+Harvest
+Build
+Die</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 8 -->
+  <section>
+    <a name="animation-lod-systems"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">8. Animation LOD Systems</h2>
+
+    <a name="critical-for-rts"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">CRITICAL FOR RTS</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Units far away should use:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">simpler animation</pre>
+
+    <a name="recommended-animation-lod"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recommended Animation LOD</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
+        <thead>
+          <tr class="bg-indigo-100 text-indigo-800">
+            <th class="px-4 py-2 text-left font-semibold">Distance</th>
+            <th class="px-4 py-2 text-left font-semibold">Animation</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Near</td><td class="px-4 py-2">Full skeletal</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Mid</td><td class="px-4 py-2">Reduced FPS</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Far</td><td class="px-4 py-2">Vertex/simple</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Very Far</td><td class="px-4 py-2">Billboard/impostor</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <a name="massive-optimization-trick"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Massive Optimization Trick</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Reduce animation FPS with distance.</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Example:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Near: 30 FPS
+Mid: 15 FPS
+Far: 8 FPS</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">Most players NEVER notice.</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Huge CPU savings.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 9 -->
+  <section>
+    <a name="gpu-animation-techniques"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">9. GPU Animation Techniques</h2>
+
+    <a name="cpu-skinning-does-not-scale-well"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">CPU Skinning Does NOT Scale Well</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">For huge RTS battles:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">GPU skinning</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">is essential.</p>
+
+    <a name="best-gpu-animation-methods"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best GPU Animation Methods</h3>
+
+    <a name="1-texture-based-bone-animation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">1. Texture-based bone animation</h3>
+
+    <a name="2-bone-texture-palettes"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">2. Bone texture palettes</h3>
+
+    <a name="3-vertex-animation-textures-vat"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">3. Vertex animation textures (VAT)</h3>
+
+    <a name="texture-based-bone-animation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Texture-Based Bone Animation</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Stores bone transforms in textures.</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Advantages:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">massive batching
+GPU efficient
+thousands of units</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 10 -->
+  <section>
+    <a name="animation-compression"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">10. Animation Compression</h2>
+
+    <a name="important"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">IMPORTANT</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Animation data becomes enormous.</p>
+
+    <a name="use-compression"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Use Compression</h3>
+
+    <a name="recommended"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Recommended</h4>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">glTF animation compression</pre>
+
+    <a name="remove"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Remove:</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">unused tracks
+finger bones
+tiny motion noise</pre>
+
+    <a name="keyframe-reduction"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Keyframe Reduction</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Huge optimization.</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Most RTS units only need:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">10-20 FPS baked animation</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">NOT 60 FPS.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 11 -->
+  <section>
+    <a name="instanced-animation"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">11. Instanced Animation</h2>
+
+    <a name="best-modern-rts-technique"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Modern RTS Technique</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">instanced skinned meshes</pre>
+
+    <a name="benefits"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Benefits</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">thousands of animated units
+low draw calls
+shared animation data</pre>
+
+    <a name="strategy"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Strategy</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">All units share:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">same skeleton
+same animation clips
+different state offsets</pre>
+
+    <a name="add-variation-using"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Add Variation Using</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">phase offsets
+speed variation
+blend variation</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">This prevents clone appearance.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 12 -->
+  <section>
+    <a name="root-motion-vs-simulated-movement"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">12. Root Motion vs Simulated Movement</h2>
+
+    <a name="never-use-root-motion-for-rts-movement"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">NEVER Use Root Motion for RTS Movement</h3>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium text-red-700">BAD:</p>
+    <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">animation drives movement</pre>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium text-green-700">GOOD:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">simulation drives animation</pre>
+
+    <a name="correct-rts-flow"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Correct RTS Flow</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Pathfinding
+-> movement velocity
+-> animation speed</pre>
+
+    <a name="why"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Why?</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">RTS requires:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">precise gameplay movement</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 13 -->
+  <section>
+    <a name="blend-trees"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">13. Blend Trees</h2>
+
+    <a name="use-animation-blending"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Use Animation Blending</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Critical for smooth movement.</p>
+
+    <a name="recommended-blends"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recommended Blends</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">idle <-> walk
+walk <-> run
+move <-> attack</pre>
+
+    <a name="avoid-hard-transitions"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Avoid Hard Transitions</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">They look robotic.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 14 -->
+  <section>
+    <a name="animation-state-machines"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">14. Animation State Machines</h2>
+
+    <a name="recommended-structure"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recommended Structure</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Movement State Machine
++
+Combat State Machine</pre>
+
+    <a name="example"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Example</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Idle
+-> Move
+-> Attack
+-> Recover
+-> Move</pre>
+
+    <a name="use-timed-attack-windows"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Use Timed Attack Windows</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Combat should sync with:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">animation hit frames</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 15 -->
+  <section>
+    <a name="crowd-animation-techniques"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">15. Crowd Animation Techniques</h2>
+
+    <a name="for-massive-battles"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">For Massive Battles</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Use:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">animation phase randomization</pre>
+
+    <a name="example"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Example</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">animation.time += randomOffset;</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">This prevents synchronized marching.</p>
+
+    <a name="best-crowd-tricks"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Crowd Tricks</h3>
+
+    <a name="add"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Add:</h4>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">speed variance
+timing variance
+turn variance
+idle variance</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">Tiny changes create huge realism.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 16 -->
+  <section>
+    <a name="procedural-animation"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">16. Procedural Animation</h2>
+
+    <a name="procedural-animation-is-extremely-valuable"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Procedural Animation Is EXTREMELY Valuable</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Especially for:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">secondary motion
+terrain adaptation
+weapon sway
+look targets
+wind response</pre>
+
+    <a name="best-hybrid-strategy"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Hybrid Strategy</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Baked core animation
++
+Procedural enhancement</pre>
+
+    <a name="procedural-additions"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Procedural Additions</h3>
+
+    <a name="examples"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Examples</h4>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">head tracking
+torso rotation
+weapon recoil
+foot alignment
+leaning</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 17 -->
+  <section>
+    <a name="animation-timing-tricks"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">17. Animation Timing Tricks</h2>
+
+    <a name="timing---detail"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Timing > Detail</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Professional RTS feel comes from:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">timing quality</pre>
+
+    <a name="important-timing-principles"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Important Timing Principles</h3>
+
+    <a name="attack-windup"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Attack windup</h3>
+
+    <a name="anticipation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Anticipation</h3>
+
+    <a name="impact-pause"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Impact pause</h3>
+
+    <a name="recovery"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recovery</h3>
+
+    <a name="movement-acceleration"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Movement acceleration</h3>
+
+    <a name="animation-curves-matter"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Animation Curves Matter</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Avoid perfectly linear motion.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 18 -->
+  <section>
+    <a name="unit-turning"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">18. Unit Turning</h2>
+
+    <a name="one-of-the-most-important-rts-features"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">One of the MOST Important RTS Features</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Bad turning ruins quality instantly.</p>
+
+    <a name="use"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Use:</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">turn rates
+rotation interpolation
+banking
+leaning</pre>
+
+    <a name="units-should-not"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Units Should NOT</h3>
+    <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">snap rotate instantly</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">unless intentionally robotic.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 19 -->
+  <section>
+    <a name="terrain-adaptation"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">19. Terrain Adaptation</h2>
+
+    <a name="terrain-alignment-matters"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Terrain Alignment Matters</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Use procedural IK lightly.</p>
+
+    <a name="rts-best-practice"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">RTS Best Practice</h3>
+
+    <a name="simplified-terrain-adaptation"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Simplified terrain adaptation.</h4>
+    <p class="text-gray-700 leading-relaxed mb-3">NOT expensive full IK.</p>
+
+    <a name="recommended"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recommended</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">pelvis offset
+foot height adjustment
+body tilt</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 20 -->
+  <section>
+    <a name="foot-sliding-prevention"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">20. Foot Sliding Prevention</h2>
+
+    <a name="common-problem"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Common Problem</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Foot sliding destroys realism.</p>
+
+    <a name="best-fix"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Fix</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Animation speed should match:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">actual movement speed</pre>
+
+    <a name="example"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Example</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">walkAnim.timeScale =
+  velocity / baseWalkSpeed;</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 21 -->
+  <section>
+    <a name="wind-secondary-motion-and-microanimation"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">21. Wind, Secondary Motion &amp; Microanimation</h2>
+
+    <a name="huge-quality-boost"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">HUGE QUALITY BOOST</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Small ambient movement makes units feel alive.</p>
+
+    <a name="add"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Add:</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">cape motion
+weapon sway
+idle breathing
+shield bounce
+cloth flutter</pre>
+
+    <a name="use-gpu-vertex-motion"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Use GPU Vertex Motion</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Cheap and effective.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 22 -->
+  <section>
+    <a name="best-rts-readability-practices"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">22. Best RTS Readability Practices</h2>
+
+    <a name="animation-must-communicate-gameplay"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Animation Must Communicate Gameplay</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Players should instantly recognize:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">attacking
+moving
+casting
+dying
+retreating</pre>
+
+    <a name="readability-beats-realism"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Readability Beats Realism</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Always.</p>
+
+    <a name="exaggerate-important-actions"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Exaggerate Important Actions</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Especially:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">attacks
+spell casts
+death animations</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 23 -->
+  <section>
+    <a name="memory-optimization"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">23. Memory Optimization</h2>
+
+    <a name="biggest-animation-costs"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Biggest Animation Costs</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Usually:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">bone transforms
+animation clips
+skinning</pre>
+
+    <a name="best-optimization-techniques"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Optimization Techniques</h3>
+
+    <a name="share"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Share:</h4>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">skeletons
+clips
+materials
+textures</pre>
+
+    <a name="avoid-unique-rigs"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Avoid Unique Rigs</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Shared rigs are CRITICAL.</p>
+
+    <a name="recommended-bone-counts"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recommended Bone Counts</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
+        <thead>
+          <tr class="bg-indigo-100 text-indigo-800">
+            <th class="px-4 py-2 text-left font-semibold">Unit Type</th>
+            <th class="px-4 py-2 text-left font-semibold">Bones</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Infantry</td><td class="px-4 py-2">20-35</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Hero</td><td class="px-4 py-2">40-70</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Monster</td><td class="px-4 py-2">25-50</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">RTS Crowd</td><td class="px-4 py-2">10-20</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 24 -->
+  <section>
+    <a name="best-file-formats"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">24. Best File Formats</h2>
+
+    <a name="best-format"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">BEST FORMAT</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">glTF / GLB</pre>
+
+    <a name="why"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Why?</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Advantages:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">compressed
+modern
+animation support
+PBR support
+fast loading
+Three.js native</pre>
+
+    <a name="compression-stack"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Compression Stack</h3>
+
+    <a name="mandatory"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Mandatory</h4>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Draco
+Meshopt
+KTX2</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 25 -->
+  <section>
+    <a name="networking-animation"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">25. Networking Animation</h2>
+
+    <a name="never-network-animation-frames"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">NEVER Network Animation Frames</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Instead sync:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">state
+velocity
+action
+direction</pre>
+
+    <a name="example"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Example</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Unit #1052
+State: ATTACK
+Target: #44</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">Clients determine animation locally.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 26 -->
+  <section>
+    <a name="recommended-animation-pipeline"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">26. Recommended Animation Pipeline</h2>
+
+    <a name="best-pipeline"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">BEST PIPELINE</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Blender
+-> Rigify/custom rig
+-> glTF export
+-> Draco/Meshopt
+-> Three.js</pre>
+
+    <a name="recommended-workflow"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recommended Workflow</h3>
+
+    <a name="use"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Use:</h4>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">shared skeletons
+shared clips
+animation libraries</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 27 -->
+  <section>
+    <a name="threejs-animation-best-practices"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">27. Three.js Animation Best Practices</h2>
+
+    <a name="use-animationmixer-sparingly"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Use AnimationMixer Sparingly</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Too many mixers can become expensive.</p>
+
+    <a name="better-strategy"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Better Strategy</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Use:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">shared animation systems</pre>
+
+    <a name="avoid-one-mixer-per-unit"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Avoid One Mixer Per Unit</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Especially for:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">1000+ units</pre>
+
+    <a name="best-approach"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Approach</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">GPU animation
++
+shared clip playback
++
+animation texture systems</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 28 -->
+  <section>
+    <a name="example-typescript-code"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">28. Example TypeScript Code</h2>
+
+    <a name="shared-animation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Shared Animation</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">const mixer =
+  new THREE.AnimationMixer(sharedModel);</pre>
+
+    <a name="animation-speed-scaling"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Animation Speed Scaling</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">walkAction.timeScale =
+  movementSpeed / walkBaseSpeed;</pre>
+
+    <a name="smooth-rotation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Smooth Rotation</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">unit.rotation.y = THREE.MathUtils.lerp(
+  unit.rotation.y,
+  targetRotation,
+  delta * 5
+);</pre>
+
+    <a name="animation-state"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Animation State</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">enum AnimationState {
+  Idle,
+  Walk,
+  Attack,
+  Die
+}</pre>
+
+    <a name="randomized-idle-offset"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Randomized Idle Offset</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">action.time =
+  Math.random() * clip.duration;</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 29 -->
+  <section>
+    <a name="best-professional-references"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">29. Best Professional References</h2>
+
+    <a name="threejs-animation-examples"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Three.js Animation Examples</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://threejs.org/examples/?q=animation&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">Three.js Animation Examples</a>
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      (<a href="https://threejs.org/examples/?q=animation&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">threejs.org</a>)
+    </p>
+
+    <a name="gpu-animation-techniques"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">GPU Animation Techniques</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://webgpu.github.io/webgpu-samples/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">WebGPU Animation Research</a>
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      (<a href="https://webgpu.github.io/webgpu-samples/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">webgpu.github.io</a>)
+    </p>
+
+    <a name="advanced-crowd-animation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Advanced Crowd Animation</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://unity.com/dots?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">Unity DOTS Crowd Research</a>
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      (<a href="https://unity.com/dots?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">unity.com</a>)
+    </p>
+
+    <a name="motion-design-and-timing"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Motion Design &amp; Timing</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://www.animatorssurvivalkit.com/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">The Animator's Survival Kit</a>
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      (<a href="https://www.animatorssurvivalkit.com/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">animatorssurvivalkit.com</a>)
+    </p>
+
+    <a name="shader-animation-learning"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Shader Animation Learning</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://thebookofshaders.com/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">The Book of Shaders</a>
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      (<a href="https://thebookofshaders.com/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">thebookofshaders.com</a>)
+    </p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 30 -->
+  <section>
+    <a name="free-open-source-resources"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">30. Free/Open Source Resources</h2>
+
+    <a name="free-character-models"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Free Character Models</h3>
+
+    <a name="mixamo"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Mixamo</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Free animations:</p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://www.mixamo.com/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">https://www.mixamo.com/</a>
+    </p>
+
+    <a name="opengameart"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">OpenGameArt</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Huge free RTS resources:</p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://opengameart.org/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">https://opengameart.org/</a>
+    </p>
+
+    <a name="kenney-assets"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Kenney Assets</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Excellent stylized free assets:</p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://kenney.nl/assets" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">https://kenney.nl/assets</a>
+    </p>
+
+    <a name="poly-pizza"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Poly Pizza</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Free low-poly models:</p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://poly.pizza/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">https://poly.pizza/</a>
+    </p>
+
+    <a name="quaternius"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Quaternius</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Fantastic free RTS-compatible assets:</p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://quaternius.com/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">https://quaternius.com/</a>
+    </p>
+
+    <a name="sketchfab-free-models"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Sketchfab Free Models</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://sketchfab.com/features/free-3d-models" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">https://sketchfab.com/features/free-3d-models</a>
+    </p>
+
+    <a name="blender"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Blender</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Best free animation tool:</p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://www.blender.org/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">https://www.blender.org/</a>
+    </p>
+
+    <a name="gltf-transform"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">glTF Transform</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Optimization toolkit:</p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://gltf-transform.dev/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">https://gltf-transform.dev/</a>
+    </p>
+
+    <a name="meshoptimizer"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Meshoptimizer</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Critical compression:</p>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://github.com/zeux/meshoptimizer" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">https://github.com/zeux/meshoptimizer</a>
+    </p>
+
+    <a name="draco-compression"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Draco Compression</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">
+      <a href="https://google.github.io/draco/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">https://google.github.io/draco/</a>
+    </p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 31 -->
+  <section>
+    <a name="final-recommendations"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">31. Final Recommendations</h2>
+
+    <a name="best-overall-rts-animation-strategy"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Overall RTS Animation Strategy</h3>
+
+    <a name="use"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Use:</h4>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">shared skeletons
+GPU skinning
+animation LOD
+procedural enhancement
+instancing
+timing-focused animation</pre>
+
+    <a name="best-quality-to-performance-formula"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Quality-to-Performance Formula</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Simple rigs
++
+Excellent timing
++
+Strong silhouettes
++
+Procedural variation
++
+Secondary motion</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">This produces FAR better RTS visuals than:</p>
+    <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">ultra-complex cinematic animation</pre>
+
+    <a name="highest-roi-features"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Highest ROI Features</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">If you prioritize only a few things:</p>
+
+    <a name="prioritize"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">PRIORITIZE</h4>
+    <ol class="list-decimal list-inside text-gray-700 space-y-1">
+      <li>Shared skeletons</li>
+      <li>Animation LOD</li>
+      <li>Timing polish</li>
+      <li>Turning quality</li>
+      <li>Speed matching</li>
+      <li>Secondary motion</li>
+      <li>Animation variation</li>
+      <li>GPU animation</li>
+      <li>Instancing</li>
+      <li>Strong silhouettes</li>
+    </ol>
+
+    <a name="best-modern-rts-animation-stack"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Modern RTS Animation Stack</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Three.js
+TypeScript
+glTF
+GPU skinning
+Instanced rendering
+Animation LOD
+Procedural enhancement</pre>
+
+    <a name="golden-rule"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Golden Rule</h3>
+
+    <a name="players-remember"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Players remember:</h4>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">how motion FEELS</pre>
+    <p class="text-gray-700 leading-relaxed mb-3">NOT:</p>
+    <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">how many bones your rig used</pre>
+  </section>
+</div>
