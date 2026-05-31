@@ -27,3 +27,21 @@
 - Multiple guides can be open simultaneously
 - Fixed anchor names in Entity-Architecture-Guide.html (removed number prefixes)
 - Commit: (see git log)
+
+## 2026-05-31 Session
+
+### 15:30 - Convert Strategy-Game-Engineering-Bible.md to HTML
+- Converted markdown to HTML following Environment-Development-Guide.html pattern
+- 73 sections with proper slugified anchors
+- 5 red code blocks (bad/wrong patterns), 15 green code blocks (good patterns)
+- Tables, lists, and sub-headings rendered correctly
+- Commit: 948c5d7 (feat: convert Strategy-Game-Engineering-Bible.md to HTML)
+
+### - Converted 3 more guides to HTML, now 5 total under Guides
+- Converted Character-Animation-Guide.md to HTML (31 sections)
+- Converted High-Performance-Guide.md to HTML (24 major topics)
+- Converted Strategy-Game-Engineering-Bible.md to HTML (28 major sections)
+- Added all 3 to guides object in main.js with full TOC entries
+- Fixed ECS anchor in Strategy Bible (double-hyphen to single)
+- Build verified, 5 guides now listed in sidebar navigation
+- Commit: (see git log)
