@@ -1,5 +1,3 @@
-/* Dark mode and light mode support for Troyan-3500 Wiki */
-
 :root {
   --sidebar-bg: #1e3a8a;
   --sidebar-border: #bfdbfe;
@@ -9,17 +7,14 @@
   --main-text: #1e293b;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --sidebar-bg: #0f172a;
-    --sidebar-border: #334155;
-    --sidebar-text: #e0e7ef;
-    --sidebar-icon: #38bdf8;
-    --main-bg: #181f2a;
-    --main-text: #e0e7ef;
-  }
+html.dark {
+  --sidebar-bg: #0f172a;
+  --sidebar-border: #334155;
+  --sidebar-text: #e0e7ef;
+  --sidebar-icon: #38bdf8;
+  --main-bg: #181f2a;
+  --main-text: #e0e7ef;
 }
-
 
 body,
 #main-content {
@@ -37,20 +32,19 @@ body,
   color: var(--sidebar-icon);
 }
 
-/* Icon button for theme toggle */
 .theme-toggle-btn {
-  position: fixed;
-  top: 0.75rem;
-  right: 0.75rem;
   background: rgba(255,255,255,0.06);
   border: none;
   cursor: pointer;
   outline: none;
-  z-index: 10;
   padding: 0.25rem;
   border-radius: 9999px;
   transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .theme-toggle-btn:hover {
   background: rgba(100, 116, 139, 0.14);
 }
@@ -58,5 +52,3 @@ body,
 .theme-toggle-btn .material-icons {
   color: var(--sidebar-icon);
 }
-
-/* Guides icon behavior is handled via the single #guides-icon element and JS toggling */

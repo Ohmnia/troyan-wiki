@@ -7,44 +7,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   const sidebarMinWidth = 200;
   const phi = (1 + Math.sqrt(5)) / 2;
 
-  // THEME TOGGLE BUTTON
-  const themeBtn = document.createElement('button');
-  themeBtn.className = 'theme-toggle-btn';
-  themeBtn.title = 'Toggle light/dark mode';
-  themeBtn.innerHTML = `
-    <span class="material-icons" id="theme-icon">dark_mode</span>
-  `;
-  document.body.appendChild(themeBtn);
-
   // THEME LOGIC
   function setTheme(mode) {
     if (mode === 'dark') {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
-      document.getElementById('theme-icon').textContent = 'light_mode';
     } else {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
-      document.getElementById('theme-icon').textContent = 'dark_mode';
     }
+    const icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = mode === 'dark' ? 'light_mode' : 'dark_mode';
   }
 
-  // Detect system preference
   function getSystemTheme() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
-  // Initial theme
   const savedTheme = localStorage.getItem('theme');
   setTheme(savedTheme || getSystemTheme());
 
-  // Toggle theme on click
-  themeBtn.addEventListener('click', () => {
-    const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  });
-
-  // Listen for system theme changes
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
   });
@@ -124,6 +106,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const navHtml = await navResp.text();
 
   sidebar.innerHTML = navHtml;
+
+  const themeBtn = document.querySelector('.theme-toggle-btn');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  }
 
   const guidesChildren = document.getElementById('guides-children');
   const guidesToggle = document.getElementById('guides-toggle');
