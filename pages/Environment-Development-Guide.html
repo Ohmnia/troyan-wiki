@@ -1,0 +1,914 @@
+<div class="max-w-4xl mx-auto space-y-8">
+  <h1 class="text-3xl font-bold text-indigo-800 border-b border-indigo-200 pb-4">Expert Guide: Three.js + TypeScript for Online RTS Environment Development</h1>
+
+  <!-- 1 -->
+  <section>
+    <a name="philosophy-of-browser-rts-rendering"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">1. Philosophy of Browser RTS Rendering</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">The single biggest mistake in browser RTS development is trying to build an FPS-quality world.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">RTS games succeed visually through:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Strong silhouettes</li>
+      <li>Strategic readability</li>
+      <li>Atmospheric depth</li>
+      <li>Scale illusion</li>
+      <li>Lighting mood</li>
+      <li>Terrain richness</li>
+      <li>Motion</li>
+      <li>FX layering</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">NOT through:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Ultra high poly meshes</li>
+      <li>8K textures</li>
+      <li>Film-quality assets</li>
+      <li>Heavy ray tracing</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-3">The best browser RTS rendering strategy is:</p>
+    <blockquote class="border-l-4 border-indigo-400 bg-indigo-50 px-4 py-3 italic text-gray-700 my-4 rounded-r-lg">Stylized realism with procedural enhancement.</blockquote>
+    <p class="text-gray-700 leading-relaxed mb-3">This gives:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>tiny downloads</li>
+      <li>fast startup</li>
+      <li>scalability</li>
+      <li>visual uniqueness</li>
+      <li>easier LOD generation</li>
+      <li>lower GPU memory pressure</li>
+    </ul>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 2 -->
+  <section>
+    <a name="recommended-stack"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">2. Recommended Stack</h2>
+
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Core Stack</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">TypeScript
+Three.js
+Vite
+WebGL2 (today)
+WebGPU-ready architecture
+GLSL shaders now
+WGSL migration path later</pre>
+
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Strongly Recommended Libraries</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
+        <thead>
+          <tr class="bg-indigo-100 text-indigo-800">
+            <th class="px-4 py-2 text-left font-semibold">Purpose</th>
+            <th class="px-4 py-2 text-left font-semibold">Library</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">ECS</td><td class="px-4 py-2 font-mono text-indigo-600">bitecs</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Physics</td><td class="px-4 py-2 font-mono text-indigo-600">Rapier</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Networking</td><td class="px-4 py-2 font-mono text-indigo-600">Colyseus / Nakama</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Terrain Noise</td><td class="px-4 py-2 font-mono text-indigo-600">simplex-noise</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Compression</td><td class="px-4 py-2 font-mono text-indigo-600">Draco + Meshopt</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Texture Compression</td><td class="px-4 py-2 font-mono text-indigo-600">KTX2/Basis</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">GPU Particles</td><td class="px-4 py-2 font-mono text-indigo-600">Custom GLSL</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Post FX</td><td class="px-4 py-2 font-mono text-indigo-600">postprocessing</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 3 -->
+  <section>
+    <a name="architecture-for-massive-rts-worlds"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">3. Architecture for Massive RTS Worlds</h2>
+
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best RTS Rendering Strategy</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Low-poly geometry
++
+Smart procedural shaders
++
+Instancing
++
+Texture atlases
++
+Atmospheric post FX</pre>
+
+    <p class="text-gray-700 leading-relaxed mb-3 mt-6 font-medium">This produces MUCH better results than:</p>
+    <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">High poly
++
+Many textures
++
+Large materials</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 4 -->
+  <section>
+    <a name="rendering-strategy"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">4. Rendering Strategy</h2>
+
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recommended Pipeline</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Terrain
+→ Shadow Pass
+→ Main Pass
+→ SSAO
+→ Fog
+→ Bloom
+→ Color Grade
+→ FXAA/TAA</pre>
+
+    <p class="text-gray-700 leading-relaxed mt-6 p-4 bg-amber-50 border-l-4 border-amber-400 rounded-r-lg">DO NOT overuse postprocessing. RTS readability matters more than cinematic effects.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 5 -->
+  <section>
+    <a name="procedural-environments-vs-textures"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">5. Procedural Environments vs Textures</h2>
+
+    <a name="when-procedural-wins"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">When Procedural Wins</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Procedural techniques are best when:</p>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
+        <thead>
+          <tr class="bg-indigo-100 text-indigo-800">
+            <th class="px-4 py-2 text-left font-semibold">Use Case</th>
+            <th class="px-4 py-2 text-left font-semibold">Why</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Huge terrains</td><td class="px-4 py-2">Infinite variation</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">RTS maps</td><td class="px-4 py-2">Repetition reduction</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Stylized worlds</td><td class="px-4 py-2">Consistent art style</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Dynamic weather</td><td class="px-4 py-2">Runtime control</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Fog of war</td><td class="px-4 py-2">GPU generated</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Grass/wind</td><td class="px-4 py-2">Cheap animation</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Terrain blending</td><td class="px-4 py-2">No seams</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Low download size</td><td class="px-4 py-2">Tiny data footprint</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <a name="procedural-advantages"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Procedural Advantages</h4>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Tiny download
+Infinite variation
+No texture repetition
+Easy biome generation
+Easy blending
+Scalable detail</pre>
+
+    <a name="best-procedural-uses"></a>
+    <h4 class="text-lg font-medium text-indigo-500 mt-6 mb-3">Best Procedural Uses</h4>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 columns-2">
+      <li>terrain masks</li>
+      <li>biome blending</li>
+      <li>cloud layers</li>
+      <li>grass animation</li>
+      <li>water</li>
+      <li>fog</li>
+      <li>lava</li>
+      <li>snow accumulation</li>
+      <li>dirt variation</li>
+      <li>wetness</li>
+      <li>terrain decals</li>
+    </ul>
+
+    <a name="when-textures-are-better"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">When Textures Are Better</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
+        <thead>
+          <tr class="bg-indigo-100 text-indigo-800">
+            <th class="px-4 py-2 text-left font-semibold">Asset Type</th>
+            <th class="px-4 py-2 text-left font-semibold">Why</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Buildings</td><td class="px-4 py-2">Specific detail</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Units</td><td class="px-4 py-2">Recognizable surfaces</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">UI-like detail</td><td class="px-4 py-2">Precision</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Hero assets</td><td class="px-4 py-2">Artistic control</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Hard-surface sci-fi</td><td class="px-4 py-2">Mechanical consistency</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <a name="best-hybrid-strategy"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Best Hybrid Strategy</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">The BEST modern RTS approach:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Procedural macro detail
++
+Texture micro detail</pre>
+
+    <p class="text-gray-700 leading-relaxed mb-3 mt-4">Example:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Procedural terrain coloration
++
+Small seamless tiling detail maps
++
+Runtime slope blending
++
+Noise breakup</pre>
+
+    <p class="text-gray-700 leading-relaxed mt-4">This gives AAA visuals with tiny downloads.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 6 -->
+  <section>
+    <a name="terrain-rendering-techniques"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">6. Terrain Rendering Techniques</h2>
+
+    <a name="recommended-terrain-stack"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recommended Terrain Stack</h3>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Use:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Heightmap
++
+Procedural biome masks
++
+Texture splatting
++
+Noise breakup
++
+GPU instanced foliage</pre>
+
+    <a name="texture-splatting"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Texture Splatting</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Still the gold standard for RTS terrain.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Example layers:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>dirt</li>
+      <li>grass</li>
+      <li>rock</li>
+      <li>sand</li>
+      <li>snow</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Blend by:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>slope</li>
+      <li>height</li>
+      <li>biome</li>
+      <li>moisture</li>
+      <li>noise</li>
+    </ul>
+
+    <a name="runtime-slope-blending"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Runtime Slope Blending</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Example:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed"><span class="text-purple-300">float</span> slope <span class="text-white">=</span> <span class="text-blue-300">1.0</span> <span class="text-white">-</span> normal<span class="text-white">.</span>y<span class="text-white">;</span></pre>
+    <p class="text-gray-700 leading-relaxed mt-3">Steep slopes become rock automatically. This dramatically increases realism.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 7 -->
+  <section>
+    <a name="texture-optimization"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">7. Texture Optimization</h2>
+
+    <a name="use-seamless-textures-only-for"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Use Seamless Textures ONLY For</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
+        <thead>
+          <tr class="bg-green-100 text-green-800">
+            <th class="px-4 py-2 text-left font-semibold">Good Uses</th>
+            <th class="px-4 py-2 text-left font-semibold bg-red-50 text-red-800">Avoid</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Terrain</td><td class="px-4 py-2 bg-red-50">Character faces</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Dirt</td><td class="px-4 py-2 bg-red-50">Hero props</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Grass</td><td class="px-4 py-2 bg-red-50">Unique buildings</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Rock</td><td class="px-4 py-2 bg-red-50">Cinematic assets</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Sand</td><td class="px-4 py-2 bg-red-50">UI assets</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <a name="best-texture-strategy"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Best Texture Strategy</h3>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium text-green-700">DO:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">512-1024 textures
+KTX2 compression
+Texture atlases
+Shared materials</pre>
+
+    <p class="text-gray-700 leading-relaxed mb-3 mt-4 font-medium text-red-700">DO NOT:</p>
+    <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">4K textures everywhere
+Unique materials
+PNG normals
+Large albedo maps</pre>
+
+    <a name="recommended-texture-format"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommended Texture Format</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Use:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">KTX2 + Basis Universal</pre>
+    <p class="text-gray-700 leading-relaxed">This is one of the largest performance wins possible.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 8 -->
+  <section>
+    <a name="bump-maps-normal-maps-parallax-and-pbr"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">8. Bump Maps, Normal Maps, Parallax & PBR</h2>
+
+    <a name="bump-maps"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Bump Maps</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Cheap. Old. Limited.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Use only for:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>tiny detail enhancement</li>
+      <li>low-end mobile</li>
+    </ul>
+
+    <a name="normal-maps"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Normal Maps</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">BEST all-round solution.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Use for:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>RTS buildings</li>
+      <li>cliffs</li>
+      <li>terrain detail</li>
+      <li>units</li>
+      <li>hard-surface detail</li>
+    </ul>
+
+    <a name="parallax-occlusion-mapping"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Parallax Occlusion Mapping</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Looks amazing.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium text-red-700">BUT:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>expensive</li>
+      <li>poor for large RTS maps</li>
+      <li>can hurt readability</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed font-medium">Use ONLY for:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>hero assets</li>
+      <li>close camera views</li>
+    </ul>
+
+    <a name="pbr-materials"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">PBR Materials</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Use selectively. RTS benefits from stylized PBR:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Lower roughness variation
+Simplified metals
+Controlled contrast</pre>
+    <p class="text-gray-700 leading-relaxed mt-3">Too much realism hurts readability.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 9 -->
+  <section>
+    <a name="shader-languages-explained"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">9. Shader Languages Explained</h2>
+
+    <a name="glsl"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">GLSL</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Current king for Three.js/WebGL. Best today.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Use for:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>production RTS</li>
+      <li>maximum compatibility</li>
+      <li>mature tooling</li>
+    </ul>
+
+    <a name="wgsl"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">WGSL</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Future of WebGPU. Best long-term choice.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Advantages:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>compute shaders</li>
+      <li>better GPU access</li>
+      <li>safer architecture</li>
+      <li>superior performance scaling</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed font-medium">Use for:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>next-gen RTS systems</li>
+      <li>GPU simulation</li>
+      <li>fog of war</li>
+      <li>particles</li>
+      <li>crowd systems</li>
+    </ul>
+
+    <a name="msl-metal-shading-language"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">MSL (Metal Shading Language)</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Apple-specific. You generally NEVER write MSL directly in web development. WebGPU handles translation.</p>
+
+    <a name="osl-open-shading-language"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">OSL (Open Shading Language)</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Offline rendering. Used in Blender, Arnold, film rendering. NOT for browser RTS games.</p>
+
+    <a name="recommendation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Recommendation</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
+        <thead>
+          <tr class="bg-indigo-100 text-indigo-800">
+            <th class="px-4 py-2 text-left font-semibold">Today</th>
+            <th class="px-4 py-2 text-left font-semibold">Future</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200">
+            <td class="px-4 py-2 font-mono text-indigo-600">GLSL</td>
+            <td class="px-4 py-2 font-mono text-indigo-600">WGSL</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 10 -->
+  <section>
+    <a name="webgl-vs-webgpu"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">10. WebGL vs WebGPU</h2>
+
+    <a name="webgl"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">WebGL</h3>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Advantages</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>works everywhere</li>
+      <li>stable</li>
+      <li>mature</li>
+      <li>battle-tested</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed font-medium">Disadvantages</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>limited compute</li>
+      <li>CPU bottlenecks</li>
+      <li>older architecture</li>
+    </ul>
+
+    <a name="webgpu"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">WebGPU</h3>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Advantages</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>compute shaders</li>
+      <li>massively better batching</li>
+      <li>GPU simulation</li>
+      <li>future-proof</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed font-medium">Disadvantages</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>still evolving</li>
+      <li>browser support improving</li>
+      <li>tooling younger</li>
+    </ul>
+
+    <a name="best-strategy-webgl-vs-webgpu"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Best Strategy</h3>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">TODAY</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Three.js + WebGL2</pre>
+    <p class="text-gray-700 leading-relaxed mb-3 mt-4 font-medium">ARCHITECTURE</p>
+    <p class="text-gray-700 leading-relaxed">Design systems to migrate later to:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed mt-2">Three.js WebGPU + WGSL</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 11 -->
+  <section>
+    <a name="best-environment-techniques"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">11. Best Environment Techniques</h2>
+
+    <a name="gpu-instanced-grass"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">1. GPU Instanced Grass</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Massive visual improvement. Tiny performance cost if done correctly.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Best approach:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Low poly cards
++
+Vertex wind animation
++
+Distance fade</pre>
+
+    <a name="height-based-fog"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">2. Height-Based Fog</h3>
+    <p class="text-gray-700 leading-relaxed">EXTREMELY important for RTS scale. Makes worlds feel huge.</p>
+
+    <a name="atmospheric-perspective"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">3. Atmospheric Perspective</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Critical for realism. Distance should: desaturate, lighten, soften.</p>
+
+    <a name="terrain-macro-variation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">4. Terrain Macro Variation</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">The secret to AAA terrain. Never use pure repeating textures.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Add:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Large scale noise
++
+Color variation
++
+Macro breakup</pre>
+
+    <a name="decal-systems"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">5. Decal Systems</h3>
+    <p class="text-gray-700 leading-relaxed">Use for: roads, damage, scorch marks, paths, biome transitions.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 12 -->
+  <section>
+    <a name="performance-optimization"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">12. Performance Optimization</h2>
+
+    <a name="golden-rule"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Golden Rule</h3>
+    <blockquote class="border-l-4 border-amber-400 bg-amber-50 px-4 py-3 text-gray-700 my-4 rounded-r-lg font-semibold">Draw calls kill RTS performance. NOT polygons.</blockquote>
+
+    <a name="target-budgets"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Target Budgets</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
+        <thead>
+          <tr class="bg-indigo-100 text-indigo-800">
+            <th class="px-4 py-2 text-left font-semibold">Metric</th>
+            <th class="px-4 py-2 text-left font-semibold">Target</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Draw Calls</td><td class="px-4 py-2 font-mono">&lt; 500</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Materials</td><td class="px-4 py-2 font-mono">&lt; 50</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Shadow Casters</td><td class="px-4 py-2">limited</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Texture Memory</td><td class="px-4 py-2 font-mono">&lt; 512MB</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Unit Meshes</td><td class="px-4 py-2">instanced</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <a name="most-important-optimization"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Most Important Optimization</h3>
+    <blockquote class="border-l-4 border-green-400 bg-green-50 px-4 py-3 text-gray-700 my-4 rounded-r-lg font-semibold">Instancing. Always.</blockquote>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 13 -->
+  <section>
+    <a name="instancing-and-draw-call-reduction"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">13. Instancing & Draw Call Reduction</h2>
+
+    <a name="instancedmesh"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">InstancedMesh</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">One of the MOST important Three.js RTS tools.</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Example:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed"><span class="text-purple-300">const</span> mesh <span class="text-white">=</span> <span class="text-blue-300">new</span> THREE<span class="text-white">.</span>InstancedMesh<span class="text-white">(</span>
+  geometry<span class="text-white">,</span>
+  material<span class="text-white">,</span>
+  <span class="text-amber-300">10000</span>
+<span class="text-white">);</span></pre>
+
+    <a name="use-instancing-for"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Use Instancing For</h3>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>trees</li>
+      <li>rocks</li>
+      <li>units</li>
+      <li>grass</li>
+      <li>projectiles</li>
+      <li>debris</li>
+    </ul>
+
+    <a name="avoid-instancing"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Avoid</h3>
+    <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">One mesh per object</pre>
+    <p class="text-gray-700 leading-relaxed mt-3">This destroys performance.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 14 -->
+  <section>
+    <a name="streaming-and-lod-systems"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">14. Streaming & LOD Systems</h2>
+
+    <a name="chunk-based-world-streaming"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Chunk-Based World Streaming</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Required for large RTS maps.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Use:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">terrain chunks
+foliage chunks
+entity regions</pre>
+
+    <a name="lod-strategy"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">LOD Strategy</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
+        <thead>
+          <tr class="bg-indigo-100 text-indigo-800">
+            <th class="px-4 py-2 text-left font-semibold">Distance</th>
+            <th class="px-4 py-2 text-left font-semibold">Detail</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Near</td><td class="px-4 py-2">Full</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Mid</td><td class="px-4 py-2">Simplified</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2">Far</td><td class="px-4 py-2">Billboard</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <a name="billboard-forests"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Billboard Forests</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Still one of the BEST RTS techniques. Especially with:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">camera-facing normal correction</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 15 -->
+  <section>
+    <a name="atmospheric-effects"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">15. Atmospheric Effects</h2>
+
+    <a name="most-important-rts-fx"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Most Important RTS FX</h3>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-gray-700 font-medium">
+      <div class="bg-indigo-50 p-3 rounded-lg text-center">Fog</div>
+      <div class="bg-indigo-50 p-3 rounded-lg text-center">God rays</div>
+      <div class="bg-indigo-50 p-3 rounded-lg text-center">Wind</div>
+      <div class="bg-indigo-50 p-3 rounded-lg text-center">Dust</div>
+      <div class="bg-indigo-50 p-3 rounded-lg text-center">Heat haze</div>
+      <div class="bg-indigo-50 p-3 rounded-lg text-center">Cloud shadows</div>
+    </div>
+    <p class="text-gray-700 leading-relaxed mt-4">These add FAR more quality than high-poly models.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 16 -->
+  <section>
+    <a name="fog-of-war-techniques"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">16. Fog of War Techniques</h2>
+
+    <a name="best-modern-approach"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Modern Approach</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">GPU-generated fog textures. Modern RTS fog should use:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">compute textures
+blur passes
+animated cloud layers
+visibility masks</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 17 -->
+  <section>
+    <a name="asset-pipeline"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">17. Asset Pipeline</h2>
+
+    <a name="best-workflow"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Best Workflow</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Blender
+→ glTF
+→ Draco
+→ Meshopt
+→ KTX2</pre>
+
+    <a name="gltf"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">glTF</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">Use glTF exclusively.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium">Avoid:</p>
+    <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">FBX
+OBJ
+DAE</pre>
+
+    <a name="compression-stack"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Compression Stack</h3>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium text-green-700">Mandatory</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Draco
+Meshopt
+KTX2</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 18 -->
+  <section>
+    <a name="typescript-architecture"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">18. TypeScript Architecture</h2>
+
+    <a name="recommended-project-structure"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Recommended Project Structure</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">src/
+  core/
+  rendering/
+  ecs/
+  networking/
+  terrain/
+  shaders/
+  units/
+  effects/
+  ui/</pre>
+
+    <a name="avoid-massive-scene-logic"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Avoid Massive Scene Logic</h3>
+    <p class="text-gray-700 leading-relaxed mb-3 font-medium text-green-700">Use:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Entity Component System</pre>
+    <p class="text-gray-700 leading-relaxed mb-3 mt-4 font-medium text-red-700">NOT:</p>
+    <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Huge monolithic classes</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 19 -->
+  <section>
+    <a name="production-rendering-pipeline"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">19. Production Rendering Pipeline</h2>
+
+    <a name="aaa-browser-rts-stack"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">AAA Browser RTS Stack</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Instancing
+Texture atlases
+Terrain splatting
+GPU particles
+Runtime fog
+Atmospheric perspective
+Temporal AA
+LOD
+Chunk streaming
+Procedural variation</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 20 -->
+  <section>
+    <a name="best-professional-threejs-references"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">20. Best Professional Three.js References</h2>
+
+    <a name="official-threejs-examples"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Official Three.js Examples</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">The gold standard:</p>
+    <a href="https://threejs.org/examples/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">Three.js Official Examples</a>
+
+    <a name="award-winning-creative-threejs"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Award-Winning Creative Three.js</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Botanics — Exceptional shader/environment work</p>
+    <a href="https://botanics.sujen.co" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">Botanics by Sujen Phea</a>
+
+    <a name="advanced-rts-rendering-discussion"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Advanced RTS Rendering Discussion</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">VOIDSTRIKE</p>
+    <a href="https://www.reddit.com/r/threejs/comments/1rus2v8/building_an_rts_with_threejs_webgpu_perinstance/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">VOIDSTRIKE Rendering Thread</a>
+
+    <a name="massive-rts-browser-example"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Massive RTS Browser Example</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Kiomet</p>
+    <a href="https://www.webgpu.com/showcase/kiomet-real-time-multiplayer-strategy-game-rust-webgl/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">Kiomet RTS Showcase</a>
+
+    <a name="threejs-advanced-techniques"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Three.js Advanced Techniques</h3>
+    <a href="https://www.threejs-blocks.com/examples/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">Three.js Blocks Examples</a>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 21 -->
+  <section>
+    <a name="example-code"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">21. Example Code</h2>
+
+    <a name="terrain-material-blending"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Terrain Material Blending</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed"><span class="text-purple-300">vec3</span> grass <span class="text-white">=</span> <span class="text-blue-300">texture</span><span class="text-white">(</span>grassTex<span class="text-white">,</span> uv <span class="text-white">*</span> <span class="text-amber-300">16.0</span><span class="text-white">).</span>rgb<span class="text-white">;</span>
+<span class="text-purple-300">vec3</span> rock <span class="text-white">=</span> <span class="text-blue-300">texture</span><span class="text-white">(</span>rockTex<span class="text-white">,</span> uv <span class="text-white">*</span> <span class="text-amber-300">16.0</span><span class="text-white">).</span>rgb<span class="text-white">;</span>
+
+<span class="text-purple-300">float</span> slope <span class="text-white">=</span> <span class="text-amber-300">1.0</span> <span class="text-white">-</span> normal<span class="text-white">.</span>y<span class="text-white">;</span>
+
+<span class="text-purple-300">vec3</span> finalColor <span class="text-white">=</span> <span class="text-blue-300">mix</span><span class="text-white">(</span>grass<span class="text-white">,</span> rock<span class="text-white">,</span> slope<span class="text-white">);</span></pre>
+
+    <a name="wind-animation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Wind Animation</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed"><span class="text-purple-300">float</span> wind <span class="text-white">=</span>
+    <span class="text-blue-300">sin</span><span class="text-white">(</span>position<span class="text-white">.</span>x <span class="text-white">*</span> <span class="text-amber-300">0.5</span> <span class="text-white">+</span> time<span class="text-white">)</span>
+  <span class="text-white">*</span> <span class="text-amber-300">0.1</span><span class="text-white">;</span>
+
+transformed<span class="text-white">.</span>x <span class="text-white">+=</span> wind<span class="text-white">;</span></pre>
+
+    <a name="instanced-trees"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Instanced Trees</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed"><span class="text-purple-300">const</span> trees <span class="text-white">=</span> <span class="text-blue-300">new</span> THREE<span class="text-white">.</span>InstancedMesh<span class="text-white">(</span>
+  treeGeometry<span class="text-white">,</span>
+  treeMaterial<span class="text-white">,</span>
+  <span class="text-amber-300">50000</span>
+<span class="text-white">);</span></pre>
+
+    <a name="chunk-streaming"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Chunk Streaming</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed"><span class="text-purple-300">if</span> <span class="text-white">(</span>cameraMovedChunk<span class="text-white">())</span> <span class="text-white">{</span>
+  loadNearbyChunks<span class="text-white">();</span>
+  unloadFarChunks<span class="text-white">();</span>
+<span class="text-white">}</span></pre>
+
+    <a name="fog-height"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Fog Height</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed"><span class="text-purple-300">float</span> fogFactor <span class="text-white">=</span>
+  <span class="text-blue-300">smoothstep</span><span class="text-white">(</span>
+    fogNear<span class="text-white">,</span>
+    fogFar<span class="text-white">,</span>
+    vWorldPosition<span class="text-white">.</span>y
+  <span class="text-white">);</span></pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 22 -->
+  <section>
+    <a name="final-recommendations"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">22. Final Recommendations</h2>
+
+    <a name="highest-roi-features"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Highest ROI Features</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">If you only invest in a few systems:</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium text-green-700">PRIORITIZE</p>
+    <ol class="list-decimal list-inside text-gray-700 space-y-1 mb-4 columns-2">
+      <li>Instancing</li>
+      <li>Terrain blending</li>
+      <li>Atmospheric fog</li>
+      <li>Wind animation</li>
+      <li>Procedural variation</li>
+      <li>KTX2 compression</li>
+      <li>LOD</li>
+      <li>Chunk streaming</li>
+      <li>GPU particles</li>
+      <li>Good lighting</li>
+    </ol>
+
+    <a name="biggest-mistakes"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Biggest Mistakes</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium text-red-700">DO NOT</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4 columns-2">
+      <li>overuse 4K textures</li>
+      <li>use too many materials</li>
+      <li>rely on ultra-poly models</li>
+      <li>ignore atmospheric depth</li>
+      <li>skip instancing</li>
+      <li>use unique textures everywhere</li>
+      <li>overload postprocessing</li>
+    </ul>
+
+    <a name="best-overall-rts-visual-strategy"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Best Overall RTS Visual Strategy</h3>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Low-poly stylized realism
++
+Procedural enhancement
++
+Strong atmosphere
++
+Excellent lighting
++
+Massive batching</pre>
+
+    <p class="text-gray-700 leading-relaxed mt-4 mb-4">This produces:</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Tiny downloads
+Fast loading
+Huge worlds
+Strong visual identity
+Excellent performance
+AAA appearance</pre>
+
+    <a name="final-rendering-recommendation"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Final Rendering Recommendation</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">2026 Best Stack</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Three.js
+TypeScript
+WebGL2
+GLSL
+KTX2
+Instancing
+Procedural terrain
+Texture splatting
+GPU fog
+Chunk streaming</pre>
+
+    <p class="text-gray-700 leading-relaxed mt-4 mb-2 font-medium">Future Upgrade Path</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">WebGPU
+WGSL
+GPU compute simulation
+GPU culling
+GPU pathfinding</pre>
+
+    <a name="additional-references"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-8 mb-3">Additional References</h3>
+    <div class="space-y-2">
+      <p><a href="https://threejs.org/docs/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">Three.js Documentation</a></p>
+      <p><a href="https://github.com/mrdoob/three.js" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">Three.js GitHub</a></p>
+      <p><a href="https://webgpufundamentals.org/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">WebGPU Fundamentals</a></p>
+      <p><a href="https://thebookofshaders.com/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">The Book of Shaders</a></p>
+      <p><a href="https://www.w3.org/TR/WGSL/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">WGSL Specification</a></p>
+      <p><a href="https://www.khronos.org/ktx/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 underline">KTX Texture Format</a></p>
+    </div>
+  </section>
+</div>
