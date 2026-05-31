@@ -160,6 +160,9 @@ html.dark #main-content pre .text-red-400 {
 html.dark #main-content a {
   color: #93c5fd;
 }
+html.dark #main-content a:hover {
+  color: #bfdbfe;
+}
 
 /* ===== Dark mode blockquotes ===== */
 html.dark #main-content blockquote {
