@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const sidebar = document.getElementById('sidebar');
   const content = document.getElementById('content');
+  let scrollSpyHandler = null;
   const sidebarMinWidth = 200;
   const phi = (1 + Math.sqrt(5)) / 2;
 
@@ -294,6 +295,37 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
       }
     }
+
+    setupScrollSpy(pageKey);
+  }
+
+  function setupScrollSpy(pageKey) {
+    const tocLinks = document.querySelectorAll(`#toc-${pageKey} .toc-link`);
+    const anchors = [];
+    tocLinks.forEach(link => {
+      const anchor = link.dataset.target;
+      const el = content.querySelector(`[name="${anchor}"]`);
+      if (el) anchors.push({ el, link });
+    });
+    if (!anchors.length) return;
+
+    function update() {
+      const scrollY = window.scrollY + 120;
+      let current = anchors[0];
+      for (const a of anchors) {
+        const top = a.el.getBoundingClientRect().top + window.scrollY;
+        if (top <= scrollY) current = a;
+      }
+      tocLinks.forEach(l => l.classList.remove('active-toc-link'));
+      if (current) current.link.classList.add('active-toc-link');
+    }
+
+    if (scrollSpyHandler) {
+      window.removeEventListener('scroll', scrollSpyHandler);
+    }
+    scrollSpyHandler = update;
+    window.addEventListener('scroll', scrollSpyHandler, { passive: true });
+    update();
   }
 
   async function loadPage(page) {
