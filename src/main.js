@@ -315,19 +315,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       code.textContent = pre.textContent;
       pre.innerHTML = '';
       pre.appendChild(code);
+
+      let lang = 'plaintext';
+      if (/\b(THREE\.|new THREE\.|from\s+['"]three['"]|renderer\.|scene\.|camera\.|mesh\.|geometry\.|material\.)/.test(text)) lang = 'javascript';
+      else if (
+        /^(import|export|const|let|var|function|class|interface|type|enum|abstract|namespace|async|await)\b/.test(text) ||
+        /:\s*(string|number|boolean|void|any|never|unknown)\b/.test(text)
+      ) lang = 'typescript';
+      else if (/^(def |class\s+\w+:|import\s+\w+|from\s+\w+|print\()/m.test(text)) lang = 'python';
+      else if (/\b(vec[234]|float|texture|uniform|varying|gl_|sampler|mat[34])\b/.test(text)) lang = 'glsl';
+      else if (/^(npm|yarn|pnpm|npx|cd\s|mkdir\s|rm\s|cp\s|git\s|curl|wget|chmod|ls\s)/m.test(text)) lang = 'bash';
+      else if (/^\s*[#.][\w-]+\s*\{/.test(text)) lang = 'css';
+      else if ((/^\s*\{/.test(text) && /\}\s*$/.test(text)) || (/^\s*\[/.test(text) && /\]\s*$/.test(text))) lang = 'json';
+
       try {
-        const result = hljs.highlightAuto(text, ['typescript', 'javascript', 'glsl', 'bash', 'css', 'json']);
-        if (result.language && result.relevance >= 3) {
-          code.innerHTML = result.value;
-        } else {
-          const fallback = hljs.highlight(text, { language: 'typescript', ignoreIllegals: true });
-          code.innerHTML = fallback.value;
-        }
+        code.innerHTML = hljs.highlight(text, { language: lang, ignoreIllegals: true }).value;
       } catch {
-        try {
-          const fallback = hljs.highlight(text, { language: 'typescript', ignoreIllegals: true });
-          code.innerHTML = fallback.value;
-        } catch {}
+        code.textContent = pre.textContent;
       }
     });
   }
@@ -361,6 +365,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             const target = document.querySelector(`[name="${anchor}"]`);
             if (target) {
               target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              const tocContainer = link.closest('[id^="toc-"]');
+              if (tocContainer) {
+                const guideKey = tocContainer.id.replace('toc-', '');
+                loadGuidePage(guideKey, false).then(() => {
+                  const newTarget = document.querySelector(`[name="${anchor}"]`);
+                  if (newTarget) {
+                    newTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                });
+              }
             }
           });
           tocEl.appendChild(link);
@@ -427,17 +442,35 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (advanceTriggered || pageLoading) return;
 
       const atBottom = content.scrollTop + content.clientHeight >= content.scrollHeight - 120;
-      if (!atBottom) return;
+      const atTop = content.scrollTop <= 120;
 
-      const nextIdx = currentGuideIndex + 1;
-      if (nextIdx >= guideOrder.length) return;
+      if (atBottom) {
+        const nextIdx = currentGuideIndex + 1;
+        if (nextIdx >= guideOrder.length) return;
 
-      advanceTriggered = true;
-      const nextKey = guideOrder[nextIdx];
+        advanceTriggered = true;
+        const nextKey = guideOrder[nextIdx];
+        loadGuidePage(nextKey, true).catch(() => {
+          advanceTriggered = false;
+        });
+      } else if (atTop) {
+        const prevIdx = currentGuideIndex - 1;
+        if (prevIdx < 0) return;
 
-      loadGuidePage(nextKey, true).catch(() => {
-        advanceTriggered = false;
-      });
+        advanceTriggered = true;
+        const prevKey = guideOrder[prevIdx];
+        loadGuidePage(prevKey, false).then(() => {
+          const lastAnchor = content.querySelector('section:last-child a[name]');
+          if (lastAnchor) {
+            requestAnimationFrame(() => {
+              lastAnchor.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            });
+          }
+          setTimeout(() => { advanceTriggered = false; }, 600);
+        }).catch(() => {
+          advanceTriggered = false;
+        });
+      }
     };
 
     content.addEventListener('scroll', advanceHandler, { passive: true });
@@ -453,9 +486,95 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (page === 'home') {
       pageLoading = false;
       content.innerHTML = `
-        <div class="prose prose-cyan max-w-none">
-          <h1 class="text-gray-500">Welcome</h1>
-          <p class="text-blue-500">Select a page from the navigation to view content.</p>
+        <div class="max-w-4xl mx-auto px-4 py-8">
+          <div class="text-center mb-12">
+            <span class="material-icons text-6xl text-cyan-500 mb-4">public</span>
+            <h1 class="text-4xl font-bold text-gray-700 dark:text-cyan-300 mb-2">Troyan</h1>
+            <p class="text-xl text-gray-500 dark:text-gray-400">3226 AD &mdash; A World Divided</p>
+          </div>
+
+          <div class="bg-indigo-50 dark:bg-indigo-950 rounded-xl p-6 mb-8 border border-indigo-200 dark:border-indigo-800">
+            <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-200">
+              Centuries after the great cataclysm that shattered civilization, the survivors
+              of humanity cling to the scarred surface of a broken Earth &mdash; now called
+              <strong>EYA</strong>. The skies are toxic, the soil is poisoned, and the ruins
+              of the old world serve as grim monuments to what was lost. But the surface is
+              not the only world. Beneath the crust, in the suffocating darkness of ancient
+                tunnels and caverns, something else has evolved.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-blue-200 dark:border-slate-700">
+              <div class="flex items-center mb-3">
+                <span class="material-icons text-3xl text-blue-500 mr-3">cloud</span>
+                <h2 class="text-2xl font-semibold text-gray-700 dark:text-blue-300">EYA</h2>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                The <strong>Exo-Yuman Alliance</strong> controls the surface: fortified
+                fortresses, solar arrays, and gleaming white carbon-fiber structures
+                dotting the wasteland. They harness Zehedee alien technology to maintain
+                air quality, purify water, and power their war machine. EYA dominates
+                the skies with VTOL aircraft and heavy bombers, but their greatest
+                strength is also their vulnerability &mdash; exposed on the surface,
+                their supply lines can be severed from below.
+              </p>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-green-200 dark:border-slate-700">
+              <div class="flex items-center mb-3">
+                <span class="material-icons text-3xl text-green-500 mr-3">landslide</span>
+                <h2 class="text-2xl font-semibold text-gray-700 dark:text-green-300">Ugroo</h2>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Deep in the subterranean chasms, the <strong>Ugroo</strong> have adapted.
+                Generations of mutation have forged a race that thrives in darkness and
+                toxic air. Their bio-luminescent cities pulse with organic machinery,
+                acid-based harvesting, and an economy built on geothermal vents. Ugroo
+                warriors can tunnel beneath enemy lines, burst through the crust without
+                warning, and dominate the underwater and underground domains that EYA
+                cannot reach.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-amber-50 dark:bg-amber-950 rounded-xl p-6 mb-8 border border-amber-200 dark:border-amber-800">
+            <div class="flex items-center mb-3">
+              <span class="material-icons text-3xl text-amber-500 mr-3">flare</span>
+              <h2 class="text-2xl font-semibold text-gray-700 dark:text-amber-300">The Zehedee</h2>
+            </div>
+            <p class="text-gray-700 dark:text-gray-200 leading-relaxed">
+              Silent, ancient, and incomprehensible, the <strong>Zehedee</strong> are
+              not a faction you command &mdash; they are a force of nature. Their
+              derelict data-link arrays and temporal physics engines lie scattered
+              across EYA, waiting to be reactivated. Both EYA and Ugroo race to
+              decipher Zehedee technology, unlocking chronal time-acceleration,
+              energy shields, and weapons that bend the laws of physics. Whoever
+              masters the Zehedee legacy will decide the fate of the planet.
+            </p>
+          </div>
+
+          <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-purple-200 dark:border-slate-700 mb-8">
+            <div class="flex items-center mb-3">
+              <span class="material-icons text-3xl text-purple-500 mr-3">layers</span>
+              <h2 class="text-2xl font-semibold text-gray-700 dark:text-purple-300">The Conflict</h2>
+            </div>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              This is not a war of equals. It is a war of dimensions. EYA fights in
+              three dimensions &mdash; surface, air, and space. Ugroo fights in a
+              hidden fourth dimension: <em>beneath</em>. Every EYA fortress is built
+              on ground the Ugroo can claim as their own. Every Ugroo tunnel leads
+              to a surface EYA thought it controlled. The battle for EYA is a battle
+              of verticality, where victory belongs to the faction that can fight
+              across every layer of a broken world.
+            </p>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed mt-3">
+              From the irradiated plains and ruined cities above, to the bioluminescent
+              caverns and toxic gas pockets below, the war for EYA will be fought on
+              every front &mdash; and only one faction will emerge to inherit what
+              remains of humanity's cradle.
+            </p>
+          </div>
         </div>`;
       return;
     }

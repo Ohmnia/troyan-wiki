@@ -55,3 +55,14 @@
 - This creates a visual grouping where expanded sections show a darker blue container background with the toggle header maintaining its hover background color
 - Commit: 9f5f510 (feat: add visual styling for expanded sections)
 - Tag: v0.1.0
+
+## 2026-05-31 Session
+
+### 11:05 - Storyline homepage, Characters & Locations pages
+- Created wiki/pages/characters.html and wiki/pages/locations.html as
+  placeholder pages matching the resources.html "coming soon" pattern
+- Rewrote the wiki home page in src/main.js with a full narrative storyline
+  extracted from Requirements.md — covering EYA, Ugroo, and Zehedee factions,
+  the asymmetric vertical conflict, and the post-apocalyptic setting of 3226 AD
+- Home page now displays by default as the first page (loadPage('home') unchanged)
+- Characters and Locations already linked in sidebar under Assets section
