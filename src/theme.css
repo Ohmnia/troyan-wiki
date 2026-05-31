@@ -53,9 +53,26 @@ body,
   color: var(--sidebar-icon);
 }
 
+/* ===== Agent robot icon colors ===== */
+.agent-icon-agentinit { color: #d97706; }
+html.dark .agent-icon-agentinit { color: #fbbf24; }
+.agent-icon-specmaster { color: #7c3aed; }
+html.dark .agent-icon-specmaster { color: #a78bfa; }
+.agent-icon-supercoder { color: #059669; }
+html.dark .agent-icon-supercoder { color: #34d399; }
+.agent-icon-docuanalyst { color: #0284c7; }
+html.dark .agent-icon-docuanalyst { color: #38bdf8; }
+.agent-icon-watchdog { color: #dc2626; }
+html.dark .agent-icon-watchdog { color: #fb7185; }
+
 /* ===== Scroll-spy ===== */
 .toc-link.active-toc-link {
   background-color: #0e7490;
+  color: #0a1628;
+}
+.toc-link.active-toc-link .text-cyan-300,
+.toc-link.active-toc-link .text-gray-300 {
+  color: #0a1628;
 }
 .toc-link.active-toc-link:hover {
   background-color: #0e7490;
@@ -128,7 +145,7 @@ html.dark #main-content td.text-indigo-600 {
 
 /* ===== Dark mode code blocks ===== */
 html.dark #main-content pre {
-  background: #0f172a;
+  background: #020617;
 }
 html.dark #main-content pre.text-green-400,
 html.dark #main-content pre .text-green-400 {

@@ -255,6 +255,46 @@ document.addEventListener('DOMContentLoaded', async () => {
     guidesIcon.textContent = guidesOpen ? 'arrow_drop_up' : 'arrow_right';
   });
 
+  const agentsToggle = document.getElementById('agents-toggle');
+  const agentsChildren = document.getElementById('agents-children');
+  const agentsIcon = document.getElementById('agents-icon');
+  let agentsOpen = false;
+
+  const agents = [
+    { id: 'agentinit', name: 'AgentInit', file: 'agents/agent_init.md', desc: 'Minimal context loader. Greets the developer, recalls last session context, orients the agent on project state.', iconClass: 'agent-icon-agentinit' },
+    { id: 'specmaster', name: 'SpecMaster', file: 'agents/SpecMaster.md', desc: 'Technical spec & architecture planner. Turns feature concepts into implementation-ready specs.', iconClass: 'agent-icon-specmaster' },
+    { id: 'supercoder', name: 'SuperCoder', file: 'agents/SuperCoder.md', desc: 'Elite full-stack engineer. Builds features, automates workflows, maintains micro-commit codebase.', iconClass: 'agent-icon-supercoder' },
+    { id: 'docuanalyst', name: 'DocuAnalyst', file: 'agents/DocuAnalyst.md', desc: 'Deep-doc analyst. Parses documentation, runs audits, finds architectural gaps and optimization feedback.', iconClass: 'agent-icon-docuanalyst' },
+    { id: 'watchdog', name: 'Watchdog', file: 'agents/Watchdog.md', desc: 'Spec drift monitor. Watches code changes, warns when they conflict with documented RTS doctrine.', iconClass: 'agent-icon-watchdog' }
+  ];
+
+  agents.forEach(a => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'agent-wrapper';
+
+    const header = document.createElement('div');
+    header.className = 'flex items-start px-2 py-1 rounded-md text-xs transition-colors cursor-default';
+    header.innerHTML = `
+      <span class="material-icons md-18 ${a.iconClass}" style="font-size:18px">robot</span>
+      <div class="ml-2 flex-1 min-w-0">
+        <div class="text-white font-medium text-sm">${a.name}</div>
+        <div class="text-gray-400 leading-tight mt-0.5">${a.desc}</div>
+        <a href="/pages/${a.file}" download class="inline-flex items-center mt-1 text-xs text-cyan-400 hover:text-cyan-300 transition-colors">
+          <span class="material-icons" style="font-size:12px">download</span>
+          <span class="ml-0.5">download</span>
+        </a>
+      </div>`;
+    wrapper.appendChild(header);
+    agentsChildren.appendChild(wrapper);
+  });
+
+  agentsToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    agentsOpen = !agentsOpen;
+    agentsChildren.classList.toggle('hidden', !agentsOpen);
+    agentsIcon.classList.toggle('text-cyan-300', agentsOpen);
+  });
+
   function slugify(text) {
     return text.toLowerCase()
       .replace(/&/g, 'and')
@@ -310,21 +350,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!anchors.length) return;
 
     function update() {
-      const scrollY = window.scrollY + 120;
+      const contentTop = content.getBoundingClientRect().top;
+      const threshold = contentTop + 120;
       let current = anchors[0];
       for (const a of anchors) {
-        const top = a.el.getBoundingClientRect().top + window.scrollY;
-        if (top <= scrollY) current = a;
+        if (a.el.getBoundingClientRect().top <= threshold) current = a;
       }
       tocLinks.forEach(l => l.classList.remove('active-toc-link'));
       if (current) current.link.classList.add('active-toc-link');
     }
 
     if (scrollSpyHandler) {
-      window.removeEventListener('scroll', scrollSpyHandler);
+      content.removeEventListener('scroll', scrollSpyHandler);
     }
     scrollSpyHandler = update;
-    window.addEventListener('scroll', scrollSpyHandler, { passive: true });
+    content.addEventListener('scroll', scrollSpyHandler, { passive: true });
     update();
   }
 

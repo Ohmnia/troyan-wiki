@@ -15,10 +15,13 @@
       <span class="ml-3 text-cyan-100 font-medium">Documentation</span>
     </div>
     <div class="ml-4 space-y-1">
-      <a href="/pages/getting-started.md" class="flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer" data-page="getting-started">
-        <span class="material-icons md-18 text-white">play_circle_filled</span>
-        <span class="ml-2 text-white">Getting Started</span>
-      </a>
+      <div class="flex items-center px-2 py-1 rounded-md cursor-pointer hover:bg-blue-700 transition-colors" id="agents-toggle">
+        <span class="material-icons md-20 text-white" id="agents-icon">smart_toy</span>
+        <span class="ml-2 text-white font-medium">A Agents</span>
+      </div>
+      <div class="ml-4 space-y-1 hidden" id="agents-children">
+        <!-- Agent items will be injected here -->
+      </div>
       <a href="/pages/game-mechanics.md" class="flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer" data-page="game-mechanics">
         <span class="material-icons md-18 text-white">settings</span>
         <span class="ml-2 text-white">Game Mechanics</span>
