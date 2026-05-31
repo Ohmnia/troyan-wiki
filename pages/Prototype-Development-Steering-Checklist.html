@@ -1,0 +1,585 @@
+<div class="space-y-8">
+  <h1 class="text-3xl font-bold text-indigo-800 border-b border-indigo-200 pb-4">Troyan (3226 AD) — Prototype Development Steering Checklist: Solo AI-Assisted RTS Development Roadmap</h1>
+
+  <!-- 1 -->
+  <section>
+    <a name="document-purpose"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Document Purpose</h2>
+    <p class="text-gray-700 leading-relaxed mb-3">This document acts as:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>development steering guide</li>
+      <li>milestone tracker</li>
+      <li>AI copilot task reference</li>
+      <li>production roadmap</li>
+      <li>scope control system</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-3">Every task should be completed in small manageable chunks.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">When complete:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>change <code class="text-sm">[ ]</code> to <code class="text-sm">[x]</code></li>
+      <li>record notes if needed</li>
+      <li>move to next milestone</li>
+    </ul>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 2 -->
+  <section>
+    <a name="status-legend"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Status Legend</h2>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">[ ] = Not Started
+[-] = In Progress
+[x] = Complete
+[!] = Blocked</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 3 -->
+  <section>
+    <a name="development-rules"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Development Rules</h2>
+
+    <a name="core-rules"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Core Rules</h3>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Prototype FIRST</li>
+      <li>Polish later</li>
+      <li>Systems before content</li>
+      <li>Readability before realism</li>
+      <li>Gameplay before graphics</li>
+      <li>Finish vertical slice before expansion</li>
+    </ul>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 4 -->
+  <section>
+    <a name="project-structure"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Project Structure</h2>
+
+    <a name="main-development-goals"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Main Development Goals</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white rounded-lg shadow-sm">
+        <thead>
+          <tr class="bg-indigo-100 text-indigo-800">
+            <th class="px-4 py-2 text-left font-semibold">ID</th>
+            <th class="px-4 py-2 text-left font-semibold">Goal</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200"><td class="px-4 py-2 font-mono">CORE</td><td class="px-4 py-2">Core RTS gameplay</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2 font-mono">TECH</td><td class="px-4 py-2">Technical foundation</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2 font-mono">ART</td><td class="px-4 py-2">Visual identity</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2 font-mono">MAP</td><td class="px-4 py-2">Battlefield systems</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2 font-mono">UI</td><td class="px-4 py-2">Interface systems</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2 font-mono">AUDIO</td><td class="px-4 py-2">Sound &amp; atmosphere</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2 font-mono">AI</td><td class="px-4 py-2">Enemy behavior</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2 font-mono">FX</td><td class="px-4 py-2">Environmental effects</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2 font-mono">LOG</td><td class="px-4 py-2">Logistics systems</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2 font-mono">OPT</td><td class="px-4 py-2">Optimization</td></tr>
+          <tr class="border-t border-gray-200"><td class="px-4 py-2 font-mono">BUILD</td><td class="px-4 py-2">Playable builds</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 5 -->
+  <section>
+    <a name="core-gameplay-systems"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Section CORE — Core Gameplay Systems</h2>
+
+    <a name="core-001"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">CORE-001: Project Initialization</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Create clean project foundation.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Repository created</li>
+      <li>Folder structure complete</li>
+      <li>Engine initializes correctly</li>
+      <li>Development environment stable</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-001-A Create Git repository</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-001-B Create folder structure</span></li>
+    </ul>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">/src
+/assets
+/shaders
+/materials
+/models
+/textures
+/audio
+/ui
+/maps
+/docs</pre>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-001-C Initialize Three.js project</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-001-D Setup local development server</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-001-E Verify hot reload workflow</span></li>
+      <li class="text-gray-700">[ ] CORE-001-F Create development notes document</li>
+    </ul>
+
+    <a name="core-002"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">CORE-002: Camera System</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Create RTS camera controls.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Smooth movement</li>
+      <li>Stable zoom</li>
+      <li>Rotation working</li>
+      <li>No clipping issues</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-002-A Create isometric camera</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-002-B Add pan movement</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-002-C Add zoom controls</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-002-B.1 Middle-drag world-anchored pan — terrain point under cursor stays fixed during drag</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-002-C.1 Scroll-wheel zoom — scales base offset vector, clamped min/max</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-002-C.2 Ctrl+Scroll yaw rotation — orbits around selected unit or scene center; recalibrates all perceived-direction controls immediately</span></li>
+      <li class="text-gray-700">[ ] CORE-002-D Add edge scrolling</li>
+      <li class="text-gray-700">[ ] CORE-002-E Add smooth interpolation</li>
+      <li class="text-gray-700">[ ] CORE-002-F Clamp camera bounds</li>
+      <li class="text-gray-700">[ ] CORE-002-G Test readability at gameplay zoom</li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-002-H Validate perceived-direction recalibration — WASD/Arrows always follow current screen-forward direction, recomputed each frame from camera orientation</span></li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed font-medium">Gameplay readability matters more than cinematic angles.</p>
+
+    <a name="core-003"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">CORE-003: Terrain Prototype</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Create readable battlefield terrain.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Playable battlefield exists</li>
+      <li>Terrain visually readable</li>
+      <li>Unit navigation functional</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-003-A Create flat battlefield plane</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-003-B Add simple terrain material</span></li>
+      <li class="text-gray-700">[ ] CORE-003-C Add modular rock formations</li>
+      <li class="text-gray-700">[ ] CORE-003-D Add shallow crater decals</li>
+      <li class="text-gray-700">[ ] CORE-003-E Add neutral wasteland texture</li>
+      <li class="text-gray-700">[ ] CORE-003-F Add terrain chunk system</li>
+      <li class="text-gray-700">[ ] CORE-003-G Test unit readability on terrain</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-red-700">IMPORTANT: Terrain must remain mostly flat.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Avoid:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>giant cliffs</li>
+      <li>excessive elevation</li>
+      <li>over-detailed terrain</li>
+    </ul>
+
+    <a name="core-004"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">CORE-004: Unit Movement</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Units move reliably and clearly.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Units selectable</li>
+      <li>Units move correctly</li>
+      <li>Movement readable</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-A Create placeholder unit</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-B Add click selection</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-B.1 Drag-box selection — left-mouse drag projects a screen rect onto the terrain plane; unit&rsquo;s screen-space position is hit-tested against the rect; box fades out on release</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-C Add move commands</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-D Add pathfinding</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-E Add movement smoothing</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-F Add destination indicators</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-F.1 Selection ring (blue circle) — cyan <code class="text-sm">LineLoop</code> (48 segments, r=1.4 world units) attached to the unit, sits flat on the ground plane (y=−0.94). Visible only when selected. Pulses continuously with smooth sine-based opacity oscillation between 0.1 and 1.0 over 1 s.</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-F.2 Destination indicator (yellow circles) — two orange/gold <code class="text-sm">LineLoop</code> rings at the right-clicked terrain point. Pulse outward/inward over 1 s using <code class="text-sm">easeIn</code> (t²) curve. Perspective-corrected.</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-F.3 Destination perspective parity — points closer to camera render larger rings, points further away render smaller rings. Reuses blue-ring sizing pipeline.</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-G Add unit collision avoidance — per-unit separation steering prevents overlap while units travel to move targets</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-D Add pathfinding — A* grid (1-unit cells, 200×200 terrain) with AABB obstacle registration. Units follow waypoint list, fall back to direct movement when no path exists.</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-004-H Test multiple unit movement</span></li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed font-bold">Movement feel is CRITICAL.</p>
+
+    <a name="core-005"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">CORE-005: Basic Combat</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Functional readable combat.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Units attack correctly</li>
+      <li>Damage works</li>
+      <li>Combat readable</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-005-A Add health system — hp/maxHp on every UnitActor and EnemyActor via CombatStats</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-005-B Add attack range — <code class="text-sm">attackRange</code> field on CombatStats; units auto-fire when enemy enters range</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-005-C Add projectile system — travelling sphere mesh (<code class="text-sm">projectileSystem.ts</code>); spawnProjectile / updateProjectiles</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-005-D Add hit detection — onHit callback fires when projectile reaches target world position; applyDamage called</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-005-E Add death handling — dead units/enemies removed from scene and arrays each tick in updateUnitMovement</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-005-F Add combat feedback FX — orange emissive hit-flash on damaged units (120 ms); cyan projectiles for player, red for enemy</span></li>
+      <li class="text-green-600 font-medium"><span class="text-gray-700">[x] CORE-005-G Add simple enemy AI — <code class="text-sm">enemyAI.ts</code>: enemy faction (red) seeks nearest living player, attacks when in range, staggered cooldowns</span></li>
+      <li class="text-yellow-600 font-medium"><span class="text-gray-700">[-] CORE-005-H Test battle readability — pending in-browser validation</span></li>
+    </ul>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 6 -->
+  <section>
+    <a name="battlefield-and-environment"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Section MAP — Battlefield &amp; Environment</h2>
+
+    <a name="map-001"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">MAP-001: Neutral Wasteland Biome</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Create primary battlefield style.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Cohesive environment</li>
+      <li>Good readability</li>
+      <li>Atmospheric consistency</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-gray-700">[ ] MAP-001-A Create basalt terrain material</li>
+      <li class="text-gray-700">[ ] MAP-001-B Create ash overlay texture</li>
+      <li class="text-gray-700">[ ] MAP-001-C Add dead industrial debris</li>
+      <li class="text-gray-700">[ ] MAP-001-D Add crater props</li>
+      <li class="text-gray-700">[ ] MAP-001-E Add destroyed infrastructure</li>
+      <li class="text-gray-700">[ ] MAP-001-F Add subtle fog</li>
+      <li class="text-gray-700">[ ] MAP-001-G Validate readability</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed font-medium">70% of terrain should remain visually calm.</p>
+
+    <a name="map-002"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">MAP-002: Toxic Landmark Zones</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Create rare high-intensity areas.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Landmark areas distinct</li>
+      <li>Glow usage restrained</li>
+      <li>Terrain remains readable</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-gray-700">[ ] MAP-002-A Create glowing sludge shader</li>
+      <li class="text-gray-700">[ ] MAP-002-B Add toxic fissures</li>
+      <li class="text-gray-700">[ ] MAP-002-C Add geothermal vents</li>
+      <li class="text-gray-700">[ ] MAP-002-D Add animated emissive effects</li>
+      <li class="text-gray-700">[ ] MAP-002-E Add environmental particles</li>
+      <li class="text-gray-700">[ ] MAP-002-F Limit glow density</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-red-700">IMPORTANT: Glow should be RARE.</p>
+    <p class="text-gray-700 leading-relaxed mb-3">If everything glows: nothing glows.</p>
+
+    <a name="map-003"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">MAP-003: Terrain Corruption System</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Visual territory transformation.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Terrain changes visually</li>
+      <li>Corruption spread readable</li>
+      <li>Faction identity clear</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-gray-700">[ ] MAP-003-A Create neutral terrain state</li>
+      <li class="text-gray-700">[ ] MAP-003-B Create light corruption state</li>
+      <li class="text-gray-700">[ ] MAP-003-C Create heavy corruption state</li>
+      <li class="text-gray-700">[ ] MAP-003-D Add terrain blending</li>
+      <li class="text-gray-700">[ ] MAP-003-E Add faction overlays</li>
+      <li class="text-gray-700">[ ] MAP-003-F Test performance impact</li>
+    </ul>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 7 -->
+  <section>
+    <a name="visual-identity"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Section ART — Visual Identity</h2>
+
+    <a name="art-001"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">ART-001: EYA Visual Identity</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Define EYA faction language.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Consistent architecture</li>
+      <li>Readable silhouettes</li>
+      <li>Unified palette</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-gray-700">[ ] ART-001-A Define faction palette</li>
+      <li class="text-gray-700">[ ] ART-001-B Define emissive rules</li>
+      <li class="text-gray-700">[ ] ART-001-C Define material rules</li>
+      <li class="text-gray-700">[ ] ART-001-D Create architecture guide</li>
+      <li class="text-gray-700">[ ] ART-001-E Create unit silhouette guide</li>
+      <li class="text-gray-700">[ ] ART-001-F Create modular building kit</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">EYA Rules</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Primary Colors:
+- white
+- gray
+- cyan
+
+Visual Language:
+- angular
+- disciplined
+- engineered
+- clean</pre>
+
+    <a name="art-002"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">ART-002: Ugroo Visual Identity</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Define Ugroo faction language.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Corruption visually distinct</li>
+      <li>Organic forms consistent</li>
+      <li>Strong contrast vs EYA</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-gray-700">[ ] ART-002-A Define faction palette</li>
+      <li class="text-gray-700">[ ] ART-002-B Define corruption rules</li>
+      <li class="text-gray-700">[ ] ART-002-C Define glow rules</li>
+      <li class="text-gray-700">[ ] ART-002-D Create organic architecture guide</li>
+      <li class="text-gray-700">[ ] ART-002-E Create modular growth system</li>
+      <li class="text-gray-700">[ ] ART-002-F Create corruption decals</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Ugroo Rules</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">Primary Colors:
+- dark purple
+- toxic green
+- black basalt
+
+Visual Language:
+- organic
+- asymmetrical
+- fungal
+- evolving</pre>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 8 -->
+  <section>
+    <a name="automation-and-logistics"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Section LOG — Automation &amp; Logistics</h2>
+
+    <a name="log-001"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">LOG-001: Basic Resource Gathering</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Prototype automated logistics.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Workers harvest automatically</li>
+      <li>Resources transport correctly</li>
+      <li>Loop functions reliably</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-gray-700">[ ] LOG-001-A Create mineral nodes</li>
+      <li class="text-gray-700">[ ] LOG-001-B Create worker AI</li>
+      <li class="text-gray-700">[ ] LOG-001-C Add harvesting logic</li>
+      <li class="text-gray-700">[ ] LOG-001-D Add transport logic</li>
+      <li class="text-gray-700">[ ] LOG-001-E Add resource storage</li>
+      <li class="text-gray-700">[ ] LOG-001-F Add UI resource display</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed font-medium">This is one of the CORE unique systems.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 9 -->
+  <section>
+    <a name="user-interface"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Section UI — User Interface</h2>
+
+    <a name="ui-001"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">UI-001: RTS Interface Foundation</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Basic playable interface.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>UI readable</li>
+      <li>Selection feedback works</li>
+      <li>Resource display functional</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-gray-700">[ ] UI-001-A Add selection indicators</li>
+      <li class="text-gray-700">[ ] UI-001-B Add minimap placeholder</li>
+      <li class="text-gray-700">[ ] UI-001-C Add resource counters</li>
+      <li class="text-gray-700">[ ] UI-001-D Add command panel</li>
+      <li class="text-gray-700">[ ] UI-001-E Add build menu</li>
+      <li class="text-gray-700">[ ] UI-001-F Add health bars</li>
+    </ul>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 10 -->
+  <section>
+    <a name="atmosphere-and-effects"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Section FX — Atmosphere &amp; Effects</h2>
+
+    <a name="fx-001"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">FX-001: Environmental Atmosphere</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Create immersive battlefield atmosphere.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Atmosphere consistent</li>
+      <li>Visibility preserved</li>
+      <li>Performance acceptable</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-gray-700">[ ] FX-001-A Add ambient fog</li>
+      <li class="text-gray-700">[ ] FX-001-B Add dust particles</li>
+      <li class="text-gray-700">[ ] FX-001-C Add toxic gas effects</li>
+      <li class="text-gray-700">[ ] FX-001-D Add emissive shaders</li>
+      <li class="text-gray-700">[ ] FX-001-E Add environmental animation</li>
+      <li class="text-gray-700">[ ] FX-001-F Test readability impact</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed font-medium">Atmosphere must NEVER reduce gameplay clarity.</p>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 11 -->
+  <section>
+    <a name="optimization"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Section OPT — Optimization</h2>
+
+    <a name="opt-001"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">OPT-001: Performance Foundation</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Maintain stable RTS performance.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Stable FPS</li>
+      <li>Memory stable</li>
+      <li>Unit scaling functional</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Tasks</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li class="text-gray-700">[ ] OPT-001-A Add GPU instancing</li>
+      <li class="text-gray-700">[ ] OPT-001-B Add texture atlas system</li>
+      <li class="text-gray-700">[ ] OPT-001-C Add frustum culling</li>
+      <li class="text-gray-700">[ ] OPT-001-D Optimize terrain rendering</li>
+      <li class="text-gray-700">[ ] OPT-001-E Optimize particles</li>
+      <li class="text-gray-700">[ ] OPT-001-F Stress test large battles</li>
+    </ul>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 12 -->
+  <section>
+    <a name="prototype-build-milestones"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Section BUILD — Prototype Build Milestones</h2>
+
+    <a name="build-001"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">BUILD-001: First Playable</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">First functional prototype.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Completion Conditions</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>Playable battlefield</li>
+      <li>Unit movement</li>
+      <li>Basic combat</li>
+      <li>Basic harvesting</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Required Systems</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">[x] CORE-001
+[x] CORE-002
+[x] CORE-003
+[x] CORE-004
+[x] CORE-005
+[x] LOG-001
+[x] UI-001</pre>
+
+    <a name="build-002"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">BUILD-002: Atmosphere Prototype</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">World identity established.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Required Systems</p>
+    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">[x] MAP-001
+[x] MAP-002
+[x] ART-001
+[x] ART-002
+[x] FX-001</pre>
+
+    <a name="build-003"></a>
+    <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">BUILD-003: Vertical Slice</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Goal</p>
+    <p class="text-gray-700 leading-relaxed mb-3">Small but polished experience.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">Required Features</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>One complete map</li>
+      <li>EYA faction</li>
+      <li>Ugroo enemy presence</li>
+      <li>Logistics gameplay</li>
+      <li>Terrain corruption</li>
+      <li>Stable combat</li>
+      <li>Atmospheric battlefield</li>
+    </ul>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 13 -->
+  <section>
+    <a name="final-development-rule"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Final Development Rule</h2>
+
+    <a name="never-expand-scope"></a>
+    <h3 class="text-xl font-medium text-red-700 mt-6 mb-3">NEVER EXPAND SCOPE</h3>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium">UNTIL:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>current systems work</li>
+      <li>gameplay is fun</li>
+      <li>prototype is stable</li>
+      <li>readability is good</li>
+    </ul>
+  </section>
+
+  <hr class="border-gray-300 my-10" />
+
+  <!-- 14 -->
+  <section>
+    <a name="success-metric"></a>
+    <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Success Metric</h2>
+    <p class="text-gray-700 leading-relaxed mb-3">The prototype succeeds if:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>movement feels satisfying</li>
+      <li>combat is readable</li>
+      <li>logistics are interesting</li>
+      <li>factions feel unique</li>
+      <li>atmosphere feels memorable</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-3 font-bold text-red-700">NOT because:</p>
+    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+      <li>map is huge</li>
+      <li>graphics are photorealistic</li>
+      <li>there are hundreds of units</li>
+    </ul>
+  </section>
+</div>
