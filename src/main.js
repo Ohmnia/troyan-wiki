@@ -170,9 +170,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
       console.error('Error loading page:', error);
       content.innerHTML = `
-        <div class="prose prose-indigo max-w-none">
-          <h2 class="text-indigo-800 font-bold mb-4">Error Loading Page</h2>
-          <p class="text-gray-600">Failed to load ${page}.</p>
+        <div class="max-w-2xl mx-auto mt-16 text-center">
+          <span class="material-icons text-6xl text-gray-300 mb-4">error_outline</span>
+          <h2 class="text-2xl font-semibold text-gray-600 mb-2">Page Not Found</h2>
+          <p class="text-gray-400 mb-6">We couldn't find the page "<span class="font-mono text-gray-500">${page}</span>". It may have been moved or doesn't exist yet.</p>
+          <p class="text-sm text-gray-400">Try selecting a page from the navigation sidebar.</p>
         </div>`;
     }
   }
