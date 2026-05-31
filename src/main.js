@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const guides = {
     'environment-development-guide': {
       title: 'Environment Development',
+      icon: 'terrain',
       file: 'Environment-Development-Guide',
       toc: [
         'Philosophy of Browser RTS Rendering',
@@ -72,6 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     },
     'entity-architecture-guide': {
       title: 'Entity Architecture',
+      icon: 'hub',
       file: 'Entity-Architecture-Guide',
       toc: [
         'Core RTS Architecture Philosophy',
@@ -103,6 +105,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     },
     'character-animation-guide': {
       title: 'Character Animation',
+      icon: 'directions_run',
       file: 'Character-Animation-Guide',
       toc: [
         'RTS Animation Philosophy',
@@ -140,6 +143,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     },
     'high-performance-guide': {
       title: 'High Performance',
+      icon: 'bolt',
       file: 'High-Performance-Guide',
       toc: [
         'Why GLB Is the Preferred Format',
@@ -170,6 +174,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     },
     'strategy-game-engineering-bible': {
       title: 'Strategy Engineering Bible',
+      icon: 'auto_stories',
       file: 'Strategy-Game-Engineering-Bible',
       toc: [
         'Purpose of This Document',
@@ -220,6 +225,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const guidesChildren = document.getElementById('guides-children');
   const guidesToggle = document.getElementById('guides-toggle');
   const guidesIcon = document.getElementById('guides-icon1');
+  const guidesSection = document.getElementById('guides-section');
   let guidesOpen = false;
 
   const guideKeys = Object.keys(guides);
@@ -233,7 +239,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     pageLink.className = 'flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer';
     pageLink.dataset.page = key;
     pageLink.dataset.guide = key;
-    pageLink.innerHTML = `<span class="material-icons md-18 text-white">menu_book</span><span class="ml-2 text-white">${guide.title}</span>`;
+    pageLink.innerHTML = `<span class="material-icons md-18 text-white">${guide.icon}</span><span class="ml-2 text-white">${guide.title}</span>`;
     wrapper.appendChild(pageLink);
 
     const tocContainer = document.createElement('div');
@@ -252,7 +258,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     e.stopPropagation();
     guidesOpen = !guidesOpen;
     guidesChildren.classList.toggle('hidden', !guidesOpen);
-    guidesIcon.textContent = guidesOpen ? 'arrow_drop_up' : 'arrow_right';
+    guidesIcon.textContent = guidesOpen ? 'arrow_drop_down' : 'arrow_right';
+    guidesSection.classList.toggle('section-expanded', guidesOpen);
+  });
+
+  const docsToggle = document.getElementById('docs-toggle');
+  const docsChildren = document.getElementById('docs-children');
+  const docsIcon = document.getElementById('docs-icon');
+  const docsSection = document.getElementById('docs-section');
+  let docsOpen = false;
+
+  docsToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    docsOpen = !docsOpen;
+    docsChildren.classList.toggle('hidden', !docsOpen);
+    docsIcon.textContent = docsOpen ? 'arrow_drop_down' : 'arrow_right';
+    docsSection.classList.toggle('section-expanded', docsOpen);
   });
 
   function slugify(text) {

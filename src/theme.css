@@ -65,6 +65,38 @@ html.dark .agent-icon-docuanalyst { color: #38bdf8; }
 .agent-icon-watchdog { color: #dc2626; }
 html.dark .agent-icon-watchdog { color: #fb7185; }
 
+/* ===== Section expanded container ===== */
+#guides-section.section-expanded,
+#docs-section.section-expanded {
+  background-color: #172554;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+}
+html.dark #guides-section.section-expanded,
+html.dark #docs-section.section-expanded {
+  background-color: #020617;
+}
+
+#guides-section.section-expanded #guides-toggle,
+#docs-section.section-expanded #docs-toggle {
+  background-color: #1d4ed8;
+}
+html.dark #guides-section.section-expanded #guides-toggle,
+html.dark #docs-section.section-expanded #docs-toggle {
+  background-color: #1d4ed8;
+}
+
+#sidebar [data-page]:hover,
+#sidebar [data-guide]:hover,
+#sidebar a:hover {
+  color: #0a1628;
+}
+#sidebar [data-page]:hover .material-icons,
+#sidebar [data-guide]:hover .material-icons,
+#sidebar a:hover .material-icons {
+  color: #0a1628;
+}
+
 /* ===== Scroll-spy ===== */
 .toc-link.active-toc-link {
   background-color: #0e7490;
@@ -88,14 +120,22 @@ html.dark .agent-icon-watchdog { color: #fb7185; }
   color: var(--sidebar-bg);
 }
 
+/* ===== Light mode table borders ===== */
+#main-content table {
+  border: 1px solid #4b5563;
+}
+
 /* ===== Light mode code blocks ===== */
 #main-content pre {
   background: #e5e7eb;
   color: #1e293b;
+  border: 1px solid #4b5563;
 }
 #main-content pre.text-green-400,
-#main-content pre .text-green-400 {
-  color: #15803d;
+#main-content pre .text-green-400,
+#main-content code.text-green-400,
+#main-content code .text-green-400 {
+  color: #7b1fa2;
 }
 #main-content pre.text-red-400,
 #main-content pre .text-red-400 {
@@ -127,8 +167,19 @@ html.dark #main-content strong {
 
 /* ===== Dark mode tables ===== */
 html.dark #main-content table {
-  background: #1e293b;
-  border-color: #334155;
+  background: #020617;
+  border: 1px solid #9ca3af;
+}
+html.dark #main-content th {
+  color: #f1f5f9;
+  background: #0f172a;
+}
+html.dark #main-content tr {
+  border-color: #1e293b;
+}
+html.dark #main-content td {
+  color: #94a3b8;
+  border-color: #1e293b;
 }
 html.dark #main-content th {
   background: #334155;
@@ -146,10 +197,13 @@ html.dark #main-content td.text-indigo-600 {
 /* ===== Dark mode code blocks ===== */
 html.dark #main-content pre {
   background: #020617;
+  border: 1px solid #9ca3af;
 }
 html.dark #main-content pre.text-green-400,
-html.dark #main-content pre .text-green-400 {
-  color: #4ade80;
+html.dark #main-content pre .text-green-400,
+html.dark #main-content code.text-green-400,
+html.dark #main-content code .text-green-400 {
+  color: #a855f7;
 }
 html.dark #main-content pre.text-red-400,
 html.dark #main-content pre .text-red-400 {
