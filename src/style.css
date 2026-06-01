@@ -1,1 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Orbitron:wght@500;700;900&display=swap');
+
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", "Rajdhani", sans-serif;
+  --font-mono: "Share Tech Mono", "IBM Plex Mono", monospace;
+}
+@custom-variant light (&:where(.light, .light *));

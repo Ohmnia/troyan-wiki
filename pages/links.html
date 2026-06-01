@@ -1,40 +1,53 @@
-<div class="flex items-center justify-between mb-6">
-  <span class="text-xl font-bold text-cyan-400">Troyan-3500</span>
-  <button class="theme-toggle-btn" title="Toggle light/dark mode">
-    <span class="material-icons" id="theme-icon">dark_mode</span>
-  </button>
+<div class="flex items-center justify-between mb-6 border-b-2 border-[#343A3F] pb-4">
+
+
+<!-- Visible ONLY when the theme is NOT light (Default Dark Mode) -->
+<div class="light:hidden">
+  <span class="text-xl font-bold text-[#B7FF5C] uppercase tracking-widest font-['Rajdhani']">
+    Ugroo Morph Archives
+  </span>
+</div>
+
+<!-- Visible ONLY when the theme is explicitly .light mode -->
+<div class="hidden light:block">
+  <span class="text-xl font-bold text-[#B7FF5C] uppercase tracking-widest font-['Rajdhani']">
+    AYE Codex Miraculus
+  </span>
+</div>
+
+
 </div>
 <nav class="space-y-2">
-  <a href="#home" class="flex items-center px-2 py-2 rounded-md hover:bg-cyan-700 transition-colors cursor-pointer" data-page="home">
-    <span class="material-icons md-20 text-white">home</span>
-    <span class="ml-3 text-white font-medium">Home</span>
+  <a href="#home" class="flex items-center px-2 py-2 rounded-none border-l-2 border-transparent hover:border-[#7B8C4B] hover:bg-[#262A2E] transition-colors cursor-pointer" data-page="home">
+    <span class="material-icons md-20 text-[#7B8C4B]">home</span>
+    <span class="ml-3 text-[#D7D9DA] font-medium tracking-wider">Home</span>
   </a>
-  <div class="mt-4 space-y-1" id="docs-section">
-    <div class="flex items-center px-2 py-2 rounded-md cursor-pointer hover:bg-blue-700 transition-colors" id="docs-toggle">
-      <span class="material-icons md-20 text-cyan-300" id="docs-icon">arrow_right</span>
-      <span class="ml-3 text-cyan-100 font-medium">Documentation</span>
+  <div class="mt-4 space-y-1 border-t border-[#343A3F] pt-4" id="docs-section">
+    <div class="flex items-center px-2 py-2 rounded-none cursor-pointer hover:bg-[#262A2E] transition-colors border-l-2 border-transparent hover:border-[#7B8C4B]" id="docs-toggle">
+      <span class="material-icons md-20 text-[#7B8C4B]" id="docs-icon">arrow_right</span>
+      <span class="ml-3 text-[#A7FF4F] font-medium tracking-wider">Documentation</span>
     </div>
     <div class="ml-4 space-y-1 hidden" id="docs-children">
-      <a href="#ai-agents" class="flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer" data-page="ai-agents">
-        <span class="material-icons md-18 text-white">smart_toy</span>
-        <span class="ml-2 text-white">AI Agents</span>
+      <a href="#ai-agents" class="flex items-center px-2 py-1 rounded-none text-sm hover:bg-[#262A2E] transition-colors cursor-pointer border-l-2 border-transparent hover:border-[#7B8C4B]" data-page="ai-agents">
+        <span class="material-icons md-18 text-[#7B8C4B]">smart_toy</span>
+        <span class="ml-2 text-[#D7D9DA]">AI Agents</span>
       </a>
-      <a href="#architecture" class="flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer" data-page="Technical-Baseline-Architecture">
-        <span class="material-icons md-18 text-white">account_tree</span>
-        <span class="ml-2 text-white">Architecture</span>
+      <a href="#architecture" class="flex items-center px-2 py-1 rounded-none text-sm hover:bg-[#262A2E] transition-colors cursor-pointer border-l-2 border-transparent hover:border-[#7B8C4B]" data-page="Technical-Baseline-Architecture">
+        <span class="material-icons md-18 text-[#7B8C4B]">account_tree</span>
+        <span class="ml-2 text-[#D7D9DA]">Architecture</span>
       </a>
-      <a href="#steering-checklist" class="flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer" data-page="Prototype-Development-Steering-Checklist">
-        <span class="material-icons md-18 text-white">checklist</span>
-        <span class="ml-2 text-white">Steering Checklist</span>
+      <a href="#steering-checklist" class="flex items-center px-2 py-1 rounded-none text-sm hover:bg-[#262A2E] transition-colors cursor-pointer border-l-2 border-transparent hover:border-[#7B8C4B]" data-page="Prototype-Development-Steering-Checklist">
+        <span class="material-icons md-18 text-[#7B8C4B]">checklist</span>
+        <span class="ml-2 text-[#D7D9DA]">Steering Checklist</span>
       </a>
     </div>
   </div>
 
   <!-- Guides Section -->
-  <div class="mt-4 space-y-1" id="guides-section">
-    <div class="flex items-center px-2 py-2 rounded-md cursor-pointer hover:bg-blue-700 transition-colors" id="guides-toggle">
-      <span class="material-icons md-20 text-cyan-300" id="guides-icon1">arrow_right</span>
-      <span class="ml-3 text-cyan-100 font-medium">Guides</span>
+  <div class="mt-4 space-y-1 border-t border-[#343A3F] pt-4" id="guides-section">
+    <div class="flex items-center px-2 py-2 rounded-none cursor-pointer hover:bg-[#262A2E] transition-colors border-l-2 border-transparent hover:border-[#7B8C4B]" id="guides-toggle">
+      <span class="material-icons md-20 text-[#7B8C4B]" id="guides-icon1">arrow_right</span>
+      <span class="ml-3 text-[#A7FF4F] font-medium tracking-wider">Guides</span>
     </div>
     <div class="ml-4 space-y-1 hidden" id="guides-children">
       <!-- Guide pages will be injected here -->
@@ -42,24 +55,32 @@
   </div>
 
   <!-- Assets Section -->
-  <div class="mt-6 space-y-1" id="assets-section">
-    <div class="flex items-center px-2 py-2 rounded-md cursor-pointer hover:bg-blue-700 transition-colors" id="assets-toggle">
-      <span class="material-icons md-20 text-cyan-300" id="assets-icon">arrow_right</span>
-      <span class="ml-3 text-cyan-100 font-medium">Assets</span>
+  <div class="mt-6 space-y-1 border-t border-[#343A3F] pt-4" id="assets-section">
+    <div class="flex items-center px-2 py-2 rounded-none cursor-pointer hover:bg-[#262A2E] transition-colors border-l-2 border-transparent hover:border-[#7B8C4B]" id="assets-toggle">
+      <span class="material-icons md-20 text-[#7B8C4B]" id="assets-icon">arrow_right</span>
+      <span class="ml-3 text-[#A7FF4F] font-medium tracking-wider">Assets</span>
     </div>
     <div class="ml-4 space-y-1 hidden" id="assets-children">
-      <a href="#characters" class="flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer" data-page="characters">
-        <span class="material-icons md-18 text-white">person</span>
-        <span class="ml-2 text-white">Characters</span>
+      <a href="#characters" class="flex items-center px-2 py-1 rounded-none text-sm hover:bg-[#262A2E] transition-colors cursor-pointer border-l-2 border-transparent hover:border-[#7B8C4B]" data-page="characters">
+        <span class="material-icons md-18 text-[#7B8C4B]">person</span>
+        <span class="ml-2 text-[#D7D9DA]">Characters</span>
       </a>
-      <a href="#locations" class="flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer" data-page="locations">
-        <span class="material-icons md-18 text-white">place</span>
-        <span class="ml-2 text-white">Locations</span>
+      <a href="#locations" class="flex items-center px-2 py-1 rounded-none text-sm hover:bg-[#262A2E] transition-colors cursor-pointer border-l-2 border-transparent hover:border-[#7B8C4B]" data-page="locations">
+        <span class="material-icons md-18 text-[#7B8C4B]">place</span>
+        <span class="ml-2 text-[#D7D9DA]">Locations</span>
       </a>
-      <a href="#resources" class="flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer" data-page="resources">
-        <span class="material-icons md-18 text-white">inventory_2</span>
-        <span class="ml-2 text-white">Resources</span>
+      <a href="#resources" class="flex items-center px-2 py-1 rounded-none text-sm hover:bg-[#262A2E] transition-colors cursor-pointer border-l-2 border-transparent hover:border-[#7B8C4B]" data-page="resources">
+        <span class="material-icons md-18 text-[#7B8C4B]">inventory_2</span>
+        <span class="ml-2 text-[#D7D9DA]">Resources</span>
       </a>
     </div>
+  </div>
+
+  <!-- Theme Toggle -->
+  <div class="mt-6 pt-4 border-t border-[#343A3F]">
+    <a href="#" class="flex items-center px-2 py-2 rounded-none border-l-2 border-transparent hover:border-[#7B8C4B] hover:bg-[#262A2E] transition-colors cursor-pointer" id="theme-toggle">
+      <span class="material-icons md-20 text-[#7B8C4B]" id="theme-icon">light_mode</span>
+      <span class="ml-3 text-[#D7D9DA] font-medium tracking-wider" id="theme-label">EYA Surface</span>
+    </a>
   </div>
 </nav>

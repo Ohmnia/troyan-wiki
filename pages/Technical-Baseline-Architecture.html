@@ -13,7 +13,7 @@
       <li>modularity</li>
       <li>iteration speed</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed font-medium text-red-700">NOT cinematic rendering.</p>
+    <p class="text-gray-700 leading-relaxed font-medium text-orange-500">NOT cinematic rendering.</p>
   </section>
 
   <hr class="border-gray-300 my-10" />
@@ -160,7 +160,7 @@ animate()</pre>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Important Rendering Rules</h2>
 
     <a name="technical-baseline-architecture-do-not-enable-shadows-yet"></a>
-    <h3 class="text-xl font-medium text-indigo-700 mt-6 mb-3 font-bold text-red-700">DO NOT ENABLE SHADOWS YET</h3>
+    <h3 class="text-xl font-medium text-indigo-700 mt-6 mb-3 font-bold text-orange-500">DO NOT ENABLE SHADOWS YET</h3>
     <p class="text-gray-700 leading-relaxed mb-3">Shadows are expensive.</p>
     <p class="text-gray-700 leading-relaxed mb-3 font-medium">Early RTS prototype priorities:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
@@ -183,7 +183,7 @@ animate()</pre>
     <a name="technical-baseline-architecture-recommended-rts-lighting"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Recommended RTS Lighting</h2>
 
-    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-red-700">DO NOT use:</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-orange-500">DO NOT use:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>dramatic directional lighting</li>
       <li>cinematic contrast</li>
@@ -360,7 +360,7 @@ camera.lookAt(0, 0, 0)</pre>
     <a name="technical-baseline-architecture-terrain-baseline"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Terrain Baseline</h2>
 
-    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-red-700">DO NOT start with:</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-orange-500">DO NOT start with:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>procedural terrain</li>
       <li>heightmaps</li>
@@ -415,7 +415,7 @@ scene.add(terrain)</pre>
       <li>muted blue-gray</li>
       <li>volcanic ash</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed mb-2 font-medium text-red-700">Avoid:</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium text-orange-500">Avoid:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>saturated terrain</li>
       <li>bright colors</li>
@@ -431,7 +431,7 @@ scene.add(terrain)</pre>
     <a name="technical-baseline-architecture-glow-system-rules"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Glow System Rules</h2>
 
-    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-red-700">VERY IMPORTANT</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-orange-500">VERY IMPORTANT</p>
     <p class="text-gray-700 leading-relaxed mb-3">Glow should ONLY appear:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>near corruption</li>
@@ -439,7 +439,7 @@ scene.add(terrain)</pre>
       <li>near reactors</li>
       <li>near special landmarks</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed font-bold text-red-700">NOT everywhere.</p>
+    <p class="text-gray-700 leading-relaxed font-bold text-orange-500">NOT everywhere.</p>
   </section>
 
   <hr class="border-gray-300 my-10" />
@@ -463,8 +463,8 @@ scene.add(terrain)</pre>
     <a name="technical-baseline-architecture-performance-rules"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Performance Rules</h2>
 
-    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-red-700">ABSOLUTE RULES</p>
-    <p class="text-gray-700 leading-relaxed mb-2 font-medium text-red-700">DO NOT:</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-orange-500">ABSOLUTE RULES</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium text-orange-500">DO NOT:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>use 4K textures</li>
       <li>use high poly terrain</li>
@@ -512,7 +512,7 @@ scene.add(terrain)</pre>
       <li>atlases</li>
       <li>shared materials</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed mb-2 font-medium text-red-700">Avoid:</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium text-orange-500">Avoid:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>unique materials per object</li>
     </ul>
@@ -533,7 +533,7 @@ scene.add(terrain)</pre>
 1 corruption material</pre>
 
     <a name="technical-baseline-architecture-bad-material-strategy"></a>
-    <h3 class="text-xl font-medium text-red-700 mt-6 mb-3">BAD</h3>
+    <h3 class="text-xl font-medium text-orange-500 mt-6 mb-3">BAD</h3>
     <pre class="bg-gray-900 text-red-400 p-4 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">unique material for every asset</pre>
   </section>
 
@@ -569,7 +569,7 @@ scene.add(unit)</pre>
     <a name="technical-baseline-architecture-rts-selection-system"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">RTS Selection System</h2>
 
-    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-red-700">DO NOT start with:</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-orange-500">DO NOT start with:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>advanced UI</li>
       <li>animated portraits</li>
@@ -689,7 +689,7 @@ const mineralMaterial = new THREE.MeshStandardMaterial({
       <li>support mood</li>
       <li>preserve readability</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed font-bold text-red-700">NOT overwhelm gameplay.</p>
+    <p class="text-gray-700 leading-relaxed font-bold text-orange-500">NOT overwhelm gameplay.</p>
   </section>
 
   <hr class="border-gray-300 my-10" />
@@ -754,7 +754,7 @@ const mineralMaterial = new THREE.MeshStandardMaterial({
       <li>simple grid A*</li>
       <li>flat navigation</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-red-700">DO NOT use navmesh systems initially.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-orange-500">DO NOT use navmesh systems initially.</p>
   </section>
 
   <hr class="border-gray-300 my-10" />
@@ -781,7 +781,7 @@ const mineralMaterial = new THREE.MeshStandardMaterial({
       <li>reusable geometry</li>
       <li>simple silhouettes</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-red-700">DO NOT build giant hero assets.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-orange-500">DO NOT build giant hero assets.</p>
   </section>
 
   <hr class="border-gray-300 my-10" />
@@ -794,7 +794,7 @@ const mineralMaterial = new THREE.MeshStandardMaterial({
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>far camera distance</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed font-bold text-red-700">NOT close inspection.</p>
+    <p class="text-gray-700 leading-relaxed font-bold text-orange-500">NOT close inspection.</p>
   </section>
 
   <hr class="border-gray-300 my-10" />
@@ -806,7 +806,7 @@ const mineralMaterial = new THREE.MeshStandardMaterial({
 
     <a name="technical-baseline-architecture-early-prototype-shaders"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">Early Prototype</h3>
-    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-red-700">DO NOT build advanced custom shaders.</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-bold text-orange-500">DO NOT build advanced custom shaders.</p>
     <p class="text-gray-700 leading-relaxed mb-2 font-medium text-green-700">Start with:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>MeshStandardMaterial</li>
@@ -857,7 +857,7 @@ const mineralMaterial = new THREE.MeshStandardMaterial({
 
     <a name="technical-baseline-architecture-do-not-over-engineer-early"></a>
     <h3 class="text-xl font-medium text-indigo-600 mt-6 mb-3">DO NOT OVER-ENGINEER EARLY</h3>
-    <p class="text-gray-700 leading-relaxed mb-2 font-medium text-red-700">Bad:</p>
+    <p class="text-gray-700 leading-relaxed mb-2 font-medium text-orange-500">Bad:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>ECS rewrite</li>
       <li>custom renderer</li>
@@ -887,7 +887,7 @@ const mineralMaterial = new THREE.MeshStandardMaterial({
       <li>atmosphere interesting</li>
       <li>FPS stable</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed mb-3 font-bold text-red-700">NOT because:</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-bold text-orange-500">NOT because:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>graphics are AAA</li>
       <li>maps are massive</li>
@@ -922,7 +922,7 @@ const mineralMaterial = new THREE.MeshStandardMaterial({
     <a name="technical-baseline-architecture-final-technical-advice"></a>
     <h2 class="text-2xl font-semibold text-indigo-700 mt-10 mb-4">Final Technical Advice</h2>
     <p class="text-gray-700 leading-relaxed mb-3">Your biggest future risk is <strong>NOT</strong> rendering.</p>
-    <p class="text-gray-700 leading-relaxed mb-3 font-bold text-red-700">It is uncontrolled complexity.</p>
+    <p class="text-gray-700 leading-relaxed mb-3 font-bold text-orange-500">It is uncontrolled complexity.</p>
     <p class="text-gray-700 leading-relaxed mb-3 font-medium text-green-700">The safest path is:</p>
     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
       <li>small stable systems</li>

@@ -13,30 +13,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const sidebarMinWidth = 200;
   const phi = (1 + Math.sqrt(5)) / 2;
 
-  // THEME LOGIC
-  function setTheme(mode) {
-    if (mode === 'dark') {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-    const icon = document.getElementById('theme-icon');
-    if (icon) icon.textContent = mode === 'dark' ? 'light_mode' : 'dark_mode';
-  }
-
-  function getSystemTheme() {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-
-  const savedTheme = localStorage.getItem('theme');
-  setTheme(savedTheme || getSystemTheme());
-
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
-  });
-
   function updateSidebarWidth() {
     const totalWidth = window.innerWidth;
     const sidebarWidth = Math.round(totalWidth * (1 - (1 / phi)) / 2);
@@ -221,13 +197,34 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   sidebar.innerHTML = navHtml;
 
-  const themeBtn = document.querySelector('.theme-toggle-btn');
-  if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-      const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
+  // --- Theme toggle ---
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const themeLabel = document.getElementById('theme-label');
+
+  function applyTheme(theme) {
+    if (theme === 'light') {
+      document.documentElement.classList.add('light');
+      themeIcon.textContent = 'dark_mode';
+      themeLabel.textContent = 'Ug-roo Depths';
+    } else {
+      document.documentElement.classList.remove('light');
+      themeIcon.textContent = 'light_mode';
+      themeLabel.textContent = 'EYA Surface';
+    }
   }
+
+  const savedTheme = localStorage.getItem('wiki-theme') || 'dark';
+  applyTheme(savedTheme);
+
+  themeToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    const current = document.documentElement.classList.contains('light') ? 'light' : 'dark';
+    const next = current === 'light' ? 'dark' : 'light';
+    localStorage.setItem('wiki-theme', next);
+    applyTheme(next);
+  });
+  // --- end theme toggle ---
 
   const guidesChildren = document.getElementById('guides-children');
   const guidesToggle = document.getElementById('guides-toggle');
@@ -243,10 +240,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const pageLink = document.createElement('a');
     pageLink.href = '#';
-    pageLink.className = 'flex items-center px-2 py-1 rounded-md text-sm hover:bg-cyan-700 transition-colors cursor-pointer';
+    pageLink.className = 'flex items-center px-2 py-1 rounded-none text-sm hover:bg-[var(--hover-bg)] transition-colors cursor-pointer border-l-2 border-transparent hover:border-[var(--primary)]';
     pageLink.dataset.page = key;
     pageLink.dataset.guide = key;
-    pageLink.innerHTML = `<span class="material-icons md-18 text-white">${guide.icon}</span><span class="ml-2 text-white">${guide.title}</span>`;
+    pageLink.innerHTML = `<span class="material-icons md-18 text-[var(--primary)]">${guide.icon}</span><span class="ml-2 text-[var(--text)]">${guide.title}</span>`;
     wrapper.appendChild(pageLink);
 
     const tocContainer = document.createElement('div');
@@ -354,11 +351,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         guide.toc.forEach(heading => {
           const anchor = pageKey + '-' + slugify(heading);
           const link = document.createElement('span');
-          link.className = 'flex items-center px-2 py-1 rounded-md text-xs hover:bg-cyan-700 transition-colors cursor-pointer toc-link';
+          link.className = 'flex items-center px-2 py-1 rounded-none text-xs hover:bg-[var(--hover-bg)] transition-colors cursor-pointer toc-link border-l-2 border-transparent';
           link.dataset.target = anchor;
           link.tabIndex = 0;
           link.role = 'link';
-          link.innerHTML = `<span class="material-icons md-14 text-cyan-300" style="font-size:14px">chevron_right</span><span class="ml-1 text-gray-300">${heading}</span>`;
+          link.innerHTML = `<span class="material-icons md-14 text-[var(--primary)]" style="font-size:14px">chevron_right</span><span class="ml-1 text-[var(--text-soft)]">${heading}</span>`;
           link.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -488,16 +485,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       content.innerHTML = `
         <div class="max-w-4xl mx-auto px-4 py-8">
           <div class="text-center mb-12">
-            <span class="material-icons text-6xl text-cyan-500 mb-4">public</span>
-            <h1 class="text-4xl font-bold text-gray-700 dark:text-cyan-300 mb-2">Troyan</h1>
-            <p class="text-xl text-gray-500 dark:text-gray-400">3226 AD &mdash; A World Divided</p>
+            <span class="material-icons text-6xl text-[--toxic] mb-4">public</span>
+            <h1 class="text-4xl font-bold text-[--toxic-bright] mb-2 tracking-wider uppercase">Troyan</h1>
+            <p class="text-xl text-[--text-soft] font-mono">3226 AD — A World Divided</p>
           </div>
 
-          <div class="bg-indigo-50 dark:bg-indigo-950 rounded-xl p-6 mb-8 border border-indigo-200 dark:border-indigo-800">
-            <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-200">
+          <div class="bg-[--surface] border-2 border-[--border] p-6 mb-8">
+            <p class="text-lg leading-relaxed text-[--text]">
               Centuries after the great cataclysm that shattered civilization, the survivors
-              of humanity cling to the scarred surface of a broken Earth &mdash; now called
-              <strong>EYA</strong>. The skies are toxic, the soil is poisoned, and the ruins
+              of humanity cling to the scarred surface of a broken Earth — now called
+              <strong class="text-[--toxic-bright]">EYA</strong>. The skies are toxic, the soil is poisoned, and the ruins
               of the old world serve as grim monuments to what was lost. But the surface is
               not the only world. Beneath the crust, in the suffocating darkness of ancient
                 tunnels and caverns, something else has evolved.
@@ -505,29 +502,29 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-blue-200 dark:border-slate-700">
+            <div class="bg-[--surface] border-2 border-[--border] p-6">
               <div class="flex items-center mb-3">
-                <span class="material-icons text-3xl text-blue-500 mr-3">cloud</span>
-                <h2 class="text-2xl font-semibold text-gray-700 dark:text-blue-300">EYA</h2>
+                <span class="material-icons text-3xl text-[--primary] mr-3">cloud</span>
+                <h2 class="text-2xl font-semibold text-[--toxic-bright] uppercase tracking-wider">EYA</h2>
               </div>
-              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                The <strong>Exo-Yuman Alliance</strong> controls the surface: fortified
+              <p class="text-[--text] leading-relaxed">
+                The <strong class="text-[--toxic]">Exo-Yuman Alliance</strong> controls the surface: fortified
                 fortresses, solar arrays, and gleaming white carbon-fiber structures
                 dotting the wasteland. They harness Zehedee alien technology to maintain
                 air quality, purify water, and power their war machine. EYA dominates
                 the skies with VTOL aircraft and heavy bombers, but their greatest
-                strength is also their vulnerability &mdash; exposed on the surface,
+                strength is also their vulnerability — exposed on the surface,
                 their supply lines can be severed from below.
               </p>
             </div>
 
-            <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-green-200 dark:border-slate-700">
+            <div class="bg-[--surface] border-2 border-[--border] p-6">
               <div class="flex items-center mb-3">
-                <span class="material-icons text-3xl text-green-500 mr-3">landslide</span>
-                <h2 class="text-2xl font-semibold text-gray-700 dark:text-green-300">Ugroo</h2>
+                <span class="material-icons text-3xl text-[--secondary] mr-3">landslide</span>
+                <h2 class="text-2xl font-semibold text-[--toxic] uppercase tracking-wider">Ugroo</h2>
               </div>
-              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Deep in the subterranean chasms, the <strong>Ugroo</strong> have adapted.
+              <p class="text-[--text] leading-relaxed">
+                Deep in the subterranean chasms, the <strong class="text-[--toxic-bright]">Ugroo</strong> have adapted.
                 Generations of mutation have forged a race that thrives in darkness and
                 toxic air. Their bio-luminescent cities pulse with organic machinery,
                 acid-based harvesting, and an economy built on geothermal vents. Ugroo
@@ -538,14 +535,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
           </div>
 
-          <div class="bg-amber-50 dark:bg-amber-950 rounded-xl p-6 mb-8 border border-amber-200 dark:border-amber-800">
+          <div class="bg-[--amber-bg] border-2 border-[--rust] p-6 mb-8">
             <div class="flex items-center mb-3">
-              <span class="material-icons text-3xl text-amber-500 mr-3">flare</span>
-              <h2 class="text-2xl font-semibold text-gray-700 dark:text-amber-300">The Zehedee</h2>
+              <span class="material-icons text-3xl text-[--hazard] mr-3">flare</span>
+              <h2 class="text-2xl font-semibold text-[--hazard] uppercase tracking-wider">The Zehedee</h2>
             </div>
-            <p class="text-gray-700 dark:text-gray-200 leading-relaxed">
-              Silent, ancient, and incomprehensible, the <strong>Zehedee</strong> are
-              not a faction you command &mdash; they are a force of nature. Their
+            <p class="text-[--text] leading-relaxed">
+              Silent, ancient, and incomprehensible, the <strong class="text-[--hazard]">Zehedee</strong> are
+              not a faction you command — they are a force of nature. Their
               derelict data-link arrays and temporal physics engines lie scattered
               across EYA, waiting to be reactivated. Both EYA and Ugroo race to
               decipher Zehedee technology, unlocking chronal time-acceleration,
@@ -554,24 +551,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             </p>
           </div>
 
-          <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-purple-200 dark:border-slate-700 mb-8">
+          <div class="bg-[--surface] border-2 border-[--border] p-6 mb-8">
             <div class="flex items-center mb-3">
-              <span class="material-icons text-3xl text-purple-500 mr-3">layers</span>
-              <h2 class="text-2xl font-semibold text-gray-700 dark:text-purple-300">The Conflict</h2>
+              <span class="material-icons text-3xl text-[--military] mr-3">layers</span>
+              <h2 class="text-2xl font-semibold text-[--text] uppercase tracking-wider">The Conflict</h2>
             </div>
-            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p class="text-[--text] leading-relaxed">
               This is not a war of equals. It is a war of dimensions. EYA fights in
-              three dimensions &mdash; surface, air, and space. Ugroo fights in a
-              hidden fourth dimension: <em>beneath</em>. Every EYA fortress is built
+              three dimensions — surface, air, and space. Ugroo fights in a
+              hidden fourth dimension: <em class="text-[--toxic]">beneath</em>. Every EYA fortress is built
               on ground the Ugroo can claim as their own. Every Ugroo tunnel leads
               to a surface EYA thought it controlled. The battle for EYA is a battle
               of verticality, where victory belongs to the faction that can fight
               across every layer of a broken world.
             </p>
-            <p class="text-gray-600 dark:text-gray-300 leading-relaxed mt-3">
+            <p class="text-[--text] leading-relaxed mt-3">
               From the irradiated plains and ruined cities above, to the bioluminescent
               caverns and toxic gas pockets below, the war for EYA will be fought on
-              every front &mdash; and only one faction will emerge to inherit what
+              every front — and only one faction will emerge to inherit what
               remains of humanity's cradle.
             </p>
           </div>
@@ -580,7 +577,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-      content.innerHTML = '<p class="text-gray-500">Loading...</p>';
+      content.innerHTML = '<p class="text-[--text-soft]">Loading...</p>';
 
       if (guides[page]) {
         await loadGuidePage(page);
@@ -598,10 +595,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       console.error('Error loading page:', error);
       content.innerHTML = `
         <div class="max-w-2xl mx-auto mt-16 text-center">
-          <span class="material-icons text-6xl text-gray-300 mb-4">error_outline</span>
-          <h2 class="text-2xl font-semibold text-gray-600 mb-2">Page Not Found</h2>
-          <p class="text-gray-400 mb-6">We couldn't find the page "<span class="font-mono text-gray-500">${page}</span>". It may have been moved or doesn't exist yet.</p>
-          <p class="text-sm text-gray-400">Try selecting a page from the navigation sidebar.</p>
+           <span class="material-icons text-6xl text-[--border] mb-4">error_outline</span>
+          <h2 class="text-2xl font-semibold text-[--text] mb-2 uppercase tracking-wider">Page Not Found</h2>
+        <p class="text-[--text-soft] mb-6">We couldn't find the page "<span class="font-mono text-[--primary]">${page}</span>". It may have been moved or doesn't exist yet.</p>
+        <p class="text-sm text-[--text-soft]">Try selecting a page from the navigation sidebar.</p>
         </div>`;
     }
   }
