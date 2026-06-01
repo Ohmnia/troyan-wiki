@@ -84,13 +84,13 @@ body,
 }
 .agent1{
 	width:auto !important;
-	height:160px !important;
+	height:100% !important;
 	content:var(--ai-agent-1);
 }
 .agent2{
 	transform: scaleX(-1);
 	width:auto !important;
-	height:160px !important;
+	height:100% !important;
 	content:var(--ai-agent-2);
 }
 /* EYA light theme — atmospheric gradient + frosted elements */
