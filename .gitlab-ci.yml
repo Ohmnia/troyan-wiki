@@ -1,0 +1,27 @@
+# The Docker image that will be used to build your app
+image: node:lts
+
+pages:
+  # The folder that contains the files to be exposed at the Page URL
+  publish: public
+  rules:
+    # This ensures that only pushes to the main/default branch will trigger a pages deploy
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+  
+  before_script:
+    - npm install
+  
+  script:
+    # 1. Compile the production bundle via Vite (creates the 'dist' folder)
+    - npm run build
+    
+    # 2. Clear any temporary artifacts and ensure a clean public directory exists
+    - rm -rf public
+    - mkdir -p public
+    
+    # 3. Safely transfer the compiled build files to the GitLab target folder
+    - cp -r dist/* public/
+  
+  artifacts:
+    paths:
+      - public
