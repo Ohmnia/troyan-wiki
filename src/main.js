@@ -1,3 +1,5 @@
+import { askObjectQuestion } from './troyan-puter.js';
+
 document.addEventListener('DOMContentLoaded', async () => {
 
   const hljsModule = await import('highlight.js');
@@ -12,6 +14,142 @@ document.addEventListener('DOMContentLoaded', async () => {
   let pageLoading = false;
   const sidebarMinWidth = 200;
   const phi = (1 + Math.sqrt(5)) / 2;
+  let popoverAnchor = null;
+  let aiRequestToken = 0;
+
+  const aiPopover = createAIPopover();
+
+  function createAIPopover() {
+    const el = document.createElement('div');
+    el.className = 'ai-object-popover is-hidden';
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-live', 'polite');
+    el.setAttribute('aria-hidden', 'true');
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'ai-object-popover__close';
+    closeBtn.setAttribute('aria-label', 'Close AI response');
+    closeBtn.textContent = 'x';
+
+    const title = document.createElement('div');
+    title.className = 'ai-object-popover__title';
+
+    const body = document.createElement('div');
+    body.className = 'ai-object-popover__body';
+
+    closeBtn.addEventListener('click', () => {
+      hideAIPopover();
+    });
+
+    el.appendChild(closeBtn);
+    el.appendChild(title);
+    el.appendChild(body);
+    document.body.appendChild(el);
+
+    return {
+      el,
+      title,
+      body
+    };
+  }
+
+  function positionAIPopover(anchor) {
+    if (!anchor || aiPopover.el.classList.contains('is-hidden')) return;
+
+    const rect = anchor.getBoundingClientRect();
+    const popRect = aiPopover.el.getBoundingClientRect();
+    const gap = 10;
+
+    let left = rect.right + gap;
+    if (left + popRect.width > window.innerWidth - 12) {
+      left = rect.left - popRect.width - gap;
+    }
+
+    if (left < 12) {
+      left = 12;
+    }
+
+    let top = rect.top;
+    if (top + popRect.height > window.innerHeight - 12) {
+      top = window.innerHeight - popRect.height - 12;
+    }
+
+    if (top < 12) {
+      top = 12;
+    }
+
+    aiPopover.el.style.left = `${Math.round(left)}px`;
+    aiPopover.el.style.top = `${Math.round(top)}px`;
+  }
+
+  function showAIPopover(anchor, titleText, bodyText, state = 'ready') {
+    popoverAnchor = anchor;
+    aiPopover.title.textContent = titleText;
+    aiPopover.body.textContent = bodyText;
+    aiPopover.el.classList.remove('is-hidden', 'is-loading', 'is-error');
+    aiPopover.el.classList.add(`is-${state}`);
+    aiPopover.el.setAttribute('aria-hidden', 'false');
+    positionAIPopover(anchor);
+  }
+
+  function hideAIPopover() {
+    popoverAnchor = null;
+    aiPopover.el.classList.add('is-hidden');
+    aiPopover.el.classList.remove('is-loading', 'is-error');
+    aiPopover.el.setAttribute('aria-hidden', 'true');
+  }
+
+  function getObjectName(questionButton) {
+    return (
+      questionButton.dataset.aiObject ||
+      questionButton.getAttribute('aria-label') ||
+      questionButton.closest('[data-ai-object-name]')?.dataset.aiObjectName ||
+      'This object'
+    );
+  }
+
+  function getAIPrompt(questionButton, objectName) {
+    const customPrompt = questionButton.dataset.aiPrompt;
+    if (customPrompt && customPrompt.trim()) {
+      return customPrompt.trim();
+    }
+
+    return `In the Troyan lore and RTS gameplay context, answer the question about ${objectName}.
+
+Rules:
+- Use a fresh, non-identical wording each time (don’t repeat previous responses).
+- Provide the answer as short, clear text.
+- Then provide exactly 2 links to the best resources (URLs) relevant to the question.
+- Output format:
+  ANSWER: <your answer text>
+  LINKS:
+  1) <url>
+  2) <url>
+
+Keep the ANSWER section short (<= 50 words).`;
+  }
+
+  async function handleObjectQuestionClick(questionButton) {
+    const objectName = getObjectName(questionButton);
+    const prompt = getAIPrompt(questionButton, objectName);
+
+    showAIPopover(questionButton, objectName, 'Thinking...', 'loading');
+
+    const token = ++aiRequestToken;
+    try {
+      const answer = await askObjectQuestion(prompt);
+      if (token !== aiRequestToken) return;
+
+      // aiPopover currently shows plain text via textContent.
+      // Ensure LINKS appear underneath by keeping a strict text format.
+      showAIPopover(questionButton, objectName, answer, 'ready');
+    } catch (error) {
+      if (token !== aiRequestToken) return;
+      const message = error instanceof Error ? error.message : 'Failed to fetch AI response.';
+      showAIPopover(questionButton, objectName, message, 'error');
+    }
+  }
 
   function updateSidebarWidth() {
     const totalWidth = window.innerWidth;
@@ -21,6 +159,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   updateSidebarWidth();
   window.addEventListener('resize', updateSidebarWidth);
+  window.addEventListener('resize', () => {
+    positionAIPopover(popoverAnchor);
+  });
 
   const guides = {
     'environment-development-guide': {
@@ -475,6 +616,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   async function loadPage(page) {
     pageLoading = true;
+    hideAIPopover();
     if (advanceHandler) {
       content.removeEventListener('scroll', advanceHandler);
       advanceHandler = null;
@@ -613,6 +755,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     const page = link.dataset.page;
 
     loadPage(page);
+  });
+
+  content.addEventListener('click', (e) => {
+    const questionButton = e.target.closest('[data-ai-question-btn]');
+    if (!questionButton) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    handleObjectQuestionClick(questionButton);
+  });
+
+  content.addEventListener('scroll', () => {
+    positionAIPopover(popoverAnchor);
+  }, { passive: true });
+
+  document.addEventListener('click', (e) => {
+    if (aiPopover.el.classList.contains('is-hidden')) return;
+    if (aiPopover.el.contains(e.target)) return;
+    if (e.target.closest('[data-ai-question-btn]')) return;
+    hideAIPopover();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      hideAIPopover();
+    }
   });
 
   loadPage('home');

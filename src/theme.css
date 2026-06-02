@@ -47,6 +47,7 @@ html:not(.light) {
   --amber-bg: #1F1410;
   --ai-agent-1:url("/img/ugroo-ooga-booga-wawakala.png");
   --ai-agent-2:url("/img/koos-ugroo.png");
+  --openai-icon:url("/img/open-ai-green.svg");
 }
 
 /* ===== Light Theme (EYA surface — white + neon cyan) ===== */
@@ -74,6 +75,7 @@ html.light {
   --amber-bg: #FFF8E1;
   --ai-agent-1:url("/img/eya-poenshboet.png");
   --ai-agent-2:url("/img/eya-soldier-01.png");
+  --openai-icon:url("/img/open-ai-cyan.svg");
 }
 /* ===== Base ===== */
 body,
@@ -81,15 +83,35 @@ body,
   background: var(--bg);
   color: var(--text);
 }
+.openai-icon-btn{
+  border:none;
+  background:transparent;
+}
+.openai-icon{
+	width:24px !important;
+	height:24px !important;
+	content:url("/img/open-ai-white.svg");
+  vertical-align: middle;
+}
+#AIAgents{
+  vertical-align: middle;
+}
+.openai-icon:hover{
+	width:24px !important;
+	height:24px !important;
+	content:var(--openai-icon);
+}
 .agent1{
 	width:auto !important;
 	height:100% !important;
+  max-height:120px;
 	content:var(--ai-agent-1);
 }
 .agent2{
 	transform: scaleX(-1);
 	width:auto !important;
 	height:100% !important;
+  max-height:120px;
 	content:var(--ai-agent-2);
 }
 /* EYA light theme — atmospheric gradient + frosted elements */
@@ -506,4 +528,87 @@ html.light #main-content code .hljs-link { color: #0096C7; }
 *:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
+}
+
+/* ===== Object AI prompt button + popover ===== */
+#main-content .ai-object-help-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-left: 0.45rem;
+  border: 1px solid var(--primary);
+  color: var(--toxic-bright);
+  background: var(--surface-active);
+  font-family: "Share Tech Mono", "IBM Plex Mono", monospace;
+  font-size: 0.85rem;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+#main-content .ai-object-help-btn:hover {
+  background: var(--hover-bg);
+  color: var(--toxic);
+}
+
+.ai-object-popover {
+  position: fixed;
+  z-index: 1200;
+  max-width: min(32rem, calc(100vw - 24px));
+  width: 24rem;
+  padding: 0.9rem 1rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.ai-object-popover.is-hidden {
+  display: none;
+}
+
+.ai-object-popover.is-loading {
+  border-color: var(--primary);
+}
+
+.ai-object-popover.is-error {
+  border-color: var(--danger);
+}
+
+.ai-object-popover__close {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.45rem;
+  border: 0;
+  background: transparent;
+  color: var(--text-soft);
+  cursor: pointer;
+  padding: 0.15rem;
+  font-family: "Share Tech Mono", "IBM Plex Mono", monospace;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.ai-object-popover__close:hover {
+  color: var(--toxic);
+}
+
+.ai-object-popover__title {
+  margin-right: 1rem;
+  margin-bottom: 0.55rem;
+  color: var(--toxic-bright);
+  font-family: "Rajdhani", "IBM Plex Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ai-object-popover__body {
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
 }
